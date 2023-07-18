@@ -16,7 +16,7 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://morai-techblog.github.io/2023/09/12/blog-support-just-landed/</loc>
+         <loc>https://morai-techblog.github.io/2022/09/12/blog-support-just-landed/</loc>
          <lastmod>2023-07-18</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -26,12 +26,22 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://morai-techblog.github.io/category/sim-10/</loc>
+         <loc>https://morai-techblog.github.io/archive/2022/</loc>
          <lastmod>2023-07-18</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://morai-techblog.github.io/category/news/</loc>
+         <lastmod>2023-07-18</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://morai-techblog.github.io/category/sim-10/</loc>
+         <lastmod>2023-07-18</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://morai-techblog.github.io/category/morai-sim/</loc>
          <lastmod>2023-07-18</lastmod>
          <changefreq>daily</changefreq>
     </url>
