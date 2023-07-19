@@ -2,52 +2,52 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://morai-techblog.github.io/</loc>
-         <lastmod>2023-07-18</lastmod>
+         <lastmod>2023-07-19</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://morai-techblog.github.io/tags/</loc>
-         <lastmod>2023-07-18</lastmod>
+         <lastmod>2023-07-19</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://morai-techblog.github.io/2023/09/13/blog-support-just-landed/</loc>
-         <lastmod>2023-07-18</lastmod>
+         <lastmod>2023-07-19</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://morai-techblog.github.io/2022/09/12/blog-support-just-landed/</loc>
-         <lastmod>2023-07-18</lastmod>
+         <lastmod>2023-07-19</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://morai-techblog.github.io/archive/2023/</loc>
-         <lastmod>2023-07-18</lastmod>
+         <lastmod>2023-07-19</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://morai-techblog.github.io/archive/2022/</loc>
-         <lastmod>2023-07-18</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://morai-techblog.github.io/category/news/</loc>
-         <lastmod>2023-07-18</lastmod>
+         <lastmod>2023-07-19</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://morai-techblog.github.io/category/sim-10/</loc>
-         <lastmod>2023-07-18</lastmod>
+         <lastmod>2023-07-19</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://morai-techblog.github.io/category/news/</loc>
+         <lastmod>2023-07-19</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://morai-techblog.github.io/category/morai-sim/</loc>
-         <lastmod>2023-07-18</lastmod>
+         <lastmod>2023-07-19</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://morai-techblog.github.io/tags/</loc>
-         <lastmod>2023-07-18</lastmod>
+         <lastmod>2023-07-19</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
