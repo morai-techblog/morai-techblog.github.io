@@ -106,11 +106,47 @@ table pre {
   color: #4051b5;
 }
 
+/*
 .md-sidebar__inner > nav > ul > li:first-child {
   font-size: 20px;
-}
+} sm*/ 
+
+/* .md-nav__list > li:first-child {
+  font-size: 25x;
+} */
+
+
+/* #__toc {
+  font-size: 30px;
+} */
 
 .md-header__button.md-logo img:first-child {
   width: 45x;
   height: 45px;
+}
+
+/* .md-nav__link.md-nav__link--active .md-ellipsis {
+  font-size: 28x;
+} */
+
+.md-nav__link.md-nav__link--active span:first-child {
+  font-size: 28x;
+}
+
+/* .md-nav__list > li span:first-child {
+  font-size: 16px;
+} */
+
+/* .md-nav__list > li .md-nav__link.md-nav__link--active span:first-child {
+  font-size: 20px;
+} */
+
+
+
+.md-nav__list > li .md-nav__link.md-nav__link--active .md-ellipsis {
+  font-size: 20px;
+}
+
+.md-nav__list > li .md-nav__link.md-nav__link--passed.md-nav__link--active .md-ellipsis {
+  font-size: 20px;
 }

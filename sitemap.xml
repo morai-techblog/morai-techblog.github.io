@@ -2,37 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://morai-techblog.github.io/</loc>
-         <lastmod>2023-07-21</lastmod>
+         <lastmod>2023-07-31</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://morai-techblog.github.io/tags/</loc>
-         <lastmod>2023-07-21</lastmod>
+         <lastmod>2023-07-31</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://morai-techblog.github.io/2023/07/20/morai-sim/</loc>
-         <lastmod>2023-07-21</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://morai-techblog.github.io/2023/07/14/feat/</loc>
-         <lastmod>2023-07-21</lastmod>
+         <lastmod>2023-07-31</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://morai-techblog.github.io/category/products/</loc>
-         <lastmod>2023-07-21</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://morai-techblog.github.io/category/use-cases/</loc>
-         <lastmod>2023-07-21</lastmod>
+         <lastmod>2023-07-31</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://morai-techblog.github.io/tags/</loc>
-         <lastmod>2023-07-21</lastmod>
+         <lastmod>2023-07-31</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
