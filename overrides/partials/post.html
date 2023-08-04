@@ -1,0 +1,94 @@
+<!-- Post excerpt -->
+<article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+
+    <!-- Post authors -->
+    {% if post.authors %}
+      <nav class="md-post__authors md-typeset">
+        {% for author in post.authors %}
+          <span class="md-author">
+            <img src="{{ author.avatar }}" alt="{{ author.name }}" />
+          </span>
+        {% endfor %}
+      </nav>
+    {% endif %}
+
+    <!-- Post metadata -->
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+
+        <!-- Post date -->
+        <li class="md-meta__item">
+          <time datetime="{{ post.meta.date }}">
+            {{- post.meta.date_format -}}
+          </time>
+          {#- Collapse whitespace -#}
+        </li>
+
+        <!-- Post categories -->
+        {% if post.categories %}
+          <li class="md-meta__item">
+            {{ lang.t("blog.categories.in") }}
+            {% for category in post.categories %}
+              <a
+                href="{{ category.url | url }}"
+                class="md-meta__link"
+              >
+                {{- category.title -}}
+              </a>
+              {%- if loop.revindex > 1 %}, {% endif -%}
+            {% endfor -%}
+          </li>
+        {% endif %}
+
+        <!-- Post readtime -->
+        {% if post.meta.readtime %}
+          {% set time = post.meta.readtime %}
+          <li class="md-meta__item">
+            {% if time == 1 %}
+              {{ lang.t("readtime.one") }}
+            {% else %}
+              {{ lang.t("readtime.other") | replace("#", time) }}
+            {% endif %}
+          </li>
+        {% endif %}
+      </ul>
+
+      <!-- Draft marker -->
+      {% if post.meta.draft %}
+        <span class="md-draft">
+          {{ lang.t("blog.draft") }}
+        </span>
+      {% endif %}
+    </div>
+  </header>
+  <div class="md-post__meta md-meta">
+    {% if post.meta.title %}
+        <a href="{{ post.url | url }}"><h2>{{ post.meta.title }}</h2></a>
+    {% endif %}
+    {% if post.meta.cover_image %}
+    <!-- 
+    Replace /image/path with your own values. 
+    For example, if all blog images are in the format blog/images/post-title/image.png, 
+    and you set cover_image to post-title/image.png, 
+    the full image source is /blog/images/{{ post.meta.cover_image }}. 
+    -->
+      <a href="{{ post.url | url }}" target="_blank">
+        <img src="{{ config.site_url}}{{ post.meta.cover_image }}" style="width: 100%; height: auto;" alt="Cover2 image">
+      <a>
+    {% endif %}
+  </div>
+  <!-- Post content -->
+  <div class="md-post__meta md-meta">
+    {% if post.meta.description %}
+      <h3>{{ post.meta.description }}</h4>
+    {% endif %}
+  </div>
+  <div class="md-post__content md-typeset"> 
+      <nav class="md-post__action">
+        <a href="{{ post.url | url }}">
+          {{ lang.t("blog.continue") }}
+        </a>
+      </nav>
+  </div>
+</article>
