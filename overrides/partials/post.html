@@ -7,7 +7,9 @@
       <nav class="md-post__authors md-typeset">
         {% for author in post.authors %}
           <span class="md-author">
+            <a href="{{ author.avatar | url }}" class="md-meta__link" target="_blank">
             <img src="{{ author.avatar }}" alt="{{ author.name }}" />
+          </a>
           </span>
         {% endfor %}
       </nav>

@@ -1,9 +1,10 @@
 ---
 date: 2023-07-14
-authors: [EJ]
+authors: 
+  - EJ
 description: Github Action의 자동 맞춤범 검사기를 도입하여 개발자가 초안을 빠르게 수정하기
 categories:
-  - Use Cases
+  - Cases Study
 tags:
   - Foo
   - Bar
