@@ -71,12 +71,15 @@ plugins:
   - blog:
       blog_dir: .
       archive: false 
+      authors_file: .authors.yml
+      post_slugify_separator: "-"
   - search
   - tags:
       tags_file: tags.md
   - typeset
   - info:
       archive_stop_on_violation: false
+  - git-authors
 
 # Hooks
 # hooks:
