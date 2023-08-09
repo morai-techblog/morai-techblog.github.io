@@ -34,7 +34,7 @@ draft: true
 
 Label-to-Image Translation 연구는 MORAI Dataset의 Photorealism 향상을 위해 수행한 카메라 센서 기반의 Image-to-Image Translation(Synthetic-RGB o Real-RGB) 연구의 일부 과제로 시작하게 되었습니다.
 
-우선 Label-to-Image Translation이란 무엇이고 인지 학습 데이터셋에 어떻게 활용되며 활용했을 때의 장점은 무엇인지 알아보겠습니다.
+우선 Label-to-Image Translation이란 무엇이고 인지 학습 데이터셋에 어떻게 활용하며 활용했을 때의 장점은 무엇인지 알아보겠습니다.
 
 ???+ example "주요 용어"
     - Label-to-Image translation: Semantic segmentation GT로부터 그에 대응하는 원본 RGB 이미지를 복원하는 task.
@@ -46,15 +46,31 @@ Label-to-Image Translation 연구는 MORAI Dataset의 Photorealism 향상을 위
 Source가 semantic mask(ground-truth)이고 Target이 semantic mask에 대응하는 RGB 이미지인 경우를 의미.
 즉, 일반적인 정변환 하는 것이 아닌 역변환을 학습하는 것이 목표인 task.
 
-![23-07-20/그림1.png](23-07-20/그림1.png)
+![23-07-20/그림1.png](23-07-20/그림1.png){:onclick="window.open(this.src)" title="Click view screen"}
 <figcaption><b><center>그림 1. MORAI SIM 라이다 센서로 검출한 점군 형태의 정답 데이터</center></b></figcaption>
 
   - 정변환: RGB image를 input으로 받았을 때, 이에 대응하는 semantic mask를 예측
-  - 역변환: semantic mask가 주어졌을 때, 그에 대응하는 RGB image를 예측
+  - 역변환: semantic mask가 주어졌을 때, 그에 대응하는 RGB image를 예측  
 
- 
+    <div class="grid cards" markdown>
+
+    - ![23-07-20/그림1.png](23-07-20/영상1.gif){:onclick="window.open(this.src)" title="Click view screen"}
+      <figcaption><b><center>그림 1. MORAI SIM 샘플 데이터</center></b></figcaption>
+    - ![23-07-20/그림1.png](23-07-20/영상1.gif){:onclick="window.open(this.src)" title="Click view screen"}
+      <figcaption><b><center>그림 2. MORAI SIM 샘플 데이터</center></b></figcaption>
+
+    </div>
+    <br>
+
+    <div class="grid cards" markdown>
+
+    - ![23-07-20/그림1.png](23-07-20/영상1.gif){:onclick="window.open(this.src)" title="Click view screen"}
+    - ![23-07-20/그림1.png](23-07-20/영상1.gif){:onclick="window.open(this.src)" title="Click view screen"}
+      
+    </div>
+    
 ### Label-to-Image Translation 활용 분야
-일반적으로 Label-to-Image Translation를 인지 학습 데이터에는 어떻게 활용되며 활용했을 때 장점은 ~~ 입니다.
+일반적으로 Label-to-Image Translation를 인지 학습 데이터에는 어떻게 활용하며 활용했을 때 장점은 ~~ 입니다.
 
 
 ## Label-to-Image Translation 연구 배경
@@ -90,4 +106,3 @@ PPT 자료에서 소개한 논문(DECENT: Unpaired Image-to-Image Translation wi
 Label-to-Image Translation은 기본적으로 ill-posed problem이기에, 아직 연구할 부분이 많습니다. 그러나 Static object 및 Scene에 대한 합성 qaulity는 높기에 Label-to-Image와 Image-to-Image translation을 융합하는 방식으로 고도화가 가능할 것이라고 기대합니다.
 
 저희와 같이 인지 학습 데이터를 연구하시는 분들께 본 포스팅에서 다룬 Label-to-Image Translation 연구 방법 및 결과가 도움되시길 바라며 이만 마치도록 하겠습니다. 감사합니다.
-
