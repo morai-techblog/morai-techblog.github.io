@@ -4,6 +4,12 @@
   line-height: 1.2rem; /*230316*/
 }
 
+.test p {
+ font-size: 12px;
+ font-style: italic;
+ margin-top: -1px;
+}
+
 .md-typeset .admonition p,
 .md-typeset details {
   font-family: Roboto;
@@ -93,8 +99,22 @@ table pre {
 }
 
 .md-typeset blockquote {
-  font-size: 15px; /*230316*/
+  background-color: #eef7fa; /*#eef7fa*/
+  font-family: roboto;
+  margin: 0px;
+  padding: 0.5em 0.5em 1em 2em;
+  font-size: 14px;
+  line-height: 1.5rem; /*230316*/
 }
+
+blockquote { /*230316*/
+    background-color: #eef7fa; /*#eef7fa*/
+    font-family: roboto;
+    margin: 0px;
+    padding: 1em 0.5em 1px 1.5em;
+    font-size: 14px;
+}
+
 
 .md-typeset li {
   line-height: 1.5rem; /*230316*/

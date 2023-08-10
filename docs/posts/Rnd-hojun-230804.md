@@ -6,7 +6,7 @@ title: Label-to-Image Translation 연구의 장단점
 description: >
   Semantic mask 이미지로부터 RGB 이미지로 변환하는 'Label-to-Image Translation' 연구 결과를 기록하며 본 연구 기법의 장점과 단점을 알아봅니다.
 categories:
-  - Cases Study
+  - R&D Notes
 links:
 #  - posts/grammertest.md
   - Paper: https://openreview.net/pdf?id=RNZ8JOmNaV4
@@ -34,9 +34,17 @@ draft: true
 
 Image-to-Image(I2I) Translation 연구는 MORAI Dataset 중 Camera RGB image를 Real image와 유사하게 보이도록 Photorealism을 향상시키고자 시작하게 되었습니다.
 
-I2I란 무엇이고, 인지 학습 데이터셋에 어떻게 활용되며 활용했을 때의 장점은 무엇인지 알아보겠습니다.
+I2I란 무엇이고, 인지 학습 데이터셋에 어떻게 활용되며 활용했을 때의 장점은 무엇인지 알아보겠습니다. 
 
-본 문서에서 사용될 용어들의 정의는 하기와 같습니다. 
+>  🍀**주요 용어 설명** 
+>
+>  - **Image-to-Image(I2I) Translation**: Source domain X에 속하는 이미지를 Target domain Y에 속하는 image처럼 보이도록, image 내 content는 유지하되 style을 바꾸는 task. <Br>
+  즉, I2I는 하나의 딥러닝 모델 $F$이며, Source domain X에서 임의의 image $I^{X}$가 주어졌을 때, Target domain Y의 image $I^{Y}$를 모사하는 역할을 합니다, $I^{Y} \sim F(I^{X})$.
+  - **Source Domain**: 임의의 Synthetic Dataset (GTA5, SHIFT, MORAI, etc.)
+  - **Source Image**: Source domain에서 추출된 임의의 한 image
+  - **Target Domain**: 임의의 Real Dataset (Cityscapes, nuScenes, BDD100K, etc.)
+  - **Target Image**: Target domain에서 추출된 임의의 한 image
+>  - **Translated Image**: 딥러닝 모델 $F$가 Source image 한장을 input으로 하여 생성한 output, $F(I^{X})$ (Target과 유사하도록 생성하는 것이 목표).
 
     - Image-to-Image(I2I) Translation: Source domain X에 속하는 이미지를 Target domain Y에 속하는 image처럼 보이도록, image 내 content는 유지하되 style을 바꾸는 task.
         - 즉, I2I는 하나의 딥러닝 모델 $F$이며, Source domain X에서 임의의 image $I^{X}$가 주어졌을 때, Target domain Y의 image $I^{Y}$를 모사하는 역할을 합니다, $I^{Y} \sim F(I^{X})$.
@@ -46,12 +54,19 @@ I2I란 무엇이고, 인지 학습 데이터셋에 어떻게 활용되며 활용
     - Target Image: Target domain에서 추출된 임의의 한 image
     - Translated Image: 딥러닝 모델 $F$가 Source image 한장을 input으로 하여 생성한 output, $F(I^{X})$ (Target과 유사하도록 생성하는 것이 목표).
 
+- Translated Image: 딥러닝 모델 $F$가 Source image 한장을 input으로 하여 생성한 output, $F(I^{X})$ (Target과 유사하도록 생성하는 것이 목표).
 
 ### Image-to-Image (I2I) Translation 이란
 
 * 앞선 언급과 같이 I2I의 목표는, Source Image가 주어졌을 때, Target Image와 유사하도록 Translated Image를 생성하는 것이 목표.
+
 ![23-08-04/I2I_overview.png](23-08-04/I2I_overview.png)
-<figcaption><b><center>그림 1. I2I 예시, [출처](https://arxiv.org/pdf/2101.08629.pdf) </center></b></figcaption>
+<div style="font-size: 14px; font-style: italic; margin-top: -10px"> 
+  <center><b>그림 1. I2I 예시 </b> [출처: 
+  <a href="https://arxiv.org/pdf/2101.08629.pdf" target="_blank"> arxiv.org
+  </a>]
+  </center> 
+</div>
 
 * 이 목표를 달성하기 위해, I2I를 연구하는 많은 연구자는 Image가 Content와 Style의 조합으로 구성되어있다는 직관적인 가정을 사용한다.
     * MUNIT, INIT, DUNIT, DRIT, etc.
