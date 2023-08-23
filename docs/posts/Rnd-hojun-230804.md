@@ -35,23 +35,23 @@ draft: true
 ## 들어가며
 **{서론부}**
 
-Image-to-Image(I2I) Translation 또는 Style-transfer(ST)라고도 불리는 연구는 MORAI Dataset 중 Camera RGB image를 Real image와 유사하게 보이도록 Photorealism을 향상시키고자 시작하게 되었습니다.
+Image-to-Image Translation(I2I) 또는 Style-transfer(ST)라고도 불리는 연구는 MORAI Dataset 중 Camera RGB image를 Real image와 유사하게 보이도록 Photorealism을 향상시키고자 시작하게 되었습니다.
 
 I2I란 무엇이고, 인지 학습 데이터셋에 어떻게 활용되며 활용했을 때의 장점은 무엇인지 알아보겠습니다. 
 
 >  🍀**주요 용어 설명** 
 >
->  - **Image-to-Image(I2I) Translation**: Source domain $X$에 속하는 이미지를 Target domain $Y$에 속하는 image처럼 보이도록, image 내 content는 유지하되 style을 바꾸는 task. <Br>
-  즉, I2I는 하나의 딥러닝 모델 $F$이며, Source domain $X$에서 임의의 image $I^{X}$가 주어졌을 때, Target domain $Y$의 image $I^{Y}$를 모사하는 역할을 합니다, $I^{Y} \approx F(I^{X})$.
   - **Source Domain**: 임의의 Synthetic Dataset (GTA5, SHIFT, Virtual KITTI, MORAI, etc.)
   - **Source Image**: Source domain에서 추출된 임의의 한 image
   - **Target Domain**: 임의의 Real Dataset (Cityscapes, nuScenes, BDD100K, etc.)
   - **Target Image**: Target domain에서 추출된 임의의 한 image
->  - **Translated Image**: 딥러닝 모델 $F$가 Source image 한장을 input으로 하여 생성한 output, $F(I^{X})$ (Target과 유사하도록 생성하는 것이 목표).
+>  - **Translated Image**: 딥러닝 모델 $F$가 Source image 한장을 input으로 하여 생성한 output, $F(I^{X})$.
 
-### Image-to-Image (I2I) Translation 이란
+### Image-to-Image Translation(I2I) 이란
 
-* 앞선 언급과 같이 I2I의 목표는, Source Image $I^{X}$가 주어졌을 때, Target Image $I^{Y}$와 유사하도록 Translated Image $F(I^{X})$를 생성하는 것이 목표.
+* **Image-to-Image Translation(I2I)**: Source domain $X$에 속하는 이미지를 Target domain $Y$에 속하는 image처럼 보이도록, image 내 content는 유지하되 style을 바꾸는 task. 
+* 다시 말하면, I2I의 목표는 Source Image $I^{X}$가 주어졌을 때, Target Image $I^{Y}$와 유사하도록 Translated Image $F(I^{X})$를 생성하는 것 입니다.
+* 이를 수식으로 표현하면, I2I는 하나의 딥러닝 모델 $F$이며, Source domain $X$에서 임의의 image $I^{X}$가 주어졌을 때, Target domain $Y$의 image $I^{Y}$를 모사하도록 $I^{X}$를 적절히 변환하는 역할을 합니다, $F(I^{X}) = I^{X \rightarrow Y } \approx I^{Y}$.
 
 ![23-08-04/I2I_overview.png](23-08-04/I2I_overview.png){:onclick="window.open(this.src)" title="Click view screen" width="60%"}
 <div style="font-size: 14px; font-style: italic; margin-top: -10px"> 
@@ -67,53 +67,59 @@ I2I란 무엇이고, 인지 학습 데이터셋에 어떻게 활용되며 활용
 * 예시로, 하기 그림에서와 같이 computer vision과 image processing 분야에서는 이미 다양한 application에 적용중에 있으며 그 수가 지난 몇년간 기하급수적으로 늘고있습니다. 
 
 ![23-08-04/I2I_samples.png](23-08-04/I2I_samples.png){:onclick="window.open(this.src)" title="Click view screen" width="60%"}
-<figcaption><b><center>그림 1. Image decoding 예시, [출처: 
+<figcaption><b><center> TODO: caption, [출처: 
   <a href="https://arxiv.org/pdf/2101.08629.pdf" target="_blank"> arxiv.org
   </a>] </center></b></figcaption>
-* 또한, 지도학습(Supervised learning)의 경우 Source domain $X$와 Target domain $Y$ 사이에 1:1 관계(paired)로 표현되는 (input, output GT)가 정의되어야 하기에 Dataset 구축 비용이 큰 편이나, 요즘에는 input에 대응하는 output GT가 없더라도 동작하는 비지도학습 기반의 unpaired I2I가 활발히 연구되고 있습니다.
+
+* 초창기 I2I 연구의 경우 지도학습(Supervised learning)에 그 기반을 두는 경우가 많았습니다.
+* 지도학습의 경우 Source domain $X$와 Target domain $Y$ 사이에 1:1 관계(paired)로 표현되는 (input, output GT)가 정의되어야 하기에 Dataset 구축 비용이 큰 편입니다.
+    * Dataset = $\{ ( I^{X}_{i}, I^{Y}_{i}) \}_{i=1}^{N}$
+    * $N$은 이미지 개수. 
+* 그러나 요즘에는 input에 대응하는 output GT가 없더라도 동작하는 비지도학습 기반의 unpaired I2I가 활발히 연구되고 있습니다.
+    * Dataset = $\{ I^{X}_{i} \}_{i=1}^{N}, \{ I^{Y}_{i} \}_{i=1}^{M}$
+    * $N$은 Source domain $X$의 이미지 개수, $M$은 Target domain $Y$의 이미지 개수.
+* 지도학습 기반의 I2I의 경우 변환 정확도는 높지만, Paired Dataset의 구축이 어렵기에 사용성 및 활용성이 떨어지게 됩니다. 따라서, 좀더 다양한 domain에 대해 I2I 활용성을 향상시키기 위해 MORAI에서는 비지도학습 기반의 I2I 연구를 수행하였습니다.
+  
 
 ## I2I 연구 배경
 **{본론1}**
 
-* 시뮬레이션 데이터는 현실에서는 수집하기 어려운 edge/rare case가 모사된 데이터를 쉽게 생성할 수 있음
+* 시뮬레이터는 현실에서는 하기 이미지와 같이, 현실(Real)에서 수집하기 어려운 edge/rare case가 모사된 data를 쉽게 생성할 수 있습니다. 이러한 데이터를 활용함으로서 기존 인지 모델들이 취약한 edge/rare case에 대해 보완하는 역할을 수행할 수 있습니다.
 
 ![23-08-04/edgecase_data.png](23-08-04/edgecase_data.png){:onclick="window.open(this.src)" title="Click view screen" width="90%"}
-<figcaption><b><center> Sample image: goal of this RnD </center></b></figcaption>
+<figcaption><b><center> TODO: caption </center></b></figcaption>
 
-* 이러한 데이터를 활용함으로서 기존 인지 모델이 취약한 edge/rare case에 대해 보완해줄 수 있음.
-* 문제는 domain gap에 있음.
-
->  🍀**Domain Gap** 
->
->  - Domain gap 정의 서술
+* 그러나 시뮬레이터 data에 추가적인 가공없이 현실에서 수집된 data와 결합하면 성능이 오히려 감소하거나 크게 오르지 않는 현상이 드물지 않게 발생하며, [많은 연구자들](https://machinelearning.apple.com/research/bridging-the-domain-gap-for-neural-models)이 이러한 현상의 원인이 domain gap에 있다고 얘기합니다.
+>  🍀**Domain Gap**
+> 
+>  - Domain gap을 간단히 정의하자면, 서로 다른 두개 혹은 그 이상의 domain들 사이에 존재하는 차이를 의미합니다.
+>  - 예를 들어, 도심이라는 domain에서 수집한 data는 시골이라는 domain에서 수집한 data와 비교했을 때 건물의 양상, 도로 표면등의 측면에서 서로 차이를 보일 것입니다.
+>  - 마찬가지로, 동일한 장소더라도 낮이라는 domain에서 수집한 data는 밤이라는 domain에서 수집한 data와는 조명, 빛, 색 등의 측면에서 차이를 보이게 됩니다.
+>  - 정리하자면, Domain gap은 서로 다른 domain들 간의 환경, 조명, 객체들의 외형, 카메라 설치 각도 등의 다양한 변인들의 조합으로 인해 발생하는 차이를 의미합니다.  
   
+* 해당 현상은 후에 서술할 MORAI 데이터를 활용한 자체적인 실험에서도 확인하였기에, MORAI data와 Real data 사이의 domain gap을 완화하기 위해 I2I 연구를 수행하였습니다.
 * domain gap을 발생시키는 원인은 복합적이지만, 본 문서에서는 크게 두 가지로 정의한다.
-    * Semantic domain gap: 카메라 설치 위치, 주행 중 등장하는 객체들의 종류와 위치의 차이 (Spatial prior 참고)
-    * Image domain gap: 수집된 장소, 나라에 따라 domain gap이 발생함.
-* Semantic domain gap은 시뮬레이터의 장점을 활용해 상대적으로 수월하게 해결이 가능
-* Image domain gap은 그렇지 못함
+    * Semantic domain gap: 등장하는 객체들의 종류와 카메라에 투영되는 위치의 차이에서 발생하는 domain gap (하기 이미지 오른쪽 패널, Spatial prior 참고).
+    * Image domain gap: 수집된 장소, 나라에 따라 발생하는 건물/객체들의 외형적인 차이에서 발생하는 domain gap (하기 이미지 왼쪽 패널, Image samples 참고).
+* Semantic domain gap은 카메라의 설치 위치 및 등장하는 객체들의 커스텀이 용이하다는 시뮬레이터의 장점을 활용해 상대적으로 수월하게 해결이 가능합니다.
+* 그러나, Image domain gap은 그렇지 못함
     * Game/graphic texture의 느낌이 현실에 존재하는 object들의 표면과는 상이하기 때문.
-    * BDD100K, KITTI, Cityscapes는 현실(Real), 그외는 가상 (Sim/Synthetic)
-    * 현실과 가상 이미지가 주어졌을 때 사람이 그것을 쉽게 구별할 수 있음 (domain gap).
+    * 예시로, 현실과 가상 이미지가 주어졌을 때 사람이 그것을 쉽게 구별할 수 있음 
+        * BDD100K, KITTI, Cityscapes는 현실(Real), 그외는 가상 (Sim/Synthetic)
 
 ![23-08-04/dataset_compare.png](23-08-04/dataset_compare.png){:onclick="window.open(this.src)" title="Click view screen" width="100%"}
-<figcaption><b><center> Sample image: goal of this RnD </center></b></figcaption>
+<figcaption><b><center> TODO: caption </center></b></figcaption>
 
-![23-08-04/dataset_compare_RGB2.png](23-08-04/dataset_compare_RGB2.png){:onclick="window.open(this.src)" title="Click view screen" width="60%"}
-<figcaption><b><center> Sample image: goal of this RnD </center></b></figcaption>
-
-* 이러한 차이가 모델이 시뮬레이션 데이터를 활용해 성능을 향상시키는데 방해하는 역할을 함.
-  * 모델이 학습해야하는 영역이 오히려 크게 늘어나기 때문 (domain gap 포함)
-  * MORAI Dataset을 단순 학습하였을 때는 Synthetic domain과 Real domain 사이의 Gap으로 인해 인지 성능이 잘 나오지 않음.
+* 이러한 차이(gap)가 딥러닝 모델이 시뮬레이션 데이터를 활용해 성능을 향상시키는데 있어 방해하는 역할을 함.
+    * 모델이 학습해야하는 영역이 오히려 크게 늘어나기 때문 (domain gap 포함)
+    * MORAI Dataset을 단순 학습하였을 때는 Synthetic domain과 Real domain 사이의 Gap으로 인해 인지 성능이 잘 나오지 않음.
 
 ![23-08-04/XY_scatter_plot.png](23-08-04/XY_scatter_plot.png){:onclick="window.open(this.src)" title="Click view screen" width="60%"}
-<figcaption><b><center> Sample image: goal of this RnD </center></b></figcaption>
+<figcaption><b><center> TODO: caption </center></b></figcaption>
 
 * 바꿔 말하면, 이러한 domain gap을 줄여준다면, 시뮬레이션 데이터가 온전히 모델의 성능향상에 기여할 수 있도록 도움을 줄 수 있음.
-    * domain gap 감소
-
 ![23-08-04/XY_translated_X_scatter_plot.png](23-08-04/XY_translated_X_scatter_plot.png){:onclick="window.open(this.src)" title="Click view screen" width="60%"}
-<figcaption><b><center> Sample image: goal of this RnD </center></b></figcaption>
+<figcaption><b><center> TODO: caption </center></b></figcaption>
 
 * 따라서, domain gap을 줄일 수 있는 기술인 I2I (Simulator-to-Real)을 적용하고자 한다.
   * I2I를 통해 domain gap이 줄어든 translated MORAI Dataset을 구축하고, 인지성능을 개선하는 것이 목표
@@ -125,8 +131,9 @@ I2I란 무엇이고, 인지 학습 데이터셋에 어떻게 활용되며 활용
 실제로 연구를 진행한 단계 별 방법을 절차대로 작성해주세요.
 
 * 이 목표를 달성하기 위해, I2I를 연구하는 많은 연구자는 Image가 Content와 Style의 조합으로 구성되어있다는 직관적인 가정을 사용한다.
-    * MUNIT, INIT, DUNIT, DRIT, etc.
-    * Content: object shape, Style: Texture, Illumination, Light, etc.
+    * MUNIT, INIT, DUNIT, DRIT, etc. (논문 링크 첨부 예정)
+    * Content: object shape
+    * Style: Texture, Illumination, Light, etc.
 * 즉, Source Image의 Content를 Target Image의 Style과 결합하여 Translated Image를 생성한다.
     * $F(I^{X}) = I^{X}_{content} + I^{Y}_{style}$
  
@@ -138,7 +145,7 @@ I2I란 무엇이고, 인지 학습 데이터셋에 어떻게 활용되며 활용
 * [VSAIT](https://morai.atlassian.net/wiki/spaces/MTG/pages/1429602423/VSAIT+Unpaired+Image+Translation+via+Vector+Symbolic+Architectures) 내용 옮겨적기
 
 ![23-08-04/VSA_binding_and_bundling.png](23-08-04/VSA_binding_and_bundling.png){:onclick="window.open(this.src)" title="Click view screen" width="90%"}
-<figcaption><b><center> VSAIT 출처 넣기 </center></b></figcaption>
+<figcaption><b><center> TODO: VSAIT 출처 넣기 </center></b></figcaption>
 
 ## 연구 진행 순서 및 방법
 **{본론3}**
@@ -151,28 +158,28 @@ I2I란 무엇이고, 인지 학습 데이터셋에 어떻게 활용되며 활용
 
 * 따라서 해당 논문들의 실험을 재현하고,
 ![23-08-04/I2I_gta2cityscapes.png](23-08-04/I2I_gta2cityscapes.png){:onclick="window.open(this.src)" title="Click view screen"}
-<figcaption><b><center> test </center></b></figcaption>
+<figcaption><b><center> TODO: caption </center></b></figcaption>
 
 * 그 뒤 MORAI Dataset에 맞도록 가공
 ![23-08-04/I2I_morai2cityscapes.png](23-08-04/I2I_morai2cityscapes.png){:onclick="window.open(this.src)" title="Click view screen"}
-<figcaption><b><center> tes </center></b></figcaption>
+<figcaption><b><center> TODO: caption </center></b></figcaption>
 
 ## 연구 결과
 **{본론4}**
 ![23-08-04/exp_detection.png](23-08-04/exp_detection.png){:onclick="window.open(this.src)" title="Click view screen" width="80%"}
-<figcaption><b><center> table을 새로 만들어서 값을 채워넣는게 좀더 깔끔할듯, 무슨 network 사용했는지 명시 </center></b></figcaption>
+<figcaption><b><center> TODO: table을 새로 만들어서 값을 채워넣는게 좀더 깔끔할듯, 무슨 network 사용했는지 명시 </center></b></figcaption>
 
 ![23-08-04/exp_segmentation.png](23-08-04/exp_segmentation.png){:onclick="window.open(this.src)" title="Click view screen" width="90%"}
-<figcaption><b><center> table을 새로 만들어서 값을 채워넣는게 좀더 깔끔할듯, 무슨 network 사용했는지 명시 </center></b></figcaption>
+<figcaption><b><center> TODO: table을 새로 만들어서 값을 채워넣는게 좀더 깔끔할듯, 무슨 network 사용했는지 명시 </center></b></figcaption>
 
 -   
 
     <div class="grid cards" markdown>
 
     - ![23-07-20/그림1.png](23-08-04/morai_origin.gif){:onclick="window.open(this.src)" title="Click view screen"}
-      <figcaption><b><center>그림 1. MORAI SIM 샘플 데이터</center></b></figcaption>
+      <figcaption><b><center>TODO: caption</center></b></figcaption>
     - ![23-07-20/그림1.png](23-08-04/morai_translated.gif){:onclick="window.open(this.src)" title="Click view screen"}
-      <figcaption><b><center>그림 2. MORAI SIM 샘플 데이터</center></b></figcaption>
+      <figcaption><b><center>TODO: caption</center></b></figcaption>
 
     </div>
 
@@ -187,20 +194,20 @@ I2I란 무엇이고, 인지 학습 데이터셋에 어떻게 활용되며 활용
     - 인지관점에서 주요 정보들에 대한 손실 (표지판, 신호등)
   
 ![23-08-04/limit1_semantic_flipping.png](23-08-04/limit1_semantic_flipping.png){:onclick="window.open(this.src)" title="Click view screen" width="80%"}
-<figcaption><b><center> table을 새로 만들어서 값을 채워넣는게 좀더 깔끔할듯 </center></b></figcaption>
+<figcaption><b><center> TODO: caption </center></b></figcaption>
 
 ![23-08-04/limit2_high_frequency.png](23-08-04/limit2_high_frequency.png){:onclick="window.open(this.src)" title="Click view screen" width="80%"}
-<figcaption><b><center> 표지판 아래 빨간선을 빨간 box로 대체 </center></b></figcaption>
+<figcaption><b><center> TODO: 표지판 아래 빨간선을 빨간 box로 대체 </center></b></figcaption>
 
 ## 마치며
 **{결론}**
 
 결론에서는 본론 초반에서 제기한 문제를 다시 한번 상기시키며 이를 해결하기 위한 연구 방법, 결과를 요약하고 강조합니다. 끝으로 독자에게 간단한 조언을 남기며 마무리합니다.
 
-본 연구를 하게 된 계기는 ~가 필요하단 거였고 Label-to-Image Translation 연구를 통해 해결해볼 수 있었습니다. 
-
-
-Label-to-Image Translation은 기본적으로 ill-posed problem이기에, 아직 연구할 부분이 많습니다. 그러나 Static object 및 Scene에 대한 합성 qaulity는 높기에 Label-to-Image와 Image-to-Image translation을 융합하는 방식으로 고도화가 가능할 것이라고 기대합니다.
-
-저희와 같이 인지 학습 데이터를 연구하시는 분들께 본 포스팅에서 다룬 Image-to-Image Translation 연구 방법 및 결과가 도움되시길 바라며 이만 마치도록 하겠습니다. 감사합니다.
+* 본 연구를 하게 된 계기는 MORAI data와 Real data 사이에 존재하는 domain gap을 완화할 방법이 필요하다는 것이였고, 이를 Image-to-Image Translation(I2I) 연구를 통해 해결해볼 수 있었습니다. 
+* 다만, 상기 실험에서 확인한 것과 같이 아직 해결해야 하는 부분이 있습니다.
+    * Semanitc flipping, fine-detail 
+* 향후에는 semantic label, bounding-box label등을 활용하여 상기 언급한 단점을 보완하는 방향으로 연구를 진행할 계획입니다.
+* 저희와 같이 인지 학습 데이터를 연구하시는 분들께 본 포스팅에서 다룬 Image-to-Image Translation 연구 방법 및 결과가 도움되시길 바라며 이만 마치도록 하겠습니다. 
+* 감사합니다.
 
