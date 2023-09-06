@@ -11,6 +11,8 @@ site_description: >-
 # Copyright
 copyright: Copyright &copy; 2023 <a href="https://www.morai.ai">MORAI Inc.</a>
 
+rss: https://morai-techblog.github.io/feed_rss_updated.xml
+
 theme:
   name: material
   custom_dir: overrides
@@ -70,15 +72,27 @@ plugins:
   - meta
   - blog:
       blog_dir: .
-      archive: false 
+      archive: false
       authors_file: .authors.yml
       post_slugify_separator: "-"
   - search
   - tags:
       tags_file: tags.md
   - typeset
-  - info:
-      archive_stop_on_violation: false
+  - rss:
+      match_path: .* 
+      date_from_meta:
+        as_creation: date
+        as_update: true
+        datetime_format: "%Y-%m-%d %H:%M"
+        default_timezone: Asia/Seoul
+      categories:
+        - categories
+        - tags
+      comments_path: "#__comments"
+      image: https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Feed-icon.svg/128px-Feed-icon.svg.png
+#  - info:
+#      archive_stop_on_violation: false
   - git-authors
 
 # Hooks
@@ -91,7 +105,7 @@ extra:
     json: [.s2]
   analytics:
     provider: google
-    property: !ENV GOOGLE_ANALYTICS_KEY
+    property: G-ED54ZHH9RT
   social:
     - icon: fontawesome/brands/youtube
       link: https://www.youtube.com/moraisim
@@ -141,6 +155,7 @@ markdown_extensions:
 
 nav:
   - Home: index.md
+
 
 extra_css: 
   - css/extra.css

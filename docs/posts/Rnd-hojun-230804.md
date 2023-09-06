@@ -4,7 +4,7 @@ authors:
   - Hojun
 title: Image-to-Image Translation 연구의 장단점
 description: >
-  Semantic mask 이미지로부터 RGB 이미지로 변환하는 'Label-to-Image Translation' 연구 결과를 기록하며 본 연구 기법의 장점과 단점을 알아봅니다.
+  Semantic 이미지로부터 RGB 이미지로 변환하는 'Label-to-Image Translation' 연구 결과를 기록하며 본 연구 기법의 장점과 단점을 알아봅니다.
 categories:
   - R&D Notes
 links:
@@ -29,27 +29,39 @@ draft: true
 
 안녕하세요. Morai SIM에서 DataGen을 활용한 Virtual Dataset 구축 및 AI 기술을 활용한 연구개발을 담당하고 있는 임호준입니다.
 
-본 포스팅에서는 인지 학습 데이터셋 구축에 있어 Image-to-Image Translation(Synthetic-RGB to Real-RGB) 기술의 필요성 및 장단점을 알아보며 이를 MORAI Dataset에 수행한 결과를 공유드리고자 합니다.
+본 포스팅에서는 인지 학습 데이터셋 구축에 있어 Image-to-Image Translation(Synthetic-RGB to Real-RGB) 기술의 필요성 및 장단점을 알아보며 <span style="background-color:#fff5b1">이를 MORAI Dataset 구축에 적용한 결과</span>를 공유드리고자 합니다.
 
+<br>
+
+### 🍀**주요 용어 설명** 
+본문에서 언급되는 주요 기술 용어는 아래와 같습니다.
+
+<pre>
+  ✓ <b>Source Domain</b>: 임의의 Synthetic Dataset (GTA5, SHIFT, Virtual KITTI, MORAI, etc.)
+  ✓ <b>Source Domain</b>: 임의의 Synthetic Dataset (GTA5, SHIFT, Virtual KITTI, MORAI, etc.)
+  ✓ <b>Image-to-Image Translation(I2I)</b>: 가상 이미지를 현실 이미지로 변환하는 기술로 ‘SIM-to-Real’ 또는’Synthetic RGB-to Real-RGB’ Translation 라고도 불림
+  ✓ <b>Source Image</b>: Source Domain에서 추출한 임의의 이미지
+</pre>
+
+```
+  - Source Domain: 임의의 Synthetic Dataset (GTA5, SHIFT, Virtual KITTI, MORAI, etc.)
+  - **Source Image**: Source domain에서 추출된 임의의 한 image
+  - **Target Domain**: 임의의 Real Dataset (Cityscapes, nuScenes, BDD100K, etc.)
+  - **Target Image**: Target domain에서 추출된 임의의 한 image
+  - **Translated Image**: 딥러닝 모델 $F$가 Source image 한장을 input으로 하여 생성한 output, $F(I^{X})$
+```
 
 ## 들어가며
 **{서론부}**
 
-Image-to-Image Translation(I2I) 또는 Style-transfer(ST)라고도 불리는 연구는 MORAI Dataset 중 Camera RGB image를 Real image와 유사하게 보이도록 Photorealism을 향상시키고자 시작하게 되었습니다.
+Image-to-Image Translation(I2I) 또는 Style-transfer(ST)라고도 불리는 연구는 MORAI Dataset 중 Camera RGB image를 Real image와 유사하게 보이도록 하는 <span style="background-color:#fff5b1">포토리얼리즘(Photorealism)을 향상시키고자 시작하게 되었습니다.
 
-I2I란 무엇이고, 인지 학습 데이터셋에 어떻게 활용되며 활용했을 때의 장점은 무엇인지 알아보겠습니다. 
-
->  🍀**주요 용어 설명** 
->
-  - **Source Domain**: 임의의 Synthetic Dataset (GTA5, SHIFT, Virtual KITTI, MORAI, etc.)
-  - **Source Image**: Source domain에서 추출된 임의의 한 image
-  - **Target Domain**: 임의의 Real Dataset (Cityscapes, nuScenes, BDD100K, etc.)
-  - **Target Image**: Target domain에서 추출된 임의의 한 image
->  - **Translated Image**: 딥러닝 모델 $F$가 Source image 한장을 input으로 하여 생성한 output, $F(I^{X})$.
+<span style="background-color:#fff5b1">본론에 들어가기 앞서 I2I란 무엇이며, I2I가 인지 학습 데이터셋에 어떻게 활용되고 있는지에 관한 기술 배경부터 설명드리겠습니다.
 
 ### Image-to-Image Translation(I2I) 이란
 
-* **Image-to-Image Translation(I2I)**: Source domain $X$에 속하는 이미지를 Target domain $Y$에 속하는 image처럼 보이도록, image 내 content는 유지하되 style을 바꾸는 task. 
+* **Image-to-Image Translation(I2I)**: 
+Source domain $X$에 속하는 이미지를 Target domain $Y$에 속하는 image처럼 보이도록, image 내 content는 유지하되 style을 바꾸는 task.  --> 그림에 X  Y  표시
 * 다시 말하면, I2I의 목표는 Source Image $I^{X}$가 주어졌을 때, Target Image $I^{Y}$와 유사하도록 Translated Image $F(I^{X})$를 생성하는 것 입니다.
 * 이를 수식으로 표현하면, I2I는 하나의 딥러닝 모델 $F$이며, Source domain $X$에서 임의의 image $I^{X}$가 주어졌을 때, Target domain $Y$의 image $I^{Y}$를 모사하도록 $I^{X}$를 적절히 변환하는 역할을 합니다, $F(I^{X}) = I^{X \rightarrow Y } \approx I^{Y}$.
 
@@ -61,9 +73,13 @@ I2I란 무엇이고, 인지 학습 데이터셋에 어떻게 활용되며 활용
   </center> 
 </div>
 
- 
+ --> 서술식으로 고치기, 그림 수정
+
 ### I2I 활용 분야
-* Source domain $X$와 Target domain $Y$ 사이에 data로 표현가능한 인과관계만 존재한다면, I2I를 적용할 수 있기에 활용 범위가 무궁무진한 기술 중 하나입니다.
+* <span style="background-color:#fff5b1"> Source domain $X$와 Target domain $Y$ 사이에 data로 표현가능한 인과관계만 존재한다면, I2I를 적용할 수 있기에 활용 범위가 무궁무진한 기술 중 하나입니다.
+  
+--> X Y 사이의 무엇을  어떤 data  로 표현할 수 있는지? 인과관계에 대해 부연 설명
+
 * 예시로, 하기 그림에서와 같이 computer vision과 image processing 분야에서는 이미 다양한 application에 적용중에 있으며 그 수가 지난 몇년간 기하급수적으로 늘고있습니다. 
 
 ![23-08-04/I2I_samples.png](23-08-04/I2I_samples.png){:onclick="window.open(this.src)" title="Click view screen" width="60%"}
@@ -80,6 +96,7 @@ I2I란 무엇이고, 인지 학습 데이터셋에 어떻게 활용되며 활용
     * $N$은 Source domain $X$의 이미지 개수, $M$은 Target domain $Y$의 이미지 개수.
 * 지도학습 기반의 I2I의 경우 변환 정확도는 높지만, Paired Dataset의 구축이 어렵기에 사용성 및 활용성이 떨어지게 됩니다. 따라서, 좀더 다양한 domain에 대해 I2I 활용성을 향상시키기 위해 MORAI에서는 비지도학습 기반의 I2I 연구를 수행하였습니다.
   
+ --> 서술식으로 고치기, 그림 수정
 
 ## I2I 연구 배경
 **{본론1}**
@@ -138,12 +155,11 @@ I2I란 무엇이고, 인지 학습 데이터셋에 어떻게 활용되며 활용
     * $F(I^{X}) = I^{X}_{content} + I^{Y}_{style}$
  
 ![23-08-04/Image_decoding_into_style_and_content.png](23-08-04/Image_decoding_into_style_and_content.png){:onclick="window.open(this.src)" title="Click view screen" width="70%"}
-<figcaption><b><center>그림 1. Image decoding 예시, [출처: 
+<figcaption><b><center>그림 1. Image decoding 예시 [출처: 
   <a href="https://arxiv.org/abs/1804.04732.pdf" target="_blank"> arxiv.org
   </a>] </center></b></figcaption>
 
-* [VSAIT](https://morai.atlassian.net/wiki/spaces/MTG/pages/1429602423/VSAIT+Unpaired+Image+Translation+via+Vector+Symbolic+Architectures) 내용 옮겨적기
-
+[VSAIT](https://morai.atlassian.net/wiki/spaces/MTG/pages/1429602423/VSAIT+Unpaired+Image+Translation+via+Vector+Symbolic+Architectures) 내용 옮겨적기
 ![23-08-04/VSA_binding_and_bundling.png](23-08-04/VSA_binding_and_bundling.png){:onclick="window.open(this.src)" title="Click view screen" width="90%"}
 <figcaption><b><center> TODO: VSAIT 출처 넣기 </center></b></figcaption>
 
@@ -156,11 +172,11 @@ I2I란 무엇이고, 인지 학습 데이터셋에 어떻게 활용되며 활용
 * 상기 그림의 image samples/spatial prior 분석결과 Domain gap이 원인일 것이라 판단하여 이를 줄이기 위한 I2I 기법들에 대한 연구개발 수행
     * VSAIT, SRUNIT, DRIT 등의 다양한 논문들이 I2I에 대해 수행하고 있음.
 
-* 따라서 해당 논문들의 실험을 재현하고,
+따라서 해당 논문들의 실험을 재현
 ![23-08-04/I2I_gta2cityscapes.png](23-08-04/I2I_gta2cityscapes.png){:onclick="window.open(this.src)" title="Click view screen"}
 <figcaption><b><center> TODO: caption </center></b></figcaption>
 
-* 그 뒤 MORAI Dataset에 맞도록 가공
+그 뒤 MORAI Dataset에 맞도록 가공
 ![23-08-04/I2I_morai2cityscapes.png](23-08-04/I2I_morai2cityscapes.png){:onclick="window.open(this.src)" title="Click view screen"}
 <figcaption><b><center> TODO: caption </center></b></figcaption>
 
@@ -172,16 +188,13 @@ I2I란 무엇이고, 인지 학습 데이터셋에 어떻게 활용되며 활용
 ![23-08-04/exp_segmentation.png](23-08-04/exp_segmentation.png){:onclick="window.open(this.src)" title="Click view screen" width="90%"}
 <figcaption><b><center> TODO: table을 새로 만들어서 값을 채워넣는게 좀더 깔끔할듯, 무슨 network 사용했는지 명시 </center></b></figcaption>
 
--   
+<div class="grid cards" markdown>
 
-    <div class="grid cards" markdown>
+- ![23-07-20/그림1.png](23-08-04/morai_origin.gif){:onclick="window.open(this.src)" title="Click view screen"}
+- ![23-07-20/그림1.png](23-08-04/morai_translated.gif){:onclick="window.open(this.src)" title="Click view screen"}
 
-    - ![23-07-20/그림1.png](23-08-04/morai_origin.gif){:onclick="window.open(this.src)" title="Click view screen"}
-      <figcaption><b><center>TODO: caption</center></b></figcaption>
-    - ![23-07-20/그림1.png](23-08-04/morai_translated.gif){:onclick="window.open(this.src)" title="Click view screen"}
-      <figcaption><b><center>TODO: caption</center></b></figcaption>
-
-    </div>
+</div>
+<figcaption><b><center>TODO: caption</center></b></figcaption>
 
 연구 결과로 무엇을 증명할 수 있었고 어떻게 활용해볼수 있을까요?
  
@@ -195,9 +208,9 @@ I2I란 무엇이고, 인지 학습 데이터셋에 어떻게 활용되며 활용
   
 ![23-08-04/limit1_semantic_flipping.png](23-08-04/limit1_semantic_flipping.png){:onclick="window.open(this.src)" title="Click view screen" width="80%"}
 <figcaption><b><center> TODO: caption </center></b></figcaption>
-
+<br>
 ![23-08-04/limit2_high_frequency.png](23-08-04/limit2_high_frequency.png){:onclick="window.open(this.src)" title="Click view screen" width="80%"}
-<figcaption><b><center> TODO: 표지판 아래 빨간선을 빨간 box로 대체 </center></b></figcaption>
+<figcaption>TODO: 표지판 아래 빨간선을 빨간 box로 대체</figcaption>
 
 ## 마치며
 **{결론}**

@@ -13,24 +13,43 @@
 .md-typeset .admonition p,
 .md-typeset details {
   font-family: Roboto;
-  font-size: 15px; /*230316*/
-  border-width: 0;
-  border-left-width: 4px;
+  font-size: 14px; /*230316*/
+  border-width: 0px;
+  border-left-width: 0px; 
 }
 
 .md-typeset pre {
-  background-color: #6ba0c979;
+  background-color: #c9dff379/*  *//* #ededed */;
+  border-radius: 10px;
+  font-family: Roboto;
+  line-height: 1.8rem;
+  font-size: 15px; /*230316*/
+  font-weight: 200; 
+  padding: 10px 10px;
+  overflow-x: auto;
+  border: 0;
 }
 
-.md-typeset p code,
-p pre {
- 
-    background-color: #c9dff379;/* #fbe9e7; */ 
-    border: 0;
-    margin: 0 2px;
-    padding: 0 5px;
-    /* font-size: 15px; */
+
+.md-typeset pre code {
+  background-color: #f5f5f5;
+  margin: -10px;
+  padding-left: 20px;
 }
+
+
+.md-typeset p code, p pre {
+    background-color: #c9dff379;
+    border: 0;
+    font-size: 14px;
+    margin: 0 2px;
+    padding: 1px 2px;
+    /* font-size: 15px; */
+    font-family: Roboto;
+    border-radius: 2px; 
+
+}
+
 
 .md-typeset code, li code, pre, li pre {
   font-size: 14px; 
@@ -48,11 +67,12 @@ table pre {
   display: block;
 
   /* padding-top: 10px; */
-  margin-bottom: 0;
+  margin-top: 0.5em;
+  margin-bottom: 0em;
   /* padding-top: 5px; */
   margin-left: auto;
   margin-right: auto;
-  padding-bottom: -1;
+  padding-bottom: 0em;
 
   border: 0;
   -ms-interpolation-mode: bicubic;
@@ -60,18 +80,20 @@ table pre {
 
 }
 
-.md-typeset figure {
+/* .md-typeset figure {
   padding-top: 0px;
   padding-bottom: 0px;
   margin-bottom: 0;
   font-size: 14px;
-}
+} */
 
 .md-typeset figcaption {
-  padding-top: 0px;
-  padding-bottom: 10px;
+  margin-top: -0.5em;
   /* margin-bottom: 20px; */
   font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  font-size: 12px;
 }
 
 /*230515*/
@@ -99,26 +121,19 @@ table pre {
 }
 
 .md-typeset blockquote {
-  background-color: #eef7fa; /*#eef7fa*/
+  /* background-color: #ecf6fc; */
   font-family: roboto;
+  color: black;
   margin: 0px;
-  padding: 0.5em 0.5em 1em 2em;
+  padding: 0.5em 1em 1em 2em;
   font-size: 14px;
   line-height: 1.5rem; /*230316*/
-}
-
-blockquote { /*230316*/
-    background-color: #eef7fa; /*#eef7fa*/
-    font-family: roboto;
-    margin: 0px;
-    padding: 1em 0.5em 1px 1.5em;
-    font-size: 14px;
 }
 
 
 .md-typeset li {
   line-height: 1.5rem; /*230316*/
-  font-size: 15px; /*230316*/
+  font-size: 14px; /*230316*/
 }
 
 #__nav_2_label {
