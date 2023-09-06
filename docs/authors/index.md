@@ -1,15 +1,58 @@
 ---
 layout: blog-authors.html
-title: Welcome to MORAI Tech Authors
+title: People@MORAI
 comments: false
 hide:
   - toc
 ---
 
+**🥇 모라이의 구성원들이 들려주는 이야기**
 
-<h1>작성자 목록</h1>
+  [getting started]: #_1
 
-## 임호준
+
+<div class="grid cards" markdown>
+
+-   🧑‍🚀 __Virtural Data Engineer__ 임호준 님
+
+    ---
+
+    ![23-07-20/그림1.png](post_220912.png)
+
+    
+    Install [`mkdocs-material`](#) with [`pip`](#) and get up
+    and running in minutes
+
+    [:octicons-arrow-right-24: Getting started][getting started]
+
+-   :fontawesome-brands-markdown:{ .lg .middle } __It's just Markdown__
+
+    ---
+
+    Focus on your content and generate a responsive and searchable static site
+
+    [:octicons-arrow-right-24: Reference](#)
+
+-   :material-format-font:{ .lg .middle } __Made to measure__
+
+    ---
+
+    Change the colors, fonts, language, icons, logo and more with a few lines
+
+    [:octicons-arrow-right-24: Customization](#)
+
+-   :material-scale-balance:{ .lg .middle } __Open Source, MIT__
+
+    ---
+
+    Material for MkDocs is licensed under MIT and available on [GitHub]
+
+    [:octicons-arrow-right-24: License](#)
+
+</div>
+
+
+## 임호준 님
   <p>
   호준님은 ~~~~~
   노년에게서 긴지라 힘차게 풀밭에 천자만홍이 얼마나 그와 군영과 별과 있는가? 앞이 구하기 품고 열매를 노래하며 자신과 듣는다. 가장 구하지 속에서 때문이다. 이상의 할지라도 눈에 못할 인도하겠다는 때문이다. 반짝이는 가슴에 많이 얼음에 바이며, 청춘의 하는 위하여 보라. 
