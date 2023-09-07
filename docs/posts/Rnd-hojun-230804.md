@@ -2,9 +2,9 @@
 date: 2023-08-03
 authors:
   - Hojun
-title: Image-to-Image Translation 연구의 장단점
+title: MORAI SIM 데이터셋을 활용한 Image-to-Image Translation 연구
 description: >
-  Semantic 이미지로부터 RGB 이미지로 변환하는 'Label-to-Image Translation' 연구 결과를 기록하며 본 연구 기법의 장점과 단점을 알아봅니다.
+  자율주행 인지 모델의 성능을 개선하기 위하여 MORAI SIM의 데이터셋을 활용한 Image-to-Image Translation 연구를 수행한 내용을 알아봅니다.
 categories:
   - R&D Notes
 links:
@@ -24,144 +24,191 @@ cover_image: post_230808.png
 draft: true
 ---
 
-# Image-to-Image Translation 연구의 장단점
-**{요약부}**
+# MORAI SIM 데이터셋을 활용한 Image-to-Image Translation 연구
+안녕하세요. AI 기술을 연구하며  MORAI SIM의 Virtual 데이터셋 개발을 담당하고 있는 임호준입니다.
 
-안녕하세요. Morai SIM에서 DataGen을 활용한 Virtual Dataset 구축 및 AI 기술을 활용한 연구개발을 담당하고 있는 임호준입니다.
-
-본 포스팅에서는 인지 학습 데이터셋 구축에 있어 Image-to-Image Translation(Synthetic-RGB to Real-RGB) 기술의 필요성 및 장단점을 알아보며 <span style="background-color:#fff5b1">이를 MORAI Dataset 구축에 적용한 결과</span>를 공유드리고자 합니다.
-
+본 포스팅에서는 자율주행 인지 모델 학습에 필요한 데이터셋을 구축하기 위하여  MORAI SIM의 데이터셋을 활용한 Image-to-Image Translation 연구를 수행한 내용을 전달드리고자 합니다.
 <br>
 
-### 🍀**주요 용어 설명** 
+---
+### 🍀 용어 설명 
 본문에서 언급되는 주요 기술 용어는 아래와 같습니다.
 
 <pre>
-  ✓ <b>Source Domain</b>: 임의의 Synthetic Dataset (GTA5, SHIFT, Virtual KITTI, MORAI, etc.)
-  ✓ <b>Source Domain</b>: 임의의 Synthetic Dataset (GTA5, SHIFT, Virtual KITTI, MORAI, etc.)
-  ✓ <b>Image-to-Image Translation(I2I)</b>: 가상 이미지를 현실 이미지로 변환하는 기술로 ‘SIM-to-Real’ 또는’Synthetic RGB-to Real-RGB’ Translation 라고도 불림
-  ✓ <b>Source Image</b>: Source Domain에서 추출한 임의의 이미지
+  ◾ <b>Image-to-Image Translation(I2I)</b>: 가상 이미지를 현실 이미지로 변환하는 기술로 ‘SIM-to-Real’ 또는’Synthetic RGB-to Real-RGB’ Translation 라고도 부름
+
+  ◾ <b>Source Domain</b>: I2I 연구에 사용한 원본 데이터만 존재하는 집합. 본 포스팅에 한해 Source Domain을 가상의 Synthetic 데이터가 존재하는 집합(데이터셋)으로 정의함. 
+        예:  GTA5, SHIFT, Virtual KITTI Datasets
+
+  ◾ <b>Source Image</b>: Source Domain에서 추출한 임의의 원본 이미지
+
+  ◾ <b>Target Domain</b>:  I2I 연구에서 목표로 하는 타겟 데이터만 존재하는 집합. 본 포스팅에 한해 Target Domain을 현실의 Real 데이터가 존재하는 집합(데이터셋)으로 정의함.
+        예: Cityscapes, nuScenes, BDD100K Datasets
+
+  ◾ <b>Target Image</b>: Target Domain에서 추출한 임의의 타겟 이미지
+
+  ◾ <b>Translated Image</b>: 특정 Source Image 를 Target Image로 변환하는 딥러닝 모델 <i>F</i>가 있다고 간주할 때, <i>F</i>에 의해 변환된 출력 이미지
+  
+  ◾<b>Domain</b>: 동일한 수준별로 분류한 특정 집합, 크게 가상 도메인과 현실 도메인이 있고, 각 도메인 내 해당 데이터가 속한 환경 요인에 따라  하위 도메인으로 분류할 수 있음
+        예: 시간대에 따른 밤 도메인과 낮 도메인, 지리에 따른 도심 도메인, 시골 도메인
+
+  ◾ <b>Domain Gap</b>: 동일한 수준에 의해 분류된 두개 혹은 그 이상의 서로 다른 집합에 속한 데이터 간의 차이
 </pre>
 
-```
-  - Source Domain: 임의의 Synthetic Dataset (GTA5, SHIFT, Virtual KITTI, MORAI, etc.)
-  - **Source Image**: Source domain에서 추출된 임의의 한 image
-  - **Target Domain**: 임의의 Real Dataset (Cityscapes, nuScenes, BDD100K, etc.)
-  - **Target Image**: Target domain에서 추출된 임의의 한 image
-  - **Translated Image**: 딥러닝 모델 $F$가 Source image 한장을 input으로 하여 생성한 output, $F(I^{X})$
-```
-
 ## 들어가며
-**{서론부}**
-
-Image-to-Image Translation(I2I) 또는 Style-transfer(ST)라고도 불리는 연구는 MORAI Dataset 중 Camera RGB image를 Real image와 유사하게 보이도록 하는 <span style="background-color:#fff5b1">포토리얼리즘(Photorealism)을 향상시키고자 시작하게 되었습니다.
-
-<span style="background-color:#fff5b1">본론에 들어가기 앞서 I2I란 무엇이며, I2I가 인지 학습 데이터셋에 어떻게 활용되고 있는지에 관한 기술 배경부터 설명드리겠습니다.
+본론에 들어가기에 앞서, 본 포스팅의 주제인 Image-to-Image Translation (I2I)란 무엇이고, 기계 학습 분야 나아가서는 자율 주행의 인지 모델의 학습에는 어떻게 활용되는지 알아보겠습니다.
 
 ### Image-to-Image Translation(I2I) 이란
 
-* **Image-to-Image Translation(I2I)**: 
-Source domain $X$에 속하는 이미지를 Target domain $Y$에 속하는 image처럼 보이도록, image 내 content는 유지하되 style을 바꾸는 task.  --> 그림에 X  Y  표시
-* 다시 말하면, I2I의 목표는 Source Image $I^{X}$가 주어졌을 때, Target Image $I^{Y}$와 유사하도록 Translated Image $F(I^{X})$를 생성하는 것 입니다.
-* 이를 수식으로 표현하면, I2I는 하나의 딥러닝 모델 $F$이며, Source domain $X$에서 임의의 image $I^{X}$가 주어졌을 때, Target domain $Y$의 image $I^{Y}$를 모사하도록 $I^{X}$를 적절히 변환하는 역할을 합니다, $F(I^{X}) = I^{X \rightarrow Y } \approx I^{Y}$.
+**Image-to-Image Translation(I2I)** 는 서로 다른 도메인에 속하는 이미지 간의 변환 기술입니다. <br>
+**I2I** 는 Source Image의 내용(Content)은 유지하되 스타일(Style)을 바꾸는 연구에 주로 활용되므로 Style-Transfer(ST)라고도 불립니다.
 
-![23-08-04/I2I_overview.png](23-08-04/I2I_overview.png){:onclick="window.open(this.src)" title="Click view screen" width="60%"}
-<div style="font-size: 14px; font-style: italic; margin-top: -10px"> 
-  <center><b>그림 1. I2I 예시 </b> [출처: 
-  <a href="https://arxiv.org/pdf/2101.08629.pdf" target="_blank"> arxiv.org
-  </a>]
-  </center> 
-</div>
+아래 그림과 같이 Source Domain에 속하는 Source Image가 Target Domain에 속하는 Target Image처럼 보이도록 **I2I** 를 수행하면, 결과적으로 맨 우측의 Translated Image를 생성하게 됩니다.
+![23-08-04/I2I_overview.png](23-08-04/I2I_overview.png){:onclick="window.open(this.src)" title="Click view screen" width="80%"}
+<figcaption> 그림 1. I2I  원리를 설명한 예시 이미지 &nbsp; [출처: <a href="https://arxiv.org/pdf/2101.08629.pdf" target="_blank"> arxiv.org</a>] </figcaption>
 
- --> 서술식으로 고치기, 그림 수정
+I2I의 목표는 Source Image $I^{X}$가 주어졌을 때, Target Image $I^{Y}$와 유사한 Translated Image, 를 생성하는 것입니다. 이를 수식으로 표현하면 아래와 같습니다.
 
-### I2I 활용 분야
-* <span style="background-color:#fff5b1"> Source domain $X$와 Target domain $Y$ 사이에 data로 표현가능한 인과관계만 존재한다면, I2I를 적용할 수 있기에 활용 범위가 무궁무진한 기술 중 하나입니다.
-  
---> X Y 사이의 무엇을  어떤 data  로 표현할 수 있는지? 인과관계에 대해 부연 설명
+> $F(I^{X}) = I^{X \rightarrow Y } \approx I^{Y}$ 
+>  
+>  - $I^{X}$: I2I 모델의 입력으로 사용하는 임의의 Source Image(원본 이미지)
+>  - $I^{Y}$: I2I 모델의 목표 대상으로 출력하는 임의의 Target Image(타겟 이미지)
+>  - $X$: Source Domain
+>  - $Y$: Target Domain
+>  - $F$: I2I를 수행하는 딥러닝 모델, 입력 $I^{X}$를 가능한 $I^{Y}$로 출력하도록 변환하는 역할
 
-* 예시로, 하기 그림에서와 같이 computer vision과 image processing 분야에서는 이미 다양한 application에 적용중에 있으며 그 수가 지난 몇년간 기하급수적으로 늘고있습니다. 
+### I2I의 목적 및 연구 분야
+I2I 기술을 활용하는 목적은 넓게는 포토리얼즘의 향상시키는 것이며, 자율주행 도메인 분야로 한정한다면 AI 기계 학습에 필요한 데이터를 얻기 위해서입니다. <br>
+따라서 본 포스팅에서 전달하는 I2I의 목적은 I2I 모델에서 얻은 데이터셋을 자율주행 인지 모델이 학습하여 인지 성능을 개선하는 것입니다.
 
-![23-08-04/I2I_samples.png](23-08-04/I2I_samples.png){:onclick="window.open(this.src)" title="Click view screen" width="60%"}
-<figcaption><b><center> TODO: caption, [출처: 
-  <a href="https://arxiv.org/pdf/2101.08629.pdf" target="_blank"> arxiv.org
-  </a>] </center></b></figcaption>
+I2I 모델 $F$에 있어서, Source Domain $X$ 와 Target Domain $Y$ 간에 데이터 알고리즘으로 나타내는 상관 관계가 존재한다면 I2I의 활용 범위는 매우 무궁무진합니다. <br>
+아래 그림과 같이, Computer Vision과 Image Processing 분야에서는 다양한 애플리케이션에 I2I를 적용하고 있으며, 근래 들어 I2I 적용 사례가 기하급수적으로 늘어나고 있는 추세입니다.
 
-* 초창기 I2I 연구의 경우 지도학습(Supervised learning)에 그 기반을 두는 경우가 많았습니다.
-* 지도학습의 경우 Source domain $X$와 Target domain $Y$ 사이에 1:1 관계(paired)로 표현되는 (input, output GT)가 정의되어야 하기에 Dataset 구축 비용이 큰 편입니다.
-    * Dataset = $\{ ( I^{X}_{i}, I^{Y}_{i}) \}_{i=1}^{N}$
-    * $N$은 이미지 개수. 
-* 그러나 요즘에는 input에 대응하는 output GT가 없더라도 동작하는 비지도학습 기반의 unpaired I2I가 활발히 연구되고 있습니다.
-    * Dataset = $\{ I^{X}_{i} \}_{i=1}^{N}, \{ I^{Y}_{i} \}_{i=1}^{M}$
-    * $N$은 Source domain $X$의 이미지 개수, $M$은 Target domain $Y$의 이미지 개수.
-* 지도학습 기반의 I2I의 경우 변환 정확도는 높지만, Paired Dataset의 구축이 어렵기에 사용성 및 활용성이 떨어지게 됩니다. 따라서, 좀더 다양한 domain에 대해 I2I 활용성을 향상시키기 위해 MORAI에서는 비지도학습 기반의 I2I 연구를 수행하였습니다.
-  
- --> 서술식으로 고치기, 그림 수정
+![23-08-04/I2I_samples.png](23-08-04/I2I_samples.png){:onclick="window.open(this.src)" title="Click view screen" width="80%"}
+<figcaption> 그림 2. I2I  적용 사례 &nbsp; [출처: <a href="https://arxiv.org/pdf/2101.08629.pdf" target="_blank"> arxiv.org</a>]</figcaption>
 
-## I2I 연구 배경
-**{본론1}**
+초창기 I2I 연구는 지도학습(Supervised Learning)에 기초를 두고 진행하는 경우가 많았습니다. <br>
+지도학습은 기계학습 종류 중 하나로 정답이 있는 데이터를 학습하는 방식입니다. 
 
-* 시뮬레이터는 현실에서는 하기 이미지와 같이, 현실(Real)에서 수집하기 어려운 edge/rare case가 모사된 data를 쉽게 생성할 수 있습니다. 이러한 데이터를 활용함으로서 기존 인지 모델들이 취약한 edge/rare case에 대해 보완하는 역할을 수행할 수 있습니다.
+지도학습 기반의 I2I 연구를 하기 위해서는 Source Domain $X$와 Target Domain $Y$ 간에 1:1 관계성이 존재하는 Paired Datasets이 존재해야 합니다. 즉, 모델이 출력해야 하는 정답 데이터(Output Ground Truth)로써 Source Image에 대응하는 Target Image가 명확하게 정의되어야 합니다. 
+
+ Paired Datasets을 공식으로 표현하면 아래와 같습니다.
+
+> _Dataset_ = $\{ ( I^{X}_{i}, I^{Y}_{i}) \}_{i=1}^{N}$ 
+>  
+>  - $N$: Source Image 및 Target Image의 개수, 각 개수는 서로 동일함. 
+
+지도학습 기반의 I2I는 i 번째에 해당하는 Source Image $I^{X}$와 Target Image $I^{Y}$가 항상 쌍으로 존재하는 Paired Datasets을 사용하므로, 이미지 간의 변환 정확도가 높은 편입니다. <br>
+그러나 특정 도메인에 대해서만 유의미한 데이터를 구해야 하기 때문에 Paired Dataset의 구축 비용이 높을 뿐 아니라 타 도메인에 대한 활용성도 떨어집니다.
+
+요즘에는 지도학습 기반의 Paired I2I 단점을 보완하고자 ‘비지도학습 기반의 I2I 연구’가 활발히 진행되고 있습니다. <Br>
+비지도학습(Unsupervised Learning)은 지도학습과 반대로 답이 없는 데이터를 학습하는 방식으로, Source Image와 Target Image간의 1:1 관계성이 없는 Unpaired Datasets이 사용됩니다.
+
+Unpaired Datasets을 공식으로 표현하면 아래와 같습니다.
+
+> _Dataset_ = $\{ I^{X}_{i} \}_{i=1}^{N}, \{ I^{Y}_{i} \}_{i=1}^{M}$
+>  
+> - $N$: Source Image 개수
+> - $M$: Target Image 개수
+> 
+>    ※ $N$과 $M$은 서로 다름, 즉 $I^{X}$와  $I^{Y}$가 쌍으로 존재하지 않음 
+
+비지도학습 기반의 I2I는 Source Image에 대응되는 Target Image가 Output GT 로 정의되지 않더라도 딥러닝 모델의 성능을 보장합니다. 이는 특정 도메인에 대한 제약 없이 데이터셋 구축이 용이할 뿐만 아니라, I2I 모델을 다른 도메인에도 활용할 수 있다는 장점을 가져옵니다.
+
+따라서 비지도학습 기반의 I2I는 데이터셋 구축의 용이성과 I2I 기술의 활용성 면에서 장점을 가지기 때문에, 이에 대한 연구를 MORAI SIM을 활용하여 수행해보고자 했습니다.
+
+## 연구 배경 및 방향
+모라이에서는 자체 개발한 시뮬레이터 플랫폼인 MORAI SIM을 통해 현실에 가까운 다양한 도메인의 데이터셋을 구축하고 있습니다. 
+
+I2I  연구 분야는 매우 다양하지만 본 포스팅에서는 비지도 학습 기반의 SIM to Real Image Translation을 연구 과제로 설정한 이유는 아래와 같은 MORAI SIM의 장점을 연구에 활용해볼 수 있기 때문입니다.
+
+ - Edge & Rare case 구현 
+ - 커스텀 데이터 생성에 용이
+
+Edge/Rare case는 악천후와 같은 극악한 상황 또는 자주 발생하지 않으나 예측하지 못한 사고를 말합니다. <br>
+자율주행 인지 모델은 Edge & Rare case를 많이 학습해야 실제 그러한 상황이 발생했을 때 인지 성능을 발휘할 수 있습니다. 그러나 현실적으로 이러한 Edge/Rare 상황들만 모아 대량의 데이터셋으로 구축하기란 매우 어렵습니다.
+
+### 연구 계기: MORAI SIM의 장점 활용
+MORAI SIM 환경에서는 현실(Real)에서 취득하기 어려운 Edge & Rare case를 용이하게 구현할 수 있습니다. 이는 3D 물리 엔진을 기반으로 개발된 시뮬레이터의 도구적 특성이기도 합니다.<br>
+아래 그림과 같이 MORAI SIM에서 취득한 데이터는 악천후의 날씨(좌그림)와 갑자기 사람이 도로에 출현하는 상황(우그림)을 그대로 모사하고 있어 Edge & Rare case에 취약한 인지 모델의 단점을 보완할 수 있습니다.
 
 ![23-08-04/edgecase_data.png](23-08-04/edgecase_data.png){:onclick="window.open(this.src)" title="Click view screen" width="90%"}
-<figcaption><b><center> TODO: caption </center></b></figcaption>
+<figcaption>그림 3. MORAI SIM에서 Edge/Rare case를 구현 및 추출한 RGB 이미지</figcaption>
 
-* 그러나 시뮬레이터 data에 추가적인 가공없이 현실에서 수집된 data와 결합하면 성능이 오히려 감소하거나 크게 오르지 않는 현상이 드물지 않게 발생하며, [많은 연구자들](https://machinelearning.apple.com/research/bridging-the-domain-gap-for-neural-models)이 이러한 현상의 원인이 domain gap에 있다고 얘기합니다.
->  🍀**Domain Gap**
-> 
->  - Domain gap을 간단히 정의하자면, 서로 다른 두개 혹은 그 이상의 domain들 사이에 존재하는 차이를 의미합니다.
->  - 예를 들어, 도심이라는 domain에서 수집한 data는 시골이라는 domain에서 수집한 data와 비교했을 때 건물의 양상, 도로 표면등의 측면에서 서로 차이를 보일 것입니다.
->  - 마찬가지로, 동일한 장소더라도 낮이라는 domain에서 수집한 data는 밤이라는 domain에서 수집한 data와는 조명, 빛, 색 등의 측면에서 차이를 보이게 됩니다.
->  - 정리하자면, Domain gap은 서로 다른 domain들 간의 환경, 조명, 객체들의 외형, 카메라 설치 각도 등의 다양한 변인들의 조합으로 인해 발생하는 차이를 의미합니다.  
-  
-* 해당 현상은 후에 서술할 MORAI 데이터를 활용한 자체적인 실험에서도 확인하였기에, MORAI data와 Real data 사이의 domain gap을 완화하기 위해 I2I 연구를 수행하였습니다.
-* domain gap을 발생시키는 원인은 복합적이지만, 본 문서에서는 크게 두 가지로 정의한다.
-    * Semantic domain gap: 등장하는 객체들의 종류와 카메라에 투영되는 위치의 차이에서 발생하는 domain gap (하기 이미지 오른쪽 패널, Spatial prior 참고).
-    * Image domain gap: 수집된 장소, 나라에 따라 발생하는 건물/객체들의 외형적인 차이에서 발생하는 domain gap (하기 이미지 왼쪽 패널, Image samples 참고).
-* Semantic domain gap은 카메라의 설치 위치 및 등장하는 객체들의 커스텀이 용이하다는 시뮬레이터의 장점을 활용해 상대적으로 수월하게 해결이 가능합니다.
-* 그러나, Image domain gap은 그렇지 못함
-    * Game/graphic texture의 느낌이 현실에 존재하는 object들의 표면과는 상이하기 때문.
-    * 예시로, 현실과 가상 이미지가 주어졌을 때 사람이 그것을 쉽게 구별할 수 있음 
-        * BDD100K, KITTI, Cityscapes는 현실(Real), 그외는 가상 (Sim/Synthetic)
+Edge & Rare case 구현에 용이한 SIM의 특성은 ‘왜 I2I 에 시뮬레이터 데이터를 사용하는가’에 대한 답이자, SIM to Real Image Translation 연구를 하게 된 충분한 동기입니다.
 
-![23-08-04/dataset_compare.png](23-08-04/dataset_compare.png){:onclick="window.open(this.src)" title="Click view screen" width="100%"}
-<figcaption><b><center> TODO: caption </center></b></figcaption>
+두번째로, MORAI SIM은 사용자가 얻고자 하는 방향으로 다양한 형태의 데이터를 가공 및 생성할 수 있습니다. <Br>
+MORAI SIM의 센서 모듈은 센서의 위치, 각도 뿐만 아니라 다양한 형태의 정답 데이터를 지원하며, 시나리오 모듈은 현실에 존재하는 다양한 동적/정적 객체 모델을 제공합니다. <Br> 이러한 MORAI SIM의 특성을 활용하면 뒤에서 설명할 ‘Semantic domain gap’을 수월하게 해결해볼 수 있습니다.
 
-* 이러한 차이(gap)가 딥러닝 모델이 시뮬레이션 데이터를 활용해 성능을 향상시키는데 있어 방해하는 역할을 함.
-    * 모델이 학습해야하는 영역이 오히려 크게 늘어나기 때문 (domain gap 포함)
-    * MORAI Dataset을 단순 학습하였을 때는 Synthetic domain과 Real domain 사이의 Gap으로 인해 인지 성능이 잘 나오지 않음.
+### 해결 과제: Domain gap
 
-![23-08-04/XY_scatter_plot.png](23-08-04/XY_scatter_plot.png){:onclick="window.open(this.src)" title="Click view screen" width="60%"}
-<figcaption><b><center> TODO: caption </center></b></figcaption>
+Domain gap은 서로 다른 두개 혹은 그 이상의 도메인 간에 존재하는 환경적, 외형적인 차이입니다. <Br>
+예를 들어, ‘도심’이라는 도메인에서 수집한 데이터는 ‘시골’이라는 도메인에서 수집한 데이터와 비교했을 때 건물의 양상, 도로 표면 등에서 차이를 보일 것입니다. <br>
+또 다른 예로, 동일한 장소더라도 ‘낮’이라는 도메인에서 수집한 데이터는 ‘밤’이라는 도메인에서 수집한 데이터와는 조명, 빛, 색 등의 차이를 보이게 됩니다.
+Domain gap은 도메인을 구성하는 환경, 조명, 다양한 객체들의 외형, 각 객체를 인지하는 카메라의 위치 및 각도 등과 같이 다양한 변수의 조합으로 발생합니다.
 
-* 바꿔 말하면, 이러한 domain gap을 줄여준다면, 시뮬레이션 데이터가 온전히 모델의 성능향상에 기여할 수 있도록 도움을 줄 수 있음.
-![23-08-04/XY_translated_X_scatter_plot.png](23-08-04/XY_translated_X_scatter_plot.png){:onclick="window.open(this.src)" title="Click view screen" width="60%"}
-<figcaption><b><center> TODO: caption </center></b></figcaption>
+본 포스팅에서는 크게 아래의 두 가지를 Domain gap을 발생시키는 요소로 정의하겠습니다.
 
-* 따라서, domain gap을 줄일 수 있는 기술인 I2I (Simulator-to-Real)을 적용하고자 한다.
-  * I2I를 통해 domain gap이 줄어든 translated MORAI Dataset을 구축하고, 인지성능을 개선하는 것이 목표
+- **RGB Domain gap**: RGB 이미지 데이터가 속한 가상과 현실 도메인 간의 차이. 각 도메인에서 동일한 객체 및 환경을 RGB 이미지를 추출했을 때 건물, 도로의 텍스처 또는 질감과 같이 육안으로 명확히 구분할 수 있는 외형적인 차이에서 발생.
 
-## 연구 방안 및 계획
-**{본론2}**
-연구를 하기 위해 준비했던 일들을 설명해주세요.
+- **Semantic Domain gap**: Semantic 이미지 데이터가 속한 가상과 현실 도메인 간의 차이. 각 도메인에서 동일한 객체 및 주변 환경을 Sematic 이미지로 나타내었을 해당 객체들의 종류와 카메라에 투영되는 위치의 차이에서 발생.
 
-실제로 연구를 진행한 단계 별 방법을 절차대로 작성해주세요.
+![23-08-04/dataset_compare.png](23-08-04/dataset_compare.png){:onclick="window.open(this.src)" title="Click view screen" width="90%"}
+<figcaption>그림 4. RGB  Domain gap(좌)과 Semantic Domain gap(우) 예시 &nbsp; [출처: <a href="https://arxiv.org/pdf/2101.08629.pdf" target="_blank"> arxiv.org</a>]</figcaption>
 
-* 이 목표를 달성하기 위해, I2I를 연구하는 많은 연구자는 Image가 Content와 Style의 조합으로 구성되어있다는 직관적인 가정을 사용한다.
-    * MUNIT, INIT, DUNIT, DRIT, etc. (논문 링크 첨부 예정)
-    * Content: object shape
-    * Style: Texture, Illumination, Light, etc.
-* 즉, Source Image의 Content를 Target Image의 Style과 결합하여 Translated Image를 생성한다.
-    * $F(I^{X}) = I^{X}_{content} + I^{Y}_{style}$
+위 그림에서 동일한 객체에 대해 현실 데이터셋(BDD, KITTI, Cityscapes)과 가상 데이터셋(Virtual KITTI 1/2,GTA5, SHIFT, MORAI)을 비교해보면 RRG Domain gap보다는 Semantic Domain gap의 차이가 적다는 것을 육안으로도 바로 확인할 수 있습니다.
+
+이는 가상의 그래픽 텍스처에서 주는 느낌이 현실과는 확연히 다름을 보이는 RGB domain gap에 비하여 Semantic domain gap이 보다 수월하게 해결될 수 있다는 의미를 전합니다.
+
+### 해결 방안: I2I 적용하여 Domain gap 완화
+자율주행 모델이 가상 도메인의 시뮬레이터에서 취득한 데이터로만 학습하면 인지 성능이 오히려 감소하거나 크기 오르지 않는 현상이 종종 발생합니다. 딥러닝 분야의 [많은 연구자들](https://machinelearning.apple.com/research/bridging-the-domain-gap-for-neural-models)은 이러한 현상의 원인이 Domain gap에 있다고 얘기합니다.
+
+아래 그림과 같이 시뮬레이터에서 취득한 데이터셋과 현실 도메인에서 취득한 데이터셋 간의 차이는 Domain gap을 포함하고 있습니다. 이는 인지 모델이 학습해야 하는 영역이 증가한다는 것을 의미하며 인지 성능에 악영향을 주게 됩니다. <br>
+ 쉽게 말해, 인지 모델이 언어 영역의 문제들(현실 데이터셋)로만 학습하고 시험을 봐야 하는데 언어 영역 뿐만 아니라 수학, 과학 등 시험과는 상관없는 영역들의 문제들(가상 데이터셋)까지 학습하여 시험을 못보게 되는 결과로 비유할 수 있습니다.
+
+![23-08-04/XY_scatter_plot.png](23-08-04/XY_scatter_plot.png){:onclick="window.open(this.src)" title="Click view screen" width="80%"}
+<figcaption>그림 5. 현실 데이터셋(파란색)과 가상의 MORAI SIM 데이터셋(빨간색) 간의 차이</figcaption>
+
+
+그런데 이러한 결과를 놀고 볼때, 아래 그림과 같이 Domain gap이 줄어들도록 변환된 MORAI SIM 데이터셋(Translated MORAI)을 생성한다면  가상의 데이터만으로도 모델의 성능 향상에 기여할 것이라고 예측해볼 수 있습니다.
+
+![23-08-04/XY_translated_X_scatter_plot.png](23-08-04/XY_translated_X_scatter_plot.png){:onclick="window.open(this.src)" title="Click view screen" width="80%"}
+<figcaption>그림 6. 현실 데이터셋(파란색)과 변환 데이터셋(분홍색) 간의 차이</figcaption>
+
+따라서 현실 도메인에 가깝도록 I2I을 기술을 적용하여 변환 데이터셋(Translated MORAI Dataset)을 구축하는 것이 'Domain gap'을 완화하기 위한 방안이 되겠습니다.
+
+## 연구 방법
+
+연구 방법에 있어서 MUNIT, INIT, DUNIT, DRIT와 같이 I2I 모델을 연구한 여러 논문을 조사한 결과 아래의 가정에 의한 I2I 모델을 재현하였고, 마지막으로 동일한 모델을 MORAI SIM  데이터셋에 적용했을 때 학습 결과를 확인할 수 있었습니다.
+
+### 가정 사항
+우선, MUNIT, INIT, DUNIT, DRIT(논문 링크 첨부 예정)와 같이 I2I 모델을 연구한 여러 논문을 조사한 결과, Image는 크게 'Content'와 'Style'의 조합으로 구성되어있다고 가정할 수 있었습니다.
+
+- Content: 의미를 가진 모든 객체(object shape)
+- Style: 객체를 둘러싼 배경의 질감, 사실감, 조명 및 조도(Texture, Illumination, Light, etc.)
+
+I2I 모델은 Source Image의 'Content'와 Target Image의 'Style'를 결합하여 Translated Image를 생성합니다.
+
+>
+ $F(I^{X}) = I^{X}_{content} + I^{Y}_{style}$
  
-![23-08-04/Image_decoding_into_style_and_content.png](23-08-04/Image_decoding_into_style_and_content.png){:onclick="window.open(this.src)" title="Click view screen" width="70%"}
-<figcaption><b><center>그림 1. Image decoding 예시 [출처: 
-  <a href="https://arxiv.org/abs/1804.04732.pdf" target="_blank"> arxiv.org
-  </a>] </center></b></figcaption>
+그리고 I2I 모델에는 아래와 같은 이미지 디코딩 알고리즘이 적용됩니다.
+
+![23-08-04/Image_decoding_into_style_and_content.png](23-08-04/Image_decoding_into_style_and_content.png){:onclick="window.open(this.src)" title="Click view screen" width="80%"}
+<figcaption> 그림 7. I2I 모델의 이미지 디코딩 알고리즘 &nbsp; [출처: 
+  <a href="https://arxiv.org/pdf/2101.08629.pdf" target="_blank"> arxiv.org</a>] 
+</figcaption>
+
+
+### VSA 방식의 I2I 모델 적용
+추가적으로, Vector Symbolic Architecture Image Translation(VSAIT) 연구 논문에서 제안한 Vector Symbolic Architecture (VSA) 방식도 본 연구에 적용해보았습니다
+
 
 [VSAIT](https://morai.atlassian.net/wiki/spaces/MTG/pages/1429602423/VSAIT+Unpaired+Image+Translation+via+Vector+Symbolic+Architectures) 내용 옮겨적기
 ![23-08-04/VSA_binding_and_bundling.png](23-08-04/VSA_binding_and_bundling.png){:onclick="window.open(this.src)" title="Click view screen" width="90%"}
 <figcaption><b><center> TODO: VSAIT 출처 넣기 </center></b></figcaption>
+
+---
 
 ## 연구 진행 순서 및 방법
 **{본론3}**
@@ -224,3 +271,26 @@ Source domain $X$에 속하는 이미지를 Target domain $Y$에 속하는 image
 * 저희와 같이 인지 학습 데이터를 연구하시는 분들께 본 포스팅에서 다룬 Image-to-Image Translation 연구 방법 및 결과가 도움되시길 바라며 이만 마치도록 하겠습니다. 
 * 감사합니다.
 
+
+---
+Then, open up `hello-world.md`, and add the following lines:
+
+``` { .sh .no-copy }
+.
+├─ docs/
+│  ├─ posts/
+│  │  └─ hello-world.md # (1)!
+│  └─ index.md
+└─ mkdocs.yml
+
+```
+
+1.  If you'd like to arrange posts differently, you're free to do so. The URLs
+    are built from the format specified in [`post_url_format`][post slugs] and
+    the titles and dates of posts, no matter how they are organized
+    inside the `posts` directory 
+
+>
+*  타겟 이미지 = $I^{Y}$
+
+---

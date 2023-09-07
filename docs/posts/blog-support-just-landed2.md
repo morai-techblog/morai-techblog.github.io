@@ -1,7 +1,7 @@
 ---
 date: 2023-07-20
 authors: [EJ]
-title: MORAI SIM의 학습 데이터셋 생성 기술 
+title: MORAI SIM의 학습 데이터셋 생성 기술
 description: >
   자율주행의 인지 성능을 이끄는 학습 데이터셋의 필요성과 MORAI SIM의 데이터셋 생성 기술을 알아봅니다.
 categories:
