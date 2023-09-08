@@ -117,7 +117,7 @@ Unpaired Datasets을 공식으로 표현하면 아래와 같습니다.
 
 따라서 비지도학습 기반의 I2I는 데이터셋 구축의 용이성과 I2I 기술의 활용성 면에서 장점을 가지기 때문에, 이에 대한 연구를 MORAI SIM을 활용하여 수행해보고자 했습니다.
 
-## 연구 배경 및 방향
+## 연구 배경
 모라이에서는 자체 개발한 시뮬레이터 플랫폼인 MORAI SIM을 통해 현실에 가까운 다양한 도메인의 데이터셋을 구축하고 있습니다. 
 
 I2I  연구 분야는 매우 다양하지만 본 포스팅에서는 비지도 학습 기반의 SIM to Real Image Translation을 연구 과제로 설정한 이유는 아래와 같은 MORAI SIM의 장점을 연구에 활용해볼 수 있기 때문입니다.
@@ -128,7 +128,7 @@ I2I  연구 분야는 매우 다양하지만 본 포스팅에서는 비지도 �
 Edge/Rare case는 악천후와 같은 극악한 상황 또는 자주 발생하지 않으나 예측하지 못한 사고를 말합니다. <br>
 자율주행 인지 모델은 Edge & Rare case를 많이 학습해야 실제 그러한 상황이 발생했을 때 인지 성능을 발휘할 수 있습니다. 그러나 현실적으로 이러한 Edge/Rare 상황들만 모아 대량의 데이터셋으로 구축하기란 매우 어렵습니다.
 
-### 연구 계기: MORAI SIM의 장점 활용
+### 계기: MORAI SIM의 장점 활용
 MORAI SIM 환경에서는 현실(Real)에서 취득하기 어려운 Edge & Rare case를 용이하게 구현할 수 있습니다. 이는 3D 물리 엔진을 기반으로 개발된 시뮬레이터의 도구적 특성이기도 합니다.<br>
 아래 그림과 같이 MORAI SIM에서 취득한 데이터는 악천후의 날씨(좌그림)와 갑자기 사람이 도로에 출현하는 상황(우그림)을 그대로 모사하고 있어 Edge & Rare case에 취약한 인지 모델의 단점을 보완할 수 있습니다.
 
@@ -160,7 +160,7 @@ Domain gap은 도메인을 구성하는 환경, 조명, 다양한 객체들의 �
 
 이는 가상의 그래픽 텍스처에서 주는 느낌이 현실과는 확연히 다름을 보이는 RGB domain gap에 비하여 Semantic domain gap이 보다 수월하게 해결될 수 있다는 의미를 전합니다.
 
-### 해결 방안: I2I 적용하여 Domain gap 완화
+### 방안: I2I 적용하여 Domain gap 완화
 자율주행 모델이 가상 도메인의 시뮬레이터에서 취득한 데이터로만 학습하면 인지 성능이 오히려 감소하거나 크기 오르지 않는 현상이 종종 발생합니다. 딥러닝 분야의 [많은 연구자들](https://machinelearning.apple.com/research/bridging-the-domain-gap-for-neural-models)은 이러한 현상의 원인이 Domain gap에 있다고 얘기합니다.
 
 아래 그림과 같이 시뮬레이터에서 취득한 데이터셋과 현실 도메인에서 취득한 데이터셋 간의 차이는 Domain gap을 포함하고 있습니다. 이는 인지 모델이 학습해야 하는 영역이 증가한다는 것을 의미하며 인지 성능에 악영향을 주게 됩니다. <br>
@@ -175,62 +175,115 @@ Domain gap은 도메인을 구성하는 환경, 조명, 다양한 객체들의 �
 ![23-08-04/XY_translated_X_scatter_plot.png](23-08-04/XY_translated_X_scatter_plot.png){:onclick="window.open(this.src)" title="Click view screen" width="80%"}
 <figcaption>그림 6. 현실 데이터셋(파란색)과 변환 데이터셋(분홍색) 간의 차이</figcaption>
 
-따라서 현실 도메인에 가깝도록 I2I을 기술을 적용하여 변환 데이터셋(Translated MORAI Dataset)을 구축하는 것이 'Domain gap'을 완화하기 위한 방안이 되겠습니다.
+따라서 I2I를 적용하여 현실 도메인에 가까운 변환 데이터셋(Translated MORAI Dataset)을 구축하는 것이 'Domain gap'을 완화하기 위한 방안이 되겠습니다.
 
 ## 연구 방법
-
-연구 방법에 있어서 MUNIT, INIT, DUNIT, DRIT와 같이 I2I 모델을 연구한 여러 논문을 조사한 결과 아래의 가정에 의한 I2I 모델을 재현하였고, 마지막으로 동일한 모델을 MORAI SIM  데이터셋에 적용했을 때 학습 결과를 확인할 수 있었습니다.
+I2I 기술을 적용하기 위해 MUNIT, INIT, DUNIT, DRIT(논문 링크 첨부 예정)와 같이 I2I 모델을 연구한 여러 논문을 조사해보았고, 여기서 제시한 I2I 모델을 분석하고 재현해보았습니다. 
+이어서, I2I 모델를 적용한 MORAI SIM 데이터셋을 학습한 결과와 현실 데이터셋을 학습한 결과를 비교함으로써, MORAI SIM을 활용한 비지도 학습 기반의 I2I가 '인지 성능 개선'에 기여하는가에 대해 본 연구의 타당성을 고찰해볼 수 있었습니다.
 
 ### 가정 사항
-우선, MUNIT, INIT, DUNIT, DRIT(논문 링크 첨부 예정)와 같이 I2I 모델을 연구한 여러 논문을 조사한 결과, Image는 크게 'Content'와 'Style'의 조합으로 구성되어있다고 가정할 수 있었습니다.
+연구를 진행하기에 앞서 Image가 아래의 Content와 Style의 조합으로 구성되어있다는 가정을 사용했습니다.
 
-- Content: 의미를 가진 모든 객체(object shape)
+- Content: 의미를 가진 모든 객체(Object shape)
 - Style: 객체를 둘러싼 배경의 질감, 사실감, 조명 및 조도(Texture, Illumination, Light, etc.)
 
-I2I 모델은 Source Image의 'Content'와 Target Image의 'Style'를 결합하여 Translated Image를 생성합니다.
+이와 같은 가정은 앞에서 조사한 I2I 연구 논문에서도 사용하고 있습니다. 
 
->
- $F(I^{X}) = I^{X}_{content} + I^{Y}_{style}$
- 
-그리고 I2I 모델에는 아래와 같은 이미지 디코딩 알고리즘이 적용됩니다.
+가정에 따른 I2I 모델 $I^{X}$은 아래와 같은 이미지 디코딩 알고리즘 방식으로 Source Image의 'Content'와 Target Image의 'Style'를 결합하여 Translated Image를 생성합니다.
 
 ![23-08-04/Image_decoding_into_style_and_content.png](23-08-04/Image_decoding_into_style_and_content.png){:onclick="window.open(this.src)" title="Click view screen" width="80%"}
 <figcaption> 그림 7. I2I 모델의 이미지 디코딩 알고리즘 &nbsp; [출처: 
   <a href="https://arxiv.org/pdf/2101.08629.pdf" target="_blank"> arxiv.org</a>] 
 </figcaption>
 
+>
+ $F(I^{X}) = I^{X}_{content} + I^{Y}_{style}$
 
 ### VSA 방식의 I2I 모델 적용
-추가적으로, Vector Symbolic Architecture Image Translation(VSAIT) 연구 논문에서 제안한 Vector Symbolic Architecture (VSA) 방식도 본 연구에 적용해보았습니다
+두번째로, 
+[Vector Symbolic Architecture Image Translation(VSAIT)](https://www.ecva.net/papers/eccv_2022/papers_ECCV/papers/136810017.pdf) 연구 논문에서 제안한 Vector Symbolic Architecture(VSA) 방식의 I2I 모델을 재현해보고 이를 MORAI SIM 데이터셋에 적용해보았습니다.
 
+VSA는 vector space에서 정의한 algebraic operation을 통해 Source Image의 Src. Content와 Target Image의 Trg. Style과 결합하하여 Translation Image를 생성하는 방식입니다. 이를 공식으로 표현하면 아래와 같습니다.
 
-[VSAIT](https://morai.atlassian.net/wiki/spaces/MTG/pages/1429602423/VSAIT+Unpaired+Image+Translation+via+Vector+Symbolic+Architectures) 내용 옮겨적기
-![23-08-04/VSA_binding_and_bundling.png](23-08-04/VSA_binding_and_bundling.png){:onclick="window.open(this.src)" title="Click view screen" width="90%"}
-<figcaption><b><center> TODO: VSAIT 출처 넣기 </center></b></figcaption>
+>
+  - Src = Src.Content + Src.Style
+  - Translated Src = Src.Content + Trg.Style
+  - `+` : Binding operator
 
----
+![23-08-04/VSA_binding_and_bundling.png](23-08-04/VSA_binding_and_bundling.png){:onclick="window.open(this.src)" title="Click view screen" }
+<figcaption>그림 8. VSA 방식을 적용한 I2I 모델의 Translation 이미지 예시</figcaption>
 
-## 연구 진행 순서 및 방법
-**{본론3}**
+그리고 논문에서 제안한 VSA-based constraints on adversarial learning 방식으로, Src.Content는 유지한 채 Src-to-Trg translation이 가능한 Vector mapping function, $F$를 구할 수 있었습니다.
 
-* 우선 Domain gap을 핸들링 하지 않았을 때의 MORAI Data가 인지 성능에 어떠한 영향을 끼치는지 확인하였음.
-    * Score가 나아지는지 혹은 아닌지
-* 성능 하락 혹은 유의미한 성능 향상이 관측되지 않았을 경우, 이를 보완하기 위한 방법에 대한 고민
-* 상기 그림의 image samples/spatial prior 분석결과 Domain gap이 원인일 것이라 판단하여 이를 줄이기 위한 I2I 기법들에 대한 연구개발 수행
-    * VSAIT, SRUNIT, DRIT 등의 다양한 논문들이 I2I에 대해 수행하고 있음.
+※ $F$는 Trg-to-Src translation도 가능
 
-따라서 해당 논문들의 실험을 재현
+[VSA 방식의 I2I 모델](https://github.com/facebookresearch/vsait)를 재현한 결과,
+현실의 타겟 데이터셋(예:Cityscapes)을 목표로 가상 데이터셋(예: GTA) 이미지에 대한 변환 이미지는 아래와 같습니다.
+
 ![23-08-04/I2I_gta2cityscapes.png](23-08-04/I2I_gta2cityscapes.png){:onclick="window.open(this.src)" title="Click view screen"}
-<figcaption><b><center> TODO: caption </center></b></figcaption>
+<figcaption>그림 9. VSA 방식의 I2I 모델로 생성한 변환 이미지 예시</figcaption>
 
-그 뒤 MORAI Dataset에 맞도록 가공
+마지막으로 MORAI SIM 데이터셋에도 동일한 I2I 모델을 적용하여 아래와 같은 Translated MORAI Dataset을 구축해보았습니다.
+
 ![23-08-04/I2I_morai2cityscapes.png](23-08-04/I2I_morai2cityscapes.png){:onclick="window.open(this.src)" title="Click view screen"}
-<figcaption><b><center> TODO: caption </center></b></figcaption>
+<figcaption>그림 10. VSA 방식의 I2I 모델을 적용한 Translated MORAI Dataset 예시</figcaption>
 
 ## 연구 결과
 **{본론4}**
 ![23-08-04/exp_detection.png](23-08-04/exp_detection.png){:onclick="window.open(this.src)" title="Click view screen" width="80%"}
 <figcaption><b><center> TODO: table을 새로 만들어서 값을 채워넣는게 좀더 깔끔할듯, 무슨 network 사용했는지 명시 </center></b></figcaption>
+
+
+
+| Train       | Val | person | car | truck | bus | mAP* (%) |
+| :---------: | :----------------------------------: | :--: |:--: |:--: |:--: |:--: |
+| `Cityscapes` | :material-check-all: Cityscapes | 40.7 | 57.9 | 34.5 | 55.8 | 47.2 |
+| `MORAI + Cityscapes` | :material-check-all: Cityscapes | 40.7 | 57.9 | 34.5 | 55.8 | 47.2 |
+| `Cityscapes` | :material-check-all: Cityscapes | **40.7** | **57.9** | **34.5** | **55.8** | **47.2** |
+
+
+ <table>
+      <thead>
+        <tr>
+          <th style="border-left: none; background-color: #c9dff379; padding: auto 5rem; text-align: center;">Train</th>
+          <th style="border-left: none; background-color: #c9dff379; padding: auto 5rem; text-align: center;">Val</th>
+          <th style="text-align: center; background-color: #f7f5f5;">person</th>
+          <th style="text-align: center; background-color: #f7f5f5;">car</th>
+          <th style="text-align: center; background-color: #f7f5f5;">truck</th>
+          <th style="text-align: center; background-color: #f7f5f5;">bus</th>
+          <th style="text-align: center; background-color: #fbe9e7;">mAP* (%)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: center;">Cityscapes</td>
+          <td style="text-align: center;">Cityscapes</td>
+          <td style="text-align: center;">40.7</td>
+          <td style="text-align: center;">57.9.7</td>
+          <td style="text-align: center;">34.5</td>
+          <td style="text-align: center;">55.8</td>
+          <td style="text-align: center;">47.2</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">MORAI + Cityscapes</td>
+          <td style="text-align: center;">Cityscapes</td>
+          <td style="text-align: center;">40.7</td>
+          <td style="text-align: center;">57.9.7</td>
+          <td style="text-align: center;">34.5</td>
+          <td style="text-align: center;">55.8</td>
+          <td style="text-align: center;">47.2</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">Cityscapes</td>
+          <td style="text-align: center;">Cityscapes</td>
+          <td style="text-align: center; font-weight: bold;">40.7</td>
+          <td style="text-align: center;">57.9.7</td>
+          <td style="text-align: center;">34.5</td>
+          <td style="text-align: center;">55.8</td>
+          <td style="text-align: center;">47.2</td>
+        </tr>
+      </tbody>
+ </table>
 
 ![23-08-04/exp_segmentation.png](23-08-04/exp_segmentation.png){:onclick="window.open(this.src)" title="Click view screen" width="90%"}
 <figcaption><b><center> TODO: table을 새로 만들어서 값을 채워넣는게 좀더 깔끔할듯, 무슨 network 사용했는지 명시 </center></b></figcaption>
@@ -289,8 +342,5 @@ Then, open up `hello-world.md`, and add the following lines:
     are built from the format specified in [`post_url_format`][post slugs] and
     the titles and dates of posts, no matter how they are organized
     inside the `posts` directory 
-
->
-*  타겟 이미지 = $I^{Y}$
 
 ---
