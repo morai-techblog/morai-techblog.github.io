@@ -288,13 +288,18 @@ VSA는 vector space에서 정의한 algebraic operation을 통해 Source Image�
 ![23-08-04/exp_segmentation.png](23-08-04/exp_segmentation.png){:onclick="window.open(this.src)" title="Click view screen" width="90%"}
 <figcaption><b><center> TODO: table을 새로 만들어서 값을 채워넣는게 좀더 깔끔할듯, 무슨 network 사용했는지 명시 </center></b></figcaption>
 
-<div class="grid cards" markdown>
 
-- ![23-07-20/그림1.png](23-08-04/morai_origin.gif){:onclick="window.open(this.src)" title="Click view screen"}
-- ![23-07-20/그림1.png](23-08-04/morai_translated.gif){:onclick="window.open(this.src)" title="Click view screen"}
 
-</div>
-<figcaption><b><center>TODO: caption</center></b></figcaption>
+<table>
+  <tr>
+    <td style="border-right: 2px solid #E2E2E2;"> <img src="../../../../assets/23-08-04/morai_translated.gif" alt="sensor" style="width: 500px; height: auto;"  title="Click to Enlage" onclick="window.open(this.src)" />
+      <figcaption style="margin-top: 0.7em;">MORAI SIM 원본 데이터셋</figcaption>
+    </td>
+    <td><img src="../../../../assets/23-08-04/morai_translated.gif" alt="sensor" style="width: 500px; height: auto;"  title="Click to Enlage" onclick="window.open(this.src)"/>
+      <figcaption style="margin-top: 0.7em;">I2I 모델을 적용한 MORAI SIM 변환 데이터셋</figcaption>
+    </td>
+  </tr>
+</table>
 
 연구 결과로 무엇을 증명할 수 있었고 어떻게 활용해볼수 있을까요?
  

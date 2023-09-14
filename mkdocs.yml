@@ -11,7 +11,7 @@ site_description: >-
 # Copyright
 copyright: Copyright &copy; 2023 <a href="https://www.morai.ai">MORAI Inc.</a>
 
-rss: https://morai-techblog.github.io/feed_rss_updated.xml
+# rss: https://morai-techblog.github.io/feed_rss_updated.xml
 
 theme:
   name: material
@@ -111,6 +111,8 @@ extra:
       link: https://www.youtube.com/moraisim
     - icon: fontawesome/brands/linkedin
       link: https://www.linkedin.com/company/morai/
+    - icon: fontawesome/solid/rss
+      link: https://morai-techblog.github.io/feed_rss_updated.xml
 
 # Extensions
 markdown_extensions:
@@ -155,6 +157,7 @@ markdown_extensions:
 
 nav:
   - Home: index.md
+  - About: about/index.md
 
 
 extra_css: 
