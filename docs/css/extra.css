@@ -81,6 +81,17 @@ table pre {
 
 }
 
+.md-typeset .md-author img {
+  max-width: auto;
+  height: 100%;
+  margin-bottom: 0em;
+  padding-bottom: 0em;
+}
+
+.md-typeset .md-author {
+  height: 100%;
+}
+
 /* .md-typeset figure {
   padding-top: 0px;
   padding-bottom: 0px;
@@ -154,7 +165,7 @@ table tbody tr:last-child > td {
   font-size: 14px; /*230316*/
 }
 
-#__nav_2_label {
+#__nav_3_label {
   font-size: 20px;
   color: #4051b5;
 }
@@ -281,4 +292,13 @@ table tbody tr:last-child > td {
       font-size: 0.75em;
     }
   }
+}
+
+/* .grid cards1{
+    margin-right: 1px;
+} */
+
+
+.md-typeset .grid {
+    grid-gap: 1.5rem;
 }
