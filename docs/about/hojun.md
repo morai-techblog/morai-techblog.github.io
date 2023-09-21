@@ -1,11 +1,14 @@
 ---
-layout: blog-authors.html
+#layout: blog-authors.html
 title: People @ MORAI
 comments: false
 hide:
   - toc
+draft: true
 ---
 
+업데이트 중입니다.
+ 
 ### 호준님의 데이터셋 개발 여정
 {본인 커리어에 대한 기본 인적 사항}
 
@@ -44,7 +47,7 @@ hide:
 
 어느 날 모 팀에서 저희 팀에 미팅을 요청했는데, 알고보니 저희가 만들고 있던 제품이 딱 필요했던 거예요. 당시 그 팀에서는 고객사를 사용자로 하는 웹사이트를 만드는데 회원가입과 인증 관련된 기능이 필요한 상황이었어요. 그래서 저희가 개발한 제품을 소개해드리니 딱이라고 말씀주시더라구요. 누군가에게 도움이 되었다는 그때 그 기분은 절대 잊을 수 없을 거에요.
 
-매월 진행하는 전사 기술 그룹 미팅에서 저희가 만들고 있던 Megazone PoPs 플랫폼을 소개하고 시연하는 자리에서 있었던 일도 기억에 남습니다. 세션이 끝난 후에 설문조사를 통해 기대 점수와 피드백을 받았는데, 꽤 높은 점수를 받았고 많은 분들이 기대하던 플랫폼이라는 피드백을 남겨주셨어요. 이 피드백들을 확인한 순간, 제가 하는 일에 보람을 느끼고 기분이 정말 좋았던 기억이 나네요.
+매월 진행하는 전사 기술 그룹 미팅에서 저희가 만들고 있던 플랫폼을 소개하고 시연하는 자리에서 있었던 일도 기억에 남습니다. 세션이 끝난 후에 설문조사를 통해 기대 점수와 피드백을 받았는데, 꽤 높은 점수를 받았고 많은 분들이 기대하던 플랫폼이라는 피드백을 남겨주셨어요. 이 피드백들을 확인한 순간, 제가 하는 일에 보람을 느끼고 기분이 정말 좋았던 기억이 나네요.
 
 <div spellcheck="true" placeholder=" " data-content-editable-leaf="true" contenteditable="false" style="max-width: 100%; width: 100%; white-space: pre-wrap; word-break: break-word; caret-color: rgb(55, 53, 47); padding: 3px 2px; min-height: 1em; color: rgb(55, 53, 47); -webkit-text-fill-color: rgba(55, 53, 47, 0.5);"></div>
 
@@ -53,23 +56,14 @@ hide:
  
 개발자의 기본은 물론 개발 실력입니다. 하지만 개발 실력만 있다고 훌륭한 제품이나 서비스가 만들어지는 것은 아닙니다. 새로운 환경에 적응하기 위한 끊임없는 공부! 함께 일하는 내외부 구성원들과의  커뮤니케이션도 필요하다고 생각해요. 이런 부분들을 채워나가기 위해 노력한다면 저는 오늘보다 내일 더 성장한 훌륭한 개발자가 될 수 있다고 확신합니다!
 
+<div spellcheck="true" placeholder=" " data-content-editable-leaf="true" contenteditable="false" style="max-width: 100%; width: 100%; white-space: pre-wrap; word-break: break-word; caret-color: rgb(55, 53, 47); padding: 3px 2px; min-height: 1em; color: rgb(55, 53, 47); -webkit-text-fill-color: rgba(55, 53, 47, 0.5);"></div>
+---
 
+<pre>
+  <span style="font-weight:550; color:rgba(144, 101, 176, 1);"> 
+  👍 호준님 글 보러가기: 
+  </span>
+  <a href="../../2023/08/03/morai-sim-image-to-image-translation"> 🎱 MORAI SIM 데이터셋을 활용한 Image-to-Image Translation 연구 </a>
+  
+</pre>
 
-<div class="posts">
-    <ul class="post">
-      {% for "hojun" in site.url %}
-        {% if post.meta.author == Hojun %}
-          <li>
-            {% if post.link %}
-              <a href="{{ post.link }}">
-            {% else %}
-              <a href="{{ site.baseurl }}{{ post.url }}">
-            {% endif %}
-                {{ post.title }} 
-              </a>
-              <time>{{ post.date | date: "%Y-%m-%d" }}</time>
-          </li>
-        {% endif %}
-      {% endfor %}
-    </ul>
-</div>
