@@ -27,7 +27,7 @@ draft: true
 # MORAI SIM 데이터셋을 활용한 Image-to-Image Translation 연구
 안녕하세요. AI 기술을 연구하며  MORAI SIM의 Virtual 데이터셋 개발을 담당하고 있는 임호준입니다.
 
-본 포스팅에서는 자율주행 인지 모델 학습에 필요한 데이터셋을 구축하기 위하여  MORAI SIM의 데이터셋을 활용한 Image-to-Image Translation 연구를 수행한 내용을 전달드리고자 합니다.
+본 포스팅에서는 자율주행 인지 모델 학습에 필요한 데이터셋을 구축하기 위하여  MORAI SIM의 데이터셋을 활용한 [Image-to-Image Translation 연구](./grammertest.md)를 수행한 내용을 전달드리고자 합니다.
 <br>
 
 ---
