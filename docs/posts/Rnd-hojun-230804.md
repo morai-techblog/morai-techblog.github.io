@@ -217,12 +217,12 @@ VSA는 vector space에서 정의한 algebraic operation을 통해 Source Image�
 
 <table>
   <tr>
-    <td style="border-right: 2px solid #E2E2E2;"> <img src="../../../../assets/23-08-04/morai_origin.gif" alt="sensor" style="width: 500px; height: auto;"  title="Click to Enlage" onclick="window.open(this.src)" />
+    <th style="border-right: 2px solid #E2E2E2;"> <img src="../../../../assets/23-08-04/morai_origin.gif" alt="sensor" style="width: 500px; height: auto;"  title="Click to Enlage" onclick="window.open(this.src)" />
       <figcaption style="margin-top: 0.7em;">MORAI SIM 원본 데이터셋</figcaption>
-    </td>
-    <td><img src="../../../../assets/23-08-04/morai_translated.gif" alt="sensor" style="width: 500px; height: auto;"  title="Click to Enlage" onclick="window.open(this.src)"/>
+    </th>
+    <th><img src="../../../../assets/23-08-04/morai_translated.gif" alt="sensor" style="width: 500px; height: auto;"  title="Click to Enlage" onclick="window.open(this.src)"/>
       <figcaption style="margin-top: 0.7em;">I2I 모델을 적용한 MORAI SIM 변환 데이터셋</figcaption>
-    </td>
+    </th>
   </tr>
 </table>
 
@@ -243,49 +243,52 @@ VSA는 vector space에서 정의한 algebraic operation을 통해 Source Image�
 
 성능을 확인하기 위한 지표로는 object detection 과제에서 대중적으로 사용되는 $AP$(average precition) 및 $mAP$(mean average precision)를 사용하여 평가하였으며, 해당 지표는 100에 가까운 수치를 보일수록 높은 성능임을 의미합니다. <br> 
 세 가지의 경우에 대해 각각 Faster R-CNN 모델의 학습을 수행한 뒤 실험 결과를 4개의 객체 종류($person, car, truck, bus$)별 AP와 mAP에 대해 나타낸 표는 다음과 같습니다. 
- <table>
+
+ <table style="min-width: 750px; margin-left:auto; margin-right:auto; overflow: hidden;">
       <thead>
         <tr>
           <th style="border-left: none; background-color: #c9dff379; padding: auto 5rem; text-align: center;">Train</th>
-          <th style="border-left: none; background-color: #c9dff379; padding: auto 5rem; text-align: center;">Val</th>
+          <th style="border-left: none; background-color: #c9dff379; padding: auto 5rem; text-align: center; border-rjght: 2px solid #E2E2E2;">Val</th>
           <th style="text-align: center; background-color: #f7f5f5;">person</th>
           <th style="text-align: center; background-color: #f7f5f5;">car</th>
           <th style="text-align: center; background-color: #f7f5f5;">truck</th>
-          <th style="text-align: center; background-color: #f7f5f5;">bus</th>
+          <th style="text-align: center; background-color: #f7f5f5; border-right: 2px solid #E2E2E2;">bus</th>
           <th style="text-align: center; background-color: #fbe9e7;">mAP* (%)</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td style="text-align: center;">Cityscapes</td>
-          <td style="text-align: center;">Cityscapes</td>
+          <td style="text-align: center; border-right: 2px solid #E2E2E2;">Cityscapes</td>
           <td style="text-align: center;">40.7</td>
           <td style="text-align: center;">57.9</td>
           <td style="text-align: center;">34.5</td>
-          <td style="text-align: center;">55.8</td>
+          <td style="text-align: center;  border-right: 2px solid #E2E2E2;">55.8</td>
           <td style="text-align: center;">47.2</td>
         </tr>
-        <tr>
+        <tr style="vertical-align : middle;">
           <td style="text-align: center;">Cityscapes + MORAI</td>
-          <td style="text-align: center;">Cityscapes</td>
-          <td style="text-align: center;">41.2</td>
-          <td style="text-align: center;">57.6</td>
-          <td style="text-align: center;">34.2</td>
-          <td style="text-align: center;">57.5</td>
+          <td style="text-align: center; border-right: 2px solid #E2E2E2; vertical-align: middle;">Cityscapes</td>
+          <td style="text-align: center; vertical-align: middle;">41.2</td>
+          <td style="text-align: center; vertical-align: middle;">57.6</td>
+          <td style="text-align: center; vertical-align: middle;">34.2</td>
+          <td style="text-align: center; vertical-align: middle;  border-right: 2px solid #E2E2E2;">57.5</td>
           <td style="text-align: center;">47.6</td>
         </tr>
         <tr>
           <td style="text-align: center;">Cityscapes + Translated MORAI</td>
-          <td style="text-align: center;">Cityscapes</td>
-          <td style="text-align: center; font-weight: bold;"><b>43.3</b></td>
-          <td style="text-align: center;"><b>59.7</b></td>
-          <td style="text-align: center;"><b>39.0</b></td>
-          <td style="text-align: center;"><b>59.9</b></td>
-          <td style="text-align: center;"><b>50.5</b></td>
+          <td style="text-align: center; border-right: 2px solid #E2E2E2; vertical-align: middle;">Cityscapes</td>
+          <td style="text-align: center; font-weight: bold; vertical-align: middle;"><b>43.3</b></td>
+          <td style="text-align: center; vertical-align: middle;"><b>59.7</b></td>
+          <td style="text-align: center; vertical-align: middle;"><b>39.0</b></td>
+          <td style="text-align: center; vertical-align: middle;  border-right: 2px solid #E2E2E2;"><b>59.9</b></td>
+          <td style="text-align: center; vertical-align: middle;"><b>50.5</b></td>
         </tr>
       </tbody>
- </table>
-<figcaption><b><center> 표 1. Comparison table showing the difference in AP and mAP score by the presence of MORAI and Translated MORAI dataset to the baseline, Cityscapes.  </center></b></figcaption>
+   </table>
+<figcaption style="margin-top: -2em; width: 100%"> 표 1. Comparison table showing the difference in AP and mAP score by the presence of MORAI and Translated MORAI dataset to the baseline, Cityscapes</figcaption>
+
+
 
 현실 데이터셋(Baseline)으로 학습되었을 때 대비 원본 데이터셋(MORAI)을 추가하였을 경우, $person$과 $bus$ 객체에 대해서는 성능이 향상되었지만(40.7 $\rightarrow$ 41.2, 55.8 $\rightarrow$ 57.5) $car$과 $truck$의 경우에는 오히려 하락하였고(57.9 $\rightarrow$ 57.6, 34.5 $\rightarrow$ 34.2), 종합적인 $mAP$ 지표에서는 0.4%의 근소한 향상만이 이루어졌습니다(47.2 $\rightarrow$ 47.6). <br>
 동일한 실험을 변환 데이터셋(Translated MORAI)으로 재현하였을 경우, 모든 종류의 객체에 대해 유의미하게 향상되었으며, 종합 지표인 $mAP$ 역시 47.2%에서 50.5%로 <b>3.5%</b>라는 유의미한 성능 향상을 보였습니다. <br>
@@ -300,58 +303,55 @@ VSA는 vector space에서 정의한 algebraic operation을 통해 Source Image�
 
 성능을 평가하기 위한 지표로는 semantic segmentation 과제에서 대중적으로 사용되는 IoU(Intersection over Union) 및 mIoU(mean Intersection over Union)을 사용하였으며, 100에 가까운 수치를 보일 수록 높은 성능임을 의미합니다. 
 세 가지 경우에 대해 각각 DeepLabV3+ 모델의 학습을 진행한 뒤 성능을 평가한 결과를 나타낸 표는 다음과 같습니다.
-
- <table>
-      <thead>
-        <tr>
-          <th style="border-left: none; background-color: #c9dff379; padding: auto 5rem; text-align: center;">Train</th>
-          <th style="border-left: none; background-color: #c9dff379; padding: auto 5rem; text-align: center;">Val</th>
-          <th style="text-align: center; background-color: #f7f5f5;">road</th>
-          <th style="text-align: center; background-color: #f7f5f5;">sidewalk</th>
-          <th style="text-align: center; background-color: #f7f5f5;">traffic signal</th>
-          <th style="text-align: center; background-color: #f7f5f5;">sky</th>
-          <th style="text-align: center; background-color: #f7f5f5;">person</th>
-          <th style="text-align: center; background-color: #f7f5f5;">car</th>
-          <th style="text-align: center; background-color: #fbe9e7;">mIoU* (%)</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td style="text-align: center;">BDD100K</td>
-          <td style="text-align: center;">BDD100K</td>
-          <td style="text-align: center;">95.06</td>
-          <td style="text-align: center;">71.11</td>
-          <td style="text-align: center;">77.11</td>
-          <td style="text-align: center;">98.55</td>
-          <td style="text-align: center;">65.17</td>
-          <td style="text-align: center;">94.75</td>
-          <td style="text-align: center;">83.62</td>
-        </tr>
-        <tr>
-          <td style="text-align: center;">BDD100K + MORAI</td>
-          <td style="text-align: center;">BDD100K</td>
-          <td style="text-align: center;">95.33</td>
-          <td style="text-align: center;">73.39</td>
-          <td style="text-align: center;">78.8</td>
-          <td style="text-align: center;">98.49</td>
-          <td style="text-align: center;">66.84</td>
-          <td style="text-align: center;">95.08</td>
-          <td style="text-align: center;">84.66</td>
-        </tr>
-        <tr>
-          <td style="text-align: center;">BDD100K + Translated MORAI</td>
-          <td style="text-align: center;">BDD100K</td>
-          <td style="text-align: center;"><b>95.68</b></td>
-          <td style="text-align: center;"><b>74.24</b></td>
-          <td style="text-align: center;"><b>79.28</b></td>
-          <td style="text-align: center;"><b>98.79</b></td>
-          <td style="text-align: center;"><b>70.81</b></td>
-          <td style="text-align: center;"><b>95.63</b></td>
-          <td style="text-align: center;"><b>85.74</b></td>
-        </tr>
-      </tbody>
- </table>
-<figcaption><b><center> 표 2. Comparison table showing the difference in IoU and mIoU scores by the presence of MORAI and translated MORAI dataset to the baseline, respectively. </center></b></figcaption>
+<!-- <div style="width: 800px; height: auto; overflow: auto"> padding: auto 5rem;  -->
+ <table style="max-width: 800px; overflow-x: auto;">
+      <tr>
+        <th style="border-left: none; background-color: #c9dff379; text-align: center; vertical-align: middle;">Train</th>
+        <th style="border-left: none; background-color: #c9dff379; text-align: center; vertical-align: middle;">Val</th>
+        <th style="text-align: center; background-color: #f7f5f5; vertical-align: middle;">road</th>
+        <th style="text-align: center; background-color: #f7f5f5; vertical-align: middle;">sidewalk</th>
+        <th style="text-align: center; background-color: #f7f5f5;">traffic signal</th>
+        <th style="text-align: center; background-color: #f7f5f5; vertical-align: middle;">sky</th>
+        <th style="text-align: center; background-color: #f7f5f5; vertical-align: middle;">person</th>
+        <th style="text-align: center; background-color: #f7f5f5; vertical-align: middle;">car</th>
+        <th style="text-align: center; background-color: #fbe9e7; vertical-align: middle;">mIoU* (%)</th>
+      </tr>
+      <tr>
+        <td style="text-align: center;">BDD100K</td>
+        <td style="text-align: center; vertical-align: middle; border-right: 2px solid #E2E2E2;">BDD100K</td>
+        <td style="text-align: center;">95.06</td>
+        <td style="text-align: center;">71.11</td>
+        <td style="text-align: center;">77.11</td>
+        <td style="text-align: center;">98.55</td>
+        <td style="text-align: center;">65.17</td>
+        <td style="text-align: center; border-right: 2px solid #E2E2E2;">94.75</td>
+        <td style="text-align: center;">83.62</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">BDD100K + MORAI</td>
+        <td style="text-align: center; vertical-align: middle; border-right: 2px solid #E2E2E2;">BDD100K</td>
+        <td style="text-align: center; vertical-align: middle;">95.33</td>
+        <td style="text-align: center; vertical-align: middle;">73.39</td>
+        <td style="text-align: center; vertical-align: middle;">78.8</td>
+        <td style="text-align: center; vertical-align: middle;">98.49</td>
+        <td style="text-align: center; vertical-align: middle;">66.84</td>
+        <td style="text-align: center; vertical-align: middle; border-right: 2px solid #E2E2E2;">95.08</td>
+        <td style="text-align: center; vertical-align: middle;">84.66</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">BDD100K + Translated MORAI</td>
+        <td style="text-align: center; vertical-align: middle; border-right: 2px solid #E2E2E2;">BDD100K</td>
+        <td style="text-align: center; vertical-align: middle"><b>95.68</b></td>
+        <td style="text-align: center; vertical-align: middle"><b>74.24</b></td>
+        <td style="text-align: center; vertical-align: middle"><b>79.28</b></td>
+        <td style="text-align: center; vertical-align: middle"><b>98.79</b></td>
+        <td style="text-align: center; vertical-align: middle"><b>70.81</b></td>
+        <td style="text-align: center; vertical-align: middle; border-right: 2px solid #E2E2E2;"><b>95.63</b></td>
+        <td style="text-align: center; vertical-align: middle"><b>85.74</b></td>
+      </tr>
+  </table>
+<figcaption style="margin-top: -2em;">표 2. Comparison table showing the difference in IoU and mIoU scores by the presence of MORAI and translated MORAI dataset to the baseline, respectively</figcaption>
+ 
 본 실험 역시 상기 object detection에서 확인한 것과 일관성 있는 결과를 확인할 수 있었습니다. 현실 데이터셋만을 사용하였을 때의 인지 성능은 mIoU 기준 83.62% 였습니다. Domain Gap이 크게 존재하는 원본 데이터셋을 함께 사용했을 경우 mIoU 84.66%로 1.04%의 성능향상이 있었지만, 이를 보완한 변환 데이터셋의 경우 mIoU 85.74로 약 <b>2.1%</b>의 성능향상을 확인할 수 있었습니다. 각 객체 종류별로 평가한 IoU 역시 변환 데이터셋을 사용하였을 때 가장 높은 성능을 보였습니다.  
 
 ### 4.2 정성적 결과
@@ -394,24 +394,3 @@ VSA는 vector space에서 정의한 algebraic operation을 통해 Source Image�
 저희와 같이 인지 학습 데이터를 연구하시는 분들께 본 포스팅에서 다룬 Image-to-Image Translation 연구 방법 및 결과가 도움되시길 바라며 이만 마치도록 하겠습니다. 
 
 감사합니다.
-
-
----
-Then, open up `hello-world.md`, and add the following lines:
-
-``` { .sh .no-copy }
-.
-├─ docs/
-│  ├─ posts/
-│  │  └─ hello-world.md # (1)!
-│  └─ index.md
-└─ mkdocs.yml
-
-```
-
-1.  If you'd like to arrange posts differently, you're free to do so. The URLs
-    are built from the format specified in [`post_url_format`][post slugs] and
-    the titles and dates of posts, no matter how they are organized
-    inside the `posts` directory 
-
----
