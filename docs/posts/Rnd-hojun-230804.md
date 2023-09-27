@@ -401,7 +401,7 @@ Object Detection 실험에서는 인지 성능 측면에서 MORAI Dataset의 가
 **그림 10.** 은 원본 이미지에 대해 I2I 수행 전과 이후를 나타냅니다. 그림에서 볼 수 있듯이 원본 이미지에서는 표지판의 60km/h 속도 제한을 명확히 인지할 수 있지만, 변환 이후 디테일이 손실 및 80km/h로 보여져 속도 기준을 명확히 인지하기 어려운 결과를 가져옵니다. </ㅠ> 
 
 ![23-08-04/limit2_high_frequency.png](23-08-04/limit2_high_frequency.png){:onclick="window.open(this.src)" title="Click view screen" width="80%"}
-<figcaption>그림 10. I2I 변환 과정 중 세부 정보가 소실되어 표지판의 제한 속도를 인지할 수 없는 예시.</figcaption>
+<figcaption>그림 10. I2I 변환 과정 중 세부 정보가 소실되어 <br> 표지판의 제한 속도를 인지할 수 없는 예시.</figcaption>
 
 향후 연구 방향은 인지 모델의 성능 향상에 기여할 수 있도록 Sim2Real I2I 모델의 변환 퀄리티는 유지하되, 위의 언급된 Semantics flipping과 Fine detail 손실 문제를 해결하고자 합니다. 
 
