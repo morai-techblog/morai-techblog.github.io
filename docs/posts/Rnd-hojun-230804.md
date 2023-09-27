@@ -64,8 +64,8 @@ draft: false
 I2I는 Source Image의 내용(Content)은 유지하되 스타일(Style)을 바꾸는 연구에 주로 활용되므로 Style-Transfer(ST)라고도 불립니다.
 
 **그림 1.** 과 같이 Source Domain $X$에 속하는 Source Image가 Target Domain $Y$에 속하는 Target Image처럼 보이도록 I2I를 수행하면, 결과적으로 맨 우측의 Translated Image를 생성하게 됩니다.
-![23-08-04/I2I_overview.png](23-08-04/I2I_overview.png){:onclick="window.open(this.src)" title="Click view screen" width="80%"}
-<figcaption> 그림 1. I2I 원리를 설명한 예시 이미지 &nbsp; [ <a href="https://arxiv.org/pdf/2101.08629.pdf" target="_blank">출처</a> ] </figcaption>
+![23-08-04/I2I_overview.jpg](23-08-04/I2I_overview.jpg){:onclick="window.open(this.src)" title="Click view screen" width="100%"}
+<figcaption> 그림 1. I2I 예시 </figcaption>
 
 I2I의 목표는 Source Image $I^{X}$가 주어졌을 때, Target Image $I^{Y}$와 유사한 Translated Image, $I^{X \rightarrow Y}$를 생성하는 것입니다. 이를 수식으로 표현하면 다음과 같습니다.
 
@@ -79,10 +79,7 @@ I2I의 목표는 Source Image $I^{X}$가 주어졌을 때, Target Image $I^{Y}$�
 
 ### 1.2 I2I의 목적 및 연구 분야
 Source Domain $X$와 Target Domain $Y$간에 데이터 알고리즘으로 나타내는 상관 관계가 존재한다면 I2I 모델 $F$는 이를 학습하여 변환을 수행할 수 있기에 I2I의 활용 범위는 매우 무궁무진합니다. <br>
-그림 2에서 보이듯, 흑백 이미지에서 컬러 이미지로의 변환, 저해상도(LR, Low-Resolution) 이미지로부터 고해상도(HR, High-Resolution) 이미지 생성등과 같이 다양한 애플리케이션에 I2I를 적용하고 있으며, 근래 들어 I2I 적용 사례가 기하급수적으로 늘어나고 있는 추세입니다.
-
-![23-08-04/I2I_samples.png](23-08-04/I2I_samples.png){:onclick="window.open(this.src)" title="Click view screen" width="80%"}
-<figcaption> 그림 2. I2I  적용 사례 &nbsp; [ <a href="https://arxiv.org/pdf/2101.08629.pdf" target="_blank">출처</a> ]</figcaption>
+링크된 [논문](https://arxiv.org/pdf/2101.08629.pdf)에서 보이듯, 흑백 이미지에서 컬러 이미지로의 변환, 저해상도(LR, Low-Resolution) 이미지로부터 고해상도(HR, High-Resolution) 이미지 생성등과 같이 다양한 애플리케이션에 I2I를 적용하고 있으며, 근래 들어 I2I 적용 사례가 기하급수적으로 늘어나고 있는 추세입니다.
 
 자율주행 분야에서의 I2I 기술을 활용하는 목적은 넓게는 시뮬레이터에서 생성되는 가상 이미지의 포토리얼즘 향상이며, 이를 통해 궁극적으로는 자율주행 인지 모델의 성능을 유의미하게 개선하는 가상 데이터를 생성하는 것입니다. <br> <br>
 
@@ -127,10 +124,10 @@ Edge/Rare case는 악천후와 같은 극악한 상황 또는 자주 발생하�
 
 ### 2.1 계기: MORAI SIM의 장점 활용
 MORAI SIM 환경에서는 현실(Real)에서 취득하기 어려운 Edge & Rare case를 용이하게 구현할 수 있습니다. 이는 3D 물리 엔진을 기반으로 개발된 시뮬레이터의 도구적 특성이기도 합니다.<br>
-**그림 3.** 과 같이 MORAI SIM에서 취득한 데이터는 악천후의 날씨에 사슴이 도로에 뛰어드는 상황(좌그림)과 갑자기 사람이 무단횡단하는 상황(우그림)을 그대로 모사하고 있어 Edge & Rare case에 취약한 인지 모델의 단점을 보완할 수 있습니다.
+**그림 2.** 과 같이 MORAI SIM에서 취득한 데이터는 악천후의 날씨에 사슴이 도로에 뛰어드는 상황(좌그림)과 갑자기 사람이 무단횡단하는 상황(우그림)을 그대로 모사하고 있어 Edge & Rare case에 취약한 인지 모델의 단점을 보완할 수 있습니다.
 
 ![23-08-04/edgecase_data.png](23-08-04/edgecase_data.png){:onclick="window.open(this.src)" title="Click view screen" width="90%"}
-<figcaption>그림 3. MORAI SIM에서 Edge/Rare case를 구현 및 추출한 RGB 이미지</figcaption>
+<figcaption>그림 2. MORAI SIM에서 Edge/Rare case를 구현 및 추출한 RGB 이미지</figcaption>
 
 Edge & Rare case 구현에 용이한 SIM의 특성은 ‘왜 I2I 에 시뮬레이터 데이터를 사용하는가’에 대한 답이자, Sim2Real I2I 연구를 하게 된 충분한 동기가 되었습니다.
 
@@ -151,7 +148,7 @@ Domain gap은 도메인을 구성하는 환경, 조명, 다양한 객체들의 �
 - **Semantic Domain gap**: Semantic 이미지 데이터가 속한 가상과 현실 도메인 간의 차이. 각 도메인에서 동일한 객체 및 주변 환경을 Sematic 이미지로 나타내었을 해당 객체들의 종류와 카메라에 투영되는 위치의 차이에서 발생.
 
 ![23-08-04/dataset_compare.png](23-08-04/dataset_compare.png){:onclick="window.open(this.src)" title="Click view screen" width="90%"}
-<figcaption>그림 4. RGB  Domain gap(좌)과 Semantic Domain gap(우) 예시.</figcaption>
+<figcaption>그림 3. RGB  Domain gap(좌)과 Semantic Domain gap(우) 예시.</figcaption>
 
 위 그림에서 동일한 객체에 대해 현실 데이터셋(BDD, KITTI, Cityscapes)과 가상 데이터셋(Virtual KITTI 1/2,GTA5, SHIFT, MORAI)을 비교해보면 RGB Domain gap보다는 Semantic Domain gap의 차이가 적다는 것을 육안으로도 바로 확인할 수 있습니다.
 
@@ -160,18 +157,18 @@ Domain gap은 도메인을 구성하는 환경, 조명, 다양한 객체들의 �
 ### 2.3 방안: I2I 활용을 통한 Domain gap 완화
 적절한 전략이 부재한 채, 자율주행 인지 모델을 가상 도메인의 시뮬레이터에서 취득한 데이터로 학습시 성능이 오히려 감소하거나 크게 오르지 않는 현상이 종종 발생합니다. 딥러닝 분야의 [많은 연구자들](https://machinelearning.apple.com/research/bridging-the-domain-gap-for-neural-models)은 이러한 현상의 원인이 Domain gap에 있다고 얘기합니다.
 
-임의로 생성한 예시 그림 5와 같이 가상 도메인인 시뮬레이터에서 취득한 데이터셋($X$)과 현실 도메인에서 취득한 데이터셋($Y$)의 분포는 모양과 위치 등에서 차이(Domain gap, $Gap(X, Y)$)를 보이고 있습니다. 이는 인지 모델이 학습해야 하는 영역이 증가한다는 것을 의미하며, 모델의 수용력 (Capacity)가 충분하지 못하다면 인지 성능에 악영향을 주게 됩니다. <br>
+임의로 생성한 예시 그림 4와 같이 가상 도메인인 시뮬레이터에서 취득한 데이터셋($X$)과 현실 도메인에서 취득한 데이터셋($Y$)의 분포는 모양과 위치 등에서 차이(Domain gap, $Gap(X, Y)$)를 보이고 있습니다. 이는 인지 모델이 학습해야 하는 영역이 증가한다는 것을 의미하며, 모델의 수용력 (Capacity)가 충분하지 못하다면 인지 성능에 악영향을 주게 됩니다. <br>
  쉽게 말해, 인지 모델이 언어 영역의 문제들(현실 데이터셋)로만 학습하고 시험을 봐야 하는데 언어 영역 뿐만 아니라 수학, 과학 등 시험과는 상관없는 영역들의 문제들(가상 데이터셋)까지 학습하여 정작 언어 영역 시험 성적이 떨어지게 되는 결과로 비유할 수 있습니다.
 
 ![23-08-04/XY_scatter_plot.png](23-08-04/XY_scatter_plot.png){:onclick="window.open(this.src)" title="Click view screen" width="60%"}
-<figcaption>그림 5. 현실 데이터셋(파란색)과 가상의 MORAI 데이터셋(빨간색)간의 차이</figcaption>
+<figcaption>그림 4. 현실 데이터셋(파란색)과 가상의 MORAI 데이터셋(빨간색)간의 차이</figcaption>
 
 
-그런데 이러한 결과를 놓고 볼때, 본 연구의 목표는 그림 6과 같이, Sim2Real I2I 모델 $F$를 통해 현실에 근접하도록 변환된 MORAI 데이터셋(Translated MORAI, $F(X)$)을 생성하고, 궁극적으로는 인지 모델의 성능 향상에 기여하는 것입니다.
+그런데 이러한 결과를 놓고 볼때, 본 연구의 목표는 그림 5과 같이, Sim2Real I2I 모델 $F$를 통해 현실에 근접하도록 변환된 MORAI 데이터셋(Translated MORAI, $F(X)$)을 생성하고, 궁극적으로는 인지 모델의 성능 향상에 기여하는 것입니다.
 따라서 I2I를 적용하여 현실 도메인에 가까운 변환 데이터셋을 구축하는 것이 'Domain gap'을 완화하기 위한 방안이 되겠습니다.
 
 ![23-08-04/XY_translated_X_scatter_plot.png](23-08-04/XY_translated_X_scatter_plot.png){:onclick="window.open(this.src)" title="Click view screen" width="60%"}
-<figcaption>그림 6. 현실 데이터셋(파란색)과 변환 데이터셋(분홍색)간의 차이</figcaption>
+<figcaption>그림 5. 현실 데이터셋(파란색)과 변환 데이터셋(분홍색)간의 차이</figcaption>
 
 
 
@@ -201,21 +198,22 @@ Sim2Real I2I 모델 개발에서는 다음과 같은 두 가지 가정을 사용
   > - Target Image Encoding: $E(I^{Y}) = (c^{Y}, s^{Y})$
   > - Generating Translated Image through Decoding: $I^{X \rightarrow Y} = D(c^{X}, s^{Y})$
 
-직관적 해결법이 적용된 I2I 모델의 이미지 변환 과정을 시각화한 결과는 **그림 7.** 과 같습니다.
+직관적 해결법이 적용된 I2I 모델의 이미지 변환 과정을 시각화한 결과는 **그림 6** 과 같습니다.
  $F$의 Encoder $E$는 Source 이미지 $I^{X}$와 Target 이미지 $I^{Y}$를 분해하여 각 도메인의 content, style을 추출하고, Decoder $D$는 Source의 content와 Target의 style을 결합하여 이미지 형태로 재구축합니다. <br> 
 이때 저희가 구축한 Sim2Real I2I 모델 $F$의 Source는 MORAI 데이터셋, Target은 현실 데이터셋(Cityscapes, BDD100K, etc.)이기에 재구성된 이미지는 현실 도메인과 유사한 MORAI 이미지가 됩니다. 
 
+![23-08-04/Image_decoding_into_style_and_content_notation.jpg](23-08-04/Image_decoding_into_style_and_content_notation.jpg){:onclick="window.open(this.src)" title="Click view screen" width="80%"}
 <table>
   <tr>
-    <th style="border-right: 2px solid #E2E2E2;"> <img src="../../../../assets/23-08-04/Image_decoding_into_style_and_content.png" alt="sensor" style="width: 500px; height: auto;"  title="Click to Enlage" onclick="window.open(this.src)" />
-      <figcaption style="margin-top: 0.7em;">(a) 인코더로 이미지 x 분해(style and content) 및 디코더로 원본 이미지 재구성</figcaption>
+    <th style="border-right: 2px solid #E2E2E2;" > <img src="../../../../assets/23-08-04/Image_decoding_into_style_and_content.jpg" alt="sensor" style="width: 500px; height: auto;"  title="Click to Enlage" onclick="window.open(this.src)" />
+      <figcaption style="margin-top: 0.7em;">(a) 인코더로 이미지 I 분해(style and content) 및 디코더로 원본 이미지 재구성</figcaption>
     </th>
-    <th><img src="../../../../assets/23-08-04/Image_decoding_into_style_and_content2.png" alt="sensor" style="width: 500px; height: auto;"  title="Click to Enlage" onclick="window.open(this.src)"/>
-      <figcaption style="margin-top: 0.7em;">(b) 인코더로 각 도메인의 이미지 분리 및 conent sawp으로 변환 이미지 구성</figcaption>
+    <th><img src="../../../../assets/23-08-04/Image_decoding_into_style_and_content2.jpg" alt="sensor" style="width: 500px; height: auto;"  title="Click to Enlage" onclick="window.open(this.src)"/>
+      <figcaption style="margin-top: 0.7em;">(b) 인코더로 각 도메인의 이미지 분리 및 디코더로 Source 도메인의 content와 Target 도메인의 style을 결합해 변환 이미지 구성</figcaption>
     </th>
   </tr>
 </table>
-<figcaption>그림 7. 인코더-디코더 기반 I2I 모델 구조</figcaption>
+<figcaption>그림 6. 인코더-디코더 기반 I2I 모델 구조, [MUNIT](https://arxiv.org/pdf/1804.04732)의 그림 참고 및 조정. </figcaption>
 
 <b>두 번째 장점은, I2I 모델 $F$를 구성하는 Encoder $E$와 Decoder $D$의 자유로운 구조 선택에 있습니다</b>. <br> 
 $E$와 $D$에는 각각의 역할이 정의되어 있을 뿐, 그 구조에는 세부적인 제약조건이 정의되지 않았습니다. 바꿔말하면, $I$를 입력으로 받아 Content $c$와 Style $s$를 추출하는 Feature extractor라면 어떠한 구조이든 간에 Encoder $E$로 사용될 수 있습니다. <br>
@@ -238,7 +236,7 @@ Diffusion 모델들의 높은 변환 성능에도 불구하고, 저희는 다음
     </th>
   </tr>
 </table>
-<figcaption>그림 8. Sim2Real I2I 모델을 적용한 Translated MORAI 데이터셋 예시</figcaption>
+<figcaption>그림 7. Sim2Real I2I 모델을 적용한 Translated MORAI 데이터셋 예시</figcaption>
 
 ## 4. 연구 결과
 Sim2Real I2I 모델로 생성한 **Translated MORAI 데이터셋** 의 궁극적인 목표는 인지 모델의 성능 개선에 기여하는 것 입니다. 이를 검증하기 위해 대중적인 인지 과제인 2D Object Detection(객체 탐지)와 Semantic Segmentation(의미적 분할)에서 각 Translated MORAI 데이터셋으로 학습한 인지 모델의 성능을 실험해보았습니다. 
@@ -372,12 +370,12 @@ Object Detection 실험에서는 인지 성능 측면에서 MORAI Dataset의 가
 
 ### 4.2 정성적 결과
 상기 Object Detection 실험에서 학습한 두 모델 (1) Cityscapes, (2) Cityscapes + Translated MORAI의 추론 결과(inference)를 시각화하여, Translated MORAI가 더해졌을 때의 효과를 확인해보았습니다. <br>
-아래 그림 중 왼쪽 패널에서 보이는 것과 같이, Cityscapes(현실, Real)로만 학습했을 때에는 탐지하지 못했던 객체들을 Translated MORAI(변환 가상 데이터셋, Sim2Real)와 함께 학습하였을 때에는 탐지에 성공한 것을 확인할 수 있습니다. <br>
+아래 그림 8의 왼쪽 패널에서 보이는 것과 같이, Cityscapes(현실, Real)로만 학습했을 때에는 탐지하지 못했던 객체들을 Translated MORAI(변환 가상 데이터셋, Sim2Real)와 함께 학습하였을 때에는 탐지에 성공한 것을 확인할 수 있습니다. <br>
 또한 오른쪽 패널에서 보이는 것처럼, Translated MORAI를 통해 추가적인 데이터를 학습함으로써 객체 오탐지가 줄어든 것을 확인할 수 있습니다. <br>
 특히, 오른쪽 패널의 두번째 그림과 같이 Cityscapes로만 학습하였을 때에는 벽지의 사람 그림을 사람이라 인식하였지만 Translated MORAI로 추가적인 사람 데이터를 학습한 결과, 오인지하지 않음을 확인할 수 있었습니다.
 
 ![23-08-04/qualitative_result.jpg](23-08-04/qualitative_result.jpg){:onclick="window.open(this.src)" title="Click view screen" width="90%"}
-<figcaption>그림 9. 변환 가상 데이터셋의 유무에 따른 인지 성능 차이: <br> 현실 데이터셋으로만 학습했을 때 대비 더 적은 미탐지 및 오인지 결과 생성.</figcaption>
+<figcaption>그림 8. 변환 가상 데이터셋의 유무에 따른 인지 성능 차이: <br> 현실 데이터셋으로만 학습했을 때 대비 더 적은 미탐지 및 오인지 결과 생성.</figcaption>
 
 앞선 연구 결과를 종합해 보았을 때, Sim2Real I2I 모델를 적용한 MORAI 데이터셋을 학습한 결과와 현실 데이터셋을 학습한 결과를 비교할 수 있었고, 결과적으로 MORAI SIM을 활용한 비지도 학습 기반의 I2I가 '인지 성능 개선'에 기여하는가에 대해 본 연구의 타당성을 고찰해볼 수 있었습니다. <br> 
 
@@ -393,17 +391,17 @@ Object Detection 실험에서는 인지 성능 측면에서 MORAI Dataset의 가
 2. Fine detail 손실
 
 첫 번째, <b>Semantics flipping</b>은 I2I 모델을 통한 변환 과정 중 원본 이미지에 존재하는 객체의 의미론적 속성(semantic class)가 변질되는 것을 의미합니다. 그 예시로 원본 이미지에서 차량(vehicle) 속성을 가진 객체가 변환 이미지에서는 사람(pedestrian)처럼 보이게 변환되는 것을 들 수 있습니다. <br>
-**그림 10.** 에서는 Semantics flipping이 발생한 영역을 빨간색 점선 박스로 보여줍니다. 각 행 별로, **하늘 $\rightarrow$ 나무 + 건물**, **방음벽 $\rightarrow$ 건물 외벽**,** 터널 벽면 $\rightarrow$ 건물 외벽** 으로 의미론적 속성이 변화한 것을 볼 수 있습니다. <br> 
+**그림 9.** 에서는 Semantics flipping이 발생한 영역을 빨간색 점선 박스로 보여줍니다. 각 행 별로, **하늘 $\rightarrow$ 나무 + 건물**, **방음벽 $\rightarrow$ 건물 외벽**,** 터널 벽면 $\rightarrow$ 건물 외벽** 으로 의미론적 속성이 변화한 것을 볼 수 있습니다. <br> 
 ![23-08-04/limit1_semantic_flipping.png](23-08-04/limit1_semantic_flipping.png){:onclick="window.open(this.src)" title="Click view screen" width="80%"}
-<figcaption><b><center> 그림 10. I2I 변환 수행시 Semantics flipping 발생 영역 시각화(빨간 점선 상자). </center></b></figcaption>
+<figcaption><b><center> 그림 9. I2I 변환 수행시 Semantics flipping 발생 영역 시각화(빨간 점선 상자). </center></b></figcaption>
 해당 현상은 Source Domain $X$와 Target Domain $Y$이 가진 semantics statistics의 차이를 적절히 고려하지 않은 채 GAN과 같은 distribution-matching 방법론을 적용하였을 때 발생하게 되며, 이에 대한 정의는 [SRUNIT](https://arxiv.org/abs/2012.04932) 논문에서 자세히 설명하고 있습니다. <br>
 가상 데이터의 장점 중 하나는 픽셀단위로 정확한 정답 데이터를 생성하기 때문에 Semantics flipping에 대한 적절한 처리가 없다면 원본 데이터를 기준으로 생성한 의미론적 속성 정답과 변환 데이터의 이미지 데이터 간의 간극으로 인한 인지 모델 학습에 부정적인 영향을 줄일 수 있다는 점입니다.
 
 두 번째, **Fine detail** 손실은 자율주행의 인지 관점에서 주요한 정보들에 대한 손실을 의미합니다.</b> 즉, 원본 이미지에는 존재하는 세부 정보(high frequency) 정보들이 I2I 모델의 변환 과정 중 손실되어 변환 이미지에서 나타나지 못하는 것을 현상입니다. 세부 정보의 예시로는 차선 색, 신호등 색, 표지판에 기술된 글자 등이 있습니다. <br>
-**그림 11.** 은 원본 이미지에 대해 I2I 수행 전과 이후를 나타냅니다. 그림에서 볼 수 있듯이 원본 이미지에서는 표지판의 60km/h 속도 제한을 명확히 인지할 수 있지만, 변환 이후 디테일이 손실 및 80km/h로 보여져 속도 기준을 명확히 인지하기 어려운 결과를 가져옵니다. </ㅠ> 
+**그림 10.** 은 원본 이미지에 대해 I2I 수행 전과 이후를 나타냅니다. 그림에서 볼 수 있듯이 원본 이미지에서는 표지판의 60km/h 속도 제한을 명확히 인지할 수 있지만, 변환 이후 디테일이 손실 및 80km/h로 보여져 속도 기준을 명확히 인지하기 어려운 결과를 가져옵니다. </ㅠ> 
 
 ![23-08-04/limit2_high_frequency.png](23-08-04/limit2_high_frequency.png){:onclick="window.open(this.src)" title="Click view screen" width="80%"}
-<figcaption>그림 11. TODO: 표지판 아래 빨간선을 빨간 box로 대체</figcaption>
+<figcaption>그림 10. I2I 변환 과정 중 세부 정보가 소실되어 표지판의 제한 속도를 인지할 수 없는 예시.</figcaption>
 
 향후 연구 방향은 인지 모델의 성능 향상에 기여할 수 있도록 Sim2Real I2I 모델의 변환 퀄리티는 유지하되, 위의 언급된 Semantics flipping과 Fine detail 손실 문제를 해결하고자 합니다. 
 
