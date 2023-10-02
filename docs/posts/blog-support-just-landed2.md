@@ -16,7 +16,7 @@ comments: true
 tags:
   - Datasets
   - MORAI SIM
-cover_image: post_220912.png
+cover_image: rgb.png
 ---
 
 # MORAI SIM의 학습 데이터셋 생성 기술
@@ -59,11 +59,11 @@ BBOX는 정답 데이터 중의 하나로, MORAI SIM은 객체 이미지 상의 
  - 2D BBOX: 객체를 둘러싼 좌상단, 우하단에 대한 x, y 값
  - 3D BBOX: 객체를 둘러싼 3차원 박스의 각 꼭지점 x, y, z 값
 
-![23-07-20/그림2.png](23-07-20/semantic.png)
-<figcaption><b><center>그림 2. MORAI SIM 카메라 센서에서 검출한 Semantic Segmentation 이미지</center></b></figcaption>
+![23-07-20/그림2.png](23-07-20/semantic.png){:onclick="window.open(this.src)" title="Click view screen" width="80%"}
+<figcaption>그림 2. MORAI SIM 카메라 센서에서 검출한 Semantic Segmentation 이미지</figcaption>
 
-![23-07-20/그림3.png](23-07-20/rgb.png)
-<figcaption><b><center>그림 3. MORAI SIM 카메라 센서에서 검출한 RGB 이미지 및 3D BBox </center></b></figcaption>
+![23-07-20/그림3.png](23-07-20/rgb.png){:onclick="window.open(this.src)" title="Click view screen" width="80%"}
+<figcaption>그림 3. MORAI SIM 카메라 센서에서 검출한 RGB 이미지 및 3D BBox</figcaption>
 
 MORAI SIM의 센서 모델에서는 개선된 이미지 분할 방식인 ‘Mesh Segmentation'과 Labeling’을 모두 지원하므로 객체의 Global 좌표 값을 활용하여 정답 데이터를 보다 정확하게 생성할 수 있습니다.
 
@@ -101,8 +101,8 @@ DataGen에서 데이터 생성 API를 호출하면 MORAI SIM에서는 기구성�
 
 DataGen에서는 프레임 간격 별로 API를 호출하며 한 프레임 당 여러 가지 환경 조합에 의한 여러 장의 이미지를 생성할 수 있습니다. 이렇게 매 주기마다 전송하는 API 요청에 의해 단시간 내 몇 만장까지의 데이터셋을 쌓을 수 있을 뿐만 아니라 특정 인지모델 학습에 필요한 데이터셋을 수백 TB까지 구축해볼 수 있습니다.
 
-![23-07-20/그림6.png](23-07-20/그림6.png)
-<figcaption><b><center>그림 6. DataGen과 연동하여 한 프레임당 생성한 이미지 데이터</center></b></figcaption>
+![23-07-20/그림6.png](23-07-20/그림6.png){:onclick="window.open(this.src)" title="Click view screen" width="80%"}
+<figcaption>그림 6. DataGen과 연동하여 한 프레임당 생성한 이미지 데이터</figcaption>
 
 실제로 모라이에서 수행한 프로젝트 중 이러한 DataGen과 MORAI SIM 간의 연동 기술을 활용하여 150 TB까지 구축해본 경험이 있습니다. 이는 10 TB 정도에 불과하는 기존 오픈 데이터셋과 비교하여 매우 높은 수치라고 볼 수 있습니다.
 

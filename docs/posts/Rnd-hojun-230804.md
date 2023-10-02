@@ -9,7 +9,7 @@ categories:
   - R&D Notes
 links:
 #  - posts/grammertest.md
-  - Paper: https://openreview.net/pdf?id=RNZ8JOmNaV4
+  - Paper, [Unpaired Image-to-Image Translation with Density Changing Regularization]: https://openreview.net/pdf?id=RNZ8JOmNaV4
 #  - Nested section:
 #    - External link: https://example.com
 #    - DataGen User Guide: https://morai-datagen-docs.scrollhelp.site/
@@ -20,7 +20,7 @@ tags:
   - Style Transfer
   - Sim2Real
 
-cover_image: post_230808.png
+cover_image: morai_translated.gif
 draft: false
 ---
 
@@ -38,12 +38,12 @@ draft: false
   ◾ <b>Image-to-Image Translation(I2I)</b>: 가상 이미지를 현실 이미지로 변환하는 기술로 ‘Simulation to Real World(Sim2Real)’ 또는’Synthetic-RGB to Real-RGB’ Translation 라고도 부름
 
   ◾ <b>Source Domain</b>: I2I 연구에 사용한 원본 데이터만 존재하는 집합. 본 포스팅에 한해 Source Domain을 Synthetic 데이터가 존재하는 집합(데이터셋)으로 정의함. 
-        예:  GTA5, SHIFT, Virtual KITTI Dataset
+        예:  GTA5, SHIFT, Virtual KITTI 데이터섯
 
   ◾ <b>Source Image</b>: Source Domain에서 추출한 임의의 원본 이미지
 
   ◾ <b>Target Domain</b>:  I2I 연구에서 목표로 하는 타겟 데이터만 존재하는 집합. 본 포스팅에 한해 Target Domain을 현실의 Real 데이터가 존재하는 집합(데이터셋)으로 정의함.
-        예: Cityscapes, nuScenes, BDD100K Dataset
+        예: Cityscapes, nuScenes, BDD100K 데이터셋
 
   ◾ <b>Target Image</b>: Target Domain에서 추출한 임의의 타겟 이미지
 
@@ -63,7 +63,7 @@ draft: false
 **Image-to-Image Translation(I2I)** 는 서로 다른 도메인에 속하는 이미지 간의 변환 기술입니다. <br>
 I2I는 Source Image의 내용(Content)은 유지하되 스타일(Style)을 바꾸는 연구에 주로 활용되므로 Style-Transfer(ST)라고도 불립니다.
 
-**그림 1.** 과 같이 Source Domain $X$에 속하는 Source Image가 Target Domain $Y$에 속하는 Target Image처럼 보이도록 I2I를 수행하면, 결과적으로 맨 우측의 Translated Image를 생성하게 됩니다.
+_**그림 1.**_ 과 같이 Source Domain $X$에 속하는 Source Image가 Target Domain $Y$에 속하는 Target Image처럼 보이도록 I2I를 수행하면, 결과적으로 맨 우측의 Translated Image를 생성하게 됩니다.
 ![23-08-04/I2I_overview.jpg](23-08-04/I2I_overview.jpg){:onclick="window.open(this.src)" title="Click view screen" width="100%"}
 <figcaption> 그림 1. I2I 예시 </figcaption>
 
@@ -79,28 +79,30 @@ I2I의 목표는 Source Image $I^{X}$가 주어졌을 때, Target Image $I^{Y}$�
 
 ### 1.2 I2I의 목적 및 연구 분야
 Source Domain $X$와 Target Domain $Y$간에 데이터 알고리즘으로 나타내는 상관 관계가 존재한다면 I2I 모델 $F$는 이를 학습하여 변환을 수행할 수 있기에 I2I의 활용 범위는 매우 무궁무진합니다. <br>
-링크된 [논문](https://arxiv.org/pdf/2101.08629.pdf)에서 보이듯, 흑백 이미지에서 컬러 이미지로의 변환, 저해상도(LR, Low-Resolution) 이미지로부터 고해상도(HR, High-Resolution) 이미지 생성등과 같이 다양한 애플리케이션에 I2I를 적용하고 있으며, 근래 들어 I2I 적용 사례가 기하급수적으로 늘어나고 있는 추세입니다.
+앞서 링크한 논문 [Unpaired Image-to-Image Translation with Density
+Changing Regularization](https://arxiv.org/pdf/2101.08629.pdf)에서도 언급했듯이, I2I는 흑백 이미지에서 컬러 이미지로의 변환, 저해상도(LR, Low-Resolution) 이미지로부터 고해상도(HR, High-Resolution) 이미지 생성과 같은 다양한 애플리케이션에 적용되고 있으며, 근래에 들어서는 이러한 I2I 적용 사례가 기하급수적으로 늘어나고 있는 추세입니다.
 
-자율주행 분야에서의 I2I 기술을 활용하는 목적은 넓게는 시뮬레이터에서 생성되는 가상 이미지의 포토리얼즘 향상이며, 이를 통해 궁극적으로는 자율주행 인지 모델의 성능을 유의미하게 개선하는 가상 데이터를 생성하는 것입니다. <br> <br>
+자율주행 분야에서의 I2I 기술을 활용하는 목적은 넓게는 시뮬레이터에서 생성되는 가상 이미지의 포토리얼즘 향상이며, 이를 통해 궁극적으로는 자율주행 인지 모델의 성능을 유의미하게 개선하는 가상 데이터를 생성하는 것입니다. <br>
 
-초창기 I2I 연구는 지도학습(Supervised Learning)에 기초를 두고 진행하는 경우가 많았습니다. <br>
-그러나 지도학습은 딥러닝 모델 학습과정에 정답 데이터(GT, Ground truth)를 필요로하기에, 지도학습 기반의 I2I 방법론은 Source Domain $X$와 Target Domain $Y$간에 1:1 관계성이 정의된 Paired Dataset이 존재해야 합니다. 즉, 모델이 출력해야 하는 정답 데이터로써 Source Image $I^{X}$에 대응하는 Target Image $I^{Y}$가 명확하게 정의되어야 합니다. 
+초창기 I2I 연구는 지도학습(Supervised Learning)에 기초를 두고 진행하는 경우가 많았습니다.<br>
+그러나 지도학습은 딥러닝 모델 학습과정에 정답 데이터(GT, Ground truth)를 필요로하기에, 지도학습 기반의 I2I 방법론은 Source Domain $X$와 Target Domain $Y$간에 1:1 관계성이 정의된 'Paired 데이터셋'이 존재해야 합니다. 즉, 모델이 출력해야 하는 정답 데이터로써 Source Image $I^{X}$에 대응하는 Target Image $I^{Y}$가 명확하게 정의되어야 합니다. 
 
- Paired Dataset을 수식으로 표현하면 다음과 같습니다.
+ 'Paired 데이터셋'을 수식으로 표현하면 다음과 같습니다.
 
-> _Dataset_ = $\{ ( I^{X}_{i}, I^{Y}_{i}) \}_{i=1}^{N}$ 
+> _Datasets_ = $\{ ( I^{X}_{i}, I^{Y}_{i}) \}_{i=1}^{N}$ 
 >  
 >  - $N$: Source Image 및 Target Image의 개수, 각 개수는 서로 동일함. 
 
-지도학습 기반의 I2I는 $i$ 번째에 해당하는 Source Image $I^{X}_{i}$와 Target Image $I^{Y}_{i}$가 항상 쌍으로 존재하는 Paired Dataset을 사용하므로, 변환된 이미지 $I^{X \rightarrow Y}$의 정확도가 높은 편입니다. 
-그러나 이러한 방법론들의 경우 Paired Dataset의 구축 비용이 높을 뿐 아니라 Target Domain $Y$가 변경될 때마다 새로이 정답 데이터를 생성해주어야 하기에 활용성이 떨어집니다. 예시로, ($X$: GTA5, $Y$: Cityscapes)를 기준으로 지도학습 I2I 수행하던 중, $Y$를 nuScenes로 변경한다면, GTA5와 nuScenes사이의 관계성을 정의해줄 정답 데이터를 새로이 만들어야 합니다.     
+지도학습 기반의 I2I는 $i$ 번째에 해당하는 Source Image $I^{X}_{i}$와 Target Image $I^{Y}_{i}$가 항상 쌍으로 존재하는 'Paired 데이터셋'을 사용하므로, 변환된 이미지 $I^{X \rightarrow Y}$의 정확도가 높은 편입니다. 
+그러나 이러한 방법론들의 경우 'Paired 데이터셋'의 구축 비용이 높을 뿐 아니라 Target Domain $Y$가 변경될 때마다 정답 데이터를 새로 생성해야 하기에 활용성이 떨어집니다. <Br>
+예를 들어, ($X$: GTA5, $Y$: Cityscapes)를 기준으로 지도학습 I2I 수행하던 중, $Y$를 nuScenes로 변경한다면, GTA5와 nuScenes사이의 관계성을 정의하는 정답 데이터를 새로 만들어야 합니다.     
 
-요즘에는 Paired Dataset을 필요로 하는 지도학습 기반의 I2I 단점을 보완하고자 ‘비지도학습 기반의 I2I 연구’가 활발히 진행되고 있습니다. <Br>
-비지도학습(Unsupervised Learning)은 지도학습과 반대로 정답이 주어지지 않은 상태로 학습하는 방식이며, Source Image $I^{X}$와 Target Image $I^{Y}$간의 1:1 관계성이 정의되지 않은 Unpaired Dataset을 사용합니다.
+요즘에는 'Paired 데이터셋'을 필요로 하는 지도학습 기반의 I2I 단점을 보완하고자 ‘비지도학습 기반의 I2I 연구’가 활발히 진행되고 있습니다. <Br>
+비지도학습(Unsupervised Learning)은 지도학습과 반대로 정답이 주어지지 않은 상태로 학습하는 방식이며, Source Image $I^{X}$와 Target Image $I^{Y}$간의 1:1 관계성이 정의되지 않은 'Unpaired 데이터셋'을 사용합니다.
 
-Unpaired Dataset을 수식으로 표현하면 다음과 같습니다.
+'Unpaired 데이터셋'을 수식으로 표현하면 다음과 같습니다.
 
-> _Dataset_ = $\Big( \{ I^{X}_{i} \}_{i=1}^{N}, \{ I^{Y}_{i} \}_{i=1}^{M} \Big)$
+> _Datasets_ = $\Big( \{ I^{X}_{i} \}_{i=1}^{N}, \{ I^{Y}_{i} \}_{i=1}^{M} \Big)$
 >  
 > - $N$: Source Image 개수
 > - $M$: Target Image 개수
@@ -114,28 +116,29 @@ Unpaired Dataset을 수식으로 표현하면 다음과 같습니다.
 ## 2. 연구 배경
 모라이에서는 자체 개발한 시뮬레이터 플랫폼인 MORAI SIM을 통해 현실에 가까운 다양한 도메인의 데이터셋을 구축하고 있습니다. 
 
-I2I의 연구 분야는 매우 다양함에도, 본 포스팅에서 비지도 학습 기반의 Simulation-to-Real-World(Sim2Real) I2I를 연구 과제로 설정한 이유는 다음와 같은 MORAI SIM의 장점을 연구에 활용해볼 수 있기 때문입니다.
+I2I의 연구 분야가 매우 다양함에도 불구하고, 본 포스팅에서 비지도 학습 기반의 Simulation-to-Real-World(Sim2Real) I2I를 연구 과제로 설정한 이유는 다음와 같은 MORAI SIM의 장점을 연구에 활용해볼 수 있기 때문입니다.
 
  - Edge & Rare case 구현 
- - Custom 데이터 생성에 용이
+ - 커스텀 데이터 생성에 용이
 
-Edge/Rare case는 악천후와 같은 극악한 상황 또는 자주 발생하지 않으나 예측하지 못한 사고를 말합니다. <br>
-자율주행 인지 모델은 Edge & Rare case를 많이 학습해야 실제 그러한 상황이 발생했을 때 성능을 발휘할 수 있습니다. 그러나 현실에서 인력으로 Edge/Rare 상황들만 모아 대량의 데이터셋으로 구축하기란 매우 어렵습니다. 이러한 케이스의 데이터를 MORAI SIM을 통해 대용량으로 생성하고, Sim2Real I2I를 통해 가상 이미지의 포토리얼리즘을 향상시킴으로써 마치 현실에서 Edge/Rare 케이스를 수집한 것과 같도록 만들기 위해 본 연구를 수행하였습니다.  
+Edge & Rare case는 악천후와 같은 극악한 상황 또는 자주 발생하지 않으나 예측하지 못한 사고를 말합니다. <br>
+자율주행 인지 모델은 Edge & Rare case를 많이 학습해야 실제 그러한 상황이 발생했을 때 성능을 발휘할 수 있습니다. 그러나 현실에서 인력으로 Edge & Rare 상황들만 모아 대량의 데이터셋으로 구축하기란 매우 어렵습니다. 
+
+따라서 MORAI SIM으로 Edge & Rare case case의 데이터를 대용량 생성하고, Sim2Real I2I를 통해 가상 이미지의 포토리얼리즘을 향상하여, 가능한 현실에서 수집한 Edge & Rare case의 데이터와 같게 만들고자 본 연구를 수행하였습니다.  
 
 ### 2.1 계기: MORAI SIM의 장점 활용
 MORAI SIM 환경에서는 현실(Real)에서 취득하기 어려운 Edge & Rare case를 용이하게 구현할 수 있습니다. 이는 3D 물리 엔진을 기반으로 개발된 시뮬레이터의 도구적 특성이기도 합니다.<br>
-**그림 2.** 과 같이 MORAI SIM에서 취득한 데이터는 악천후의 날씨에 사슴이 도로에 뛰어드는 상황(좌그림)과 갑자기 사람이 무단횡단하는 상황(우그림)을 그대로 모사하고 있어 Edge & Rare case에 취약한 인지 모델의 단점을 보완할 수 있습니다.
+_**그림 2.**_ 와 같이 MORAI SIM에서 취득한 데이터는 악천후의 날씨에 사슴이 도로에 뛰어드는 상황(좌그림)과 갑자기 사람이 무단횡단하는 상황(우그림)을 그대로 모사하고 있어 Edge & Rare case에 취약한 인지 모델의 단점을 보완할 수 있습니다.
 
-![23-08-04/edgecase_data.png](23-08-04/edgecase_data.png){:onclick="window.open(this.src)" title="Click view screen" width="90%"}
+![23-08-04/edgecase_data.png](23-08-04/edgecase_data.png){:onclick="window.open(this.src)" title="Click view screen" width="90%" height="120%"}
 <figcaption>그림 2. MORAI SIM에서 Edge/Rare case를 구현 및 추출한 RGB 이미지</figcaption>
 
-Edge & Rare case 구현에 용이한 SIM의 특성은 ‘왜 I2I 에 시뮬레이터 데이터를 사용하는가’에 대한 답이자, Sim2Real I2I 연구를 하게 된 충분한 동기가 되었습니다.
+Edge & Rare case 구현에 용이한 SIM의 특성은 ‘왜 I2I 에 시뮬레이터 데이터를 사용하는가’에 대한 답이자, Sim2Real I2I 연구를 하게 된 충분한 계기가 되었습니다.
 
 두번째로, MORAI SIM은 사용자가 얻고자 하는 방향으로 다양한 형태의 데이터를 가공 및 생성할 수 있습니다. <Br>
 MORAI SIM의 센서 모듈은 센서의 위치, 각도 뿐만 아니라 다양한 형태의 정답 데이터를 지원하며, 시나리오 모듈은 현실에 존재하는 다양한 동적/정적 객체 모델을 제공합니다. <Br> 이러한 MORAI SIM의 특성을 활용하면 뒤에서 설명할 ‘Semantic domain gap’을 수월하게 해결해볼 수 있습니다.
 
 ### 2.2 해결 과제: Domain gap
-
 Domain gap은 서로 다른 두개 혹은 그 이상의 도메인 간에 존재하는 환경적, 외형적인 차이입니다. <Br>
 예를 들어, ‘도심’이라는 도메인에서 수집한 데이터는 ‘시골’이라는 도메인에서 수집한 데이터와 비교했을 때 건물의 양상, 도로 표면 등에서 차이를 보일 것입니다. <br>
 또 다른 예로, 동일한 장소더라도 ‘낮’이라는 도메인에서 수집한 데이터는 ‘밤’이라는 도메인에서 수집한 데이터와는 조명, 빛, 색 등의 차이를 보이게 됩니다.
@@ -148,7 +151,7 @@ Domain gap은 도메인을 구성하는 환경, 조명, 다양한 객체들의 �
 - **Semantic Domain gap**: Semantic 이미지 데이터가 속한 가상과 현실 도메인 간의 차이. 각 도메인에서 동일한 객체 및 주변 환경을 Sematic 이미지로 나타내었을 해당 객체들의 종류와 카메라에 투영되는 위치의 차이에서 발생.
 
 ![23-08-04/dataset_compare.png](23-08-04/dataset_compare.png){:onclick="window.open(this.src)" title="Click view screen" width="90%"}
-<figcaption>그림 3. RGB  Domain gap(좌)과 Semantic Domain gap(우) 예시.</figcaption>
+<figcaption>그림 3. RGB  Domain gap(좌)과 Semantic Domain gap(우) 예시</figcaption>
 
 위 그림에서 동일한 객체에 대해 현실 데이터셋(BDD, KITTI, Cityscapes)과 가상 데이터셋(Virtual KITTI 1/2,GTA5, SHIFT, MORAI)을 비교해보면 RGB Domain gap보다는 Semantic Domain gap의 차이가 적다는 것을 육안으로도 바로 확인할 수 있습니다.
 
@@ -157,20 +160,18 @@ Domain gap은 도메인을 구성하는 환경, 조명, 다양한 객체들의 �
 ### 2.3 방안: I2I 활용을 통한 Domain gap 완화
 적절한 전략이 부재한 채, 자율주행 인지 모델을 가상 도메인의 시뮬레이터에서 취득한 데이터로 학습시 성능이 오히려 감소하거나 크게 오르지 않는 현상이 종종 발생합니다. 딥러닝 분야의 [많은 연구자들](https://machinelearning.apple.com/research/bridging-the-domain-gap-for-neural-models)은 이러한 현상의 원인이 Domain gap에 있다고 얘기합니다.
 
-임의로 생성한 예시 그림 4와 같이 가상 도메인인 시뮬레이터에서 취득한 데이터셋($X$)과 현실 도메인에서 취득한 데이터셋($Y$)의 분포는 모양과 위치 등에서 차이(Domain gap, $Gap(X, Y)$)를 보이고 있습니다. 이는 인지 모델이 학습해야 하는 영역이 증가한다는 것을 의미하며, 모델의 수용력 (Capacity)가 충분하지 못하다면 인지 성능에 악영향을 주게 됩니다. <br>
- 쉽게 말해, 인지 모델이 언어 영역의 문제들(현실 데이터셋)로만 학습하고 시험을 봐야 하는데 언어 영역 뿐만 아니라 수학, 과학 등 시험과는 상관없는 영역들의 문제들(가상 데이터셋)까지 학습하여 정작 언어 영역 시험 성적이 떨어지게 되는 결과로 비유할 수 있습니다.
+예시로 생성한 _**그림 4**_ 와 같이 가상 도메인인 시뮬레이터에서 취득한 데이터셋($X$)과 현실 도메인에서 취득한 데이터셋($Y$)의 분포는 모양과 위치 등에서 차이(Domain gap, $Gap(X, Y)$)를 보이고 있습니다. 이는 인지 모델이 학습해야 하는 영역이 증가한다는 것을 의미하며, 모델의 수용력 (Capacity)가 충분하지 못하다면 인지 성능에 악영향을 주게 됩니다. <br>
+쉽게 말해, 인지 모델이 언어 영역의 문제들(현실 데이터셋)로만 학습하고 시험을 봐야 하는데 언어 영역 뿐만 아니라 수학, 과학 등 시험과는 상관없는 영역들의 문제들(가상 데이터셋)까지 학습하여 정작 언어 영역 시험 성적이 떨어지게 되는 결과로 비유할 수 있습니다.
 
 ![23-08-04/XY_scatter_plot.png](23-08-04/XY_scatter_plot.png){:onclick="window.open(this.src)" title="Click view screen" width="60%"}
 <figcaption>그림 4. 현실 데이터셋(파란색)과 가상의 MORAI 데이터셋(빨간색)간의 차이</figcaption>
 
 
-그런데 이러한 결과를 놓고 볼때, 본 연구의 목표는 그림 5과 같이, Sim2Real I2I 모델 $F$를 통해 현실에 근접하도록 변환된 MORAI 데이터셋(Translated MORAI, $F(X)$)을 생성하고, 궁극적으로는 인지 모델의 성능 향상에 기여하는 것입니다.
+그런데 이러한 결과를 놓고 볼때, 본 연구의 목표는 _**그림 5**_ 와 같이, Sim2Real I2I 모델 $F$를 통해 현실에 근접하도록 변환된 MORAI 데이터셋(Translated MORAI, $F(X)$)을 생성하고, 궁극적으로는 인지 모델의 성능 향상에 기여하는 것입니다.
 따라서 I2I를 적용하여 현실 도메인에 가까운 변환 데이터셋을 구축하는 것이 'Domain gap'을 완화하기 위한 방안이 되겠습니다.
 
 ![23-08-04/XY_translated_X_scatter_plot.png](23-08-04/XY_translated_X_scatter_plot.png){:onclick="window.open(this.src)" title="Click view screen" width="60%"}
 <figcaption>그림 5. 현실 데이터셋(파란색)과 변환 데이터셋(분홍색)간의 차이</figcaption>
-
-
 
 ## 3. 연구 방법
 비지도학습 기반의 Sim2Real I2I 기술을 적용하기 위해 [UNIT](https://arxiv.org/pdf/1703.00848.pdf ), [MUNIT](https://arxiv.org/abs/1804.04732), [DRIT](https://arxiv.org/abs/1808.00948), [INIT](https://arxiv.org/pdf/1905.01744.pdf), [DUNIT]([DUNIT](https://openaccess.thecvf.com/content_CVPR_2020/papers/Bhattacharjee_DUNIT_Detection-Based_Unsupervised_Image-to-Image_Translation_CVPR_2020_paper.pdf)
@@ -198,7 +199,7 @@ Sim2Real I2I 모델 개발에서는 다음과 같은 두 가지 가정을 사용
   > - Target Image Encoding: $E(I^{Y}) = (c^{Y}, s^{Y})$
   > - Generating Translated Image through Decoding: $I^{X \rightarrow Y} = D(c^{X}, s^{Y})$
 
-직관적 해결법이 적용된 I2I 모델의 이미지 변환 과정을 시각화한 결과는 **그림 6** 과 같습니다.
+직관적 해결법이 적용된 I2I 모델의 이미지 변환 과정을 시각화한 결과는 _**그림 6.**_ 과 같습니다.
  $F$의 Encoder $E$는 Source 이미지 $I^{X}$와 Target 이미지 $I^{Y}$를 분해하여 각 도메인의 content, style을 추출하고, Decoder $D$는 Source의 content와 Target의 style을 결합하여 이미지 형태로 재구축합니다. <br> 
 이때 저희가 구축한 Sim2Real I2I 모델 $F$의 Source는 MORAI 데이터셋, Target은 현실 데이터셋(Cityscapes, BDD100K, etc.)이기에 재구성된 이미지는 현실 도메인과 유사한 MORAI 이미지가 됩니다. 
 
@@ -213,7 +214,7 @@ Sim2Real I2I 모델 개발에서는 다음과 같은 두 가지 가정을 사용
     </th>
   </tr>
 </table>
-<figcaption>그림 6. 인코더-디코더 기반 I2I 모델 구조, [MUNIT](https://arxiv.org/pdf/1804.04732)의 그림 참고 및 조정. </figcaption>
+<figcaption> 그림 6. 인코더-디코더 기반 I2I 모델 구조 (참고 논문:<a href="https://arxiv.org/pdf/1804.04732" target="_blank"> MUNIT </a>)</figcaption>
 
 <b>두 번째 장점은, I2I 모델 $F$를 구성하는 Encoder $E$와 Decoder $D$의 자유로운 구조 선택에 있습니다</b>. <br> 
 $E$와 $D$에는 각각의 역할이 정의되어 있을 뿐, 그 구조에는 세부적인 제약조건이 정의되지 않았습니다. 바꿔말하면, $I$를 입력으로 받아 Content $c$와 Style $s$를 추출하는 Feature extractor라면 어떠한 구조이든 간에 Encoder $E$로 사용될 수 있습니다. <br>
@@ -224,7 +225,7 @@ Diffusion 모델들의 높은 변환 성능에도 불구하고, 저희는 다음
 2. 변환 속도: MORAI 데이터셋의 규모는 10만 ~ 1000만 장 단위이므로, 모델의 크기 및 연산 효율성 중요
 
 ### 3.2 Sim2Real I2I 모델 적용 결과
-개발한 Sim2Real I2I 모델 $F$을 적용한 결과(Source:MORAI 데이터셋, Target:Cityscapes), 다음과 같은 **Translated MORAI 데이터셋** 을 구축해보았습니다. 
+개발한 Sim2Real I2I 모델 $F$을 적용한 결과(Source:MORAI 데이터셋, Target:Cityscapes), _**그림 7.**_ 과 같은 **Translated MORAI 데이터셋** 을 구축해보았습니다. 
 ![23-08-04/I2I_morai2cityscapes.png](23-08-04/I2I_morai2cityscapes.png){:onclick="window.open(this.src)" title="Click view screen"}
 <table>
   <tr>
@@ -251,9 +252,9 @@ Sim2Real I2I 모델로 생성한 **Translated MORAI 데이터셋** 의 궁극적
 2. 현실 데이터셋인 Cityscapes에 원본 가상 데이터셋(MORAI)을 추가하여 학습했을 때 (<b>Larger Domain Gap</b>)
 3. 현실 데이터셋인 Cityscapes에 변환 데이터셋(Translated MORAI)을 추가하여 학습했을 때 (<b>Smaller Domain Gap</b>)
 
-성능을 확인하기 위한 지표로, Object Detection 과제에서 대중적으로 사용하는 $AP$(average precition) 및 $mAP$(mean average precision)를 적용하습니다 (해당 지표는 100에 가까운 수치일수록 높은 성능임을 의미함).
+성능을 확인하기 위한 지표로, Object Detection 과제에서 대중적으로 사용하는 $AP$(Average Precision) 및 $mAP$(mean Average Precision)를 적용하습니다 (해당 지표는 100에 가까운 수치일수록 높은 성능임을 의미함).
 
-Faster R-CNN 모델을 위 세 가지의 경우에 각각 학습한 후, 실험 결과를 4개의 객체 종류(person, car, truck, bus)별 AP와 mAP를 나타낸 표는 다음과 같습니다. 
+아래의 _**표 1**_ 에서는 Faster R-CNN 모델을 위 세 가지의 경우에 각 학습한 실험 결과를 4개 객체 종류(person, car, truck, bus)별 AP와 mAP로 보여줍니다. 
 
  <table style="max-width: 700px; margin-left:auto; margin-right:auto; overflow: hidden;">
       <thead>
@@ -297,7 +298,7 @@ Faster R-CNN 모델을 위 세 가지의 경우에 각각 학습한 후, 실험 
         </tr>
       </tbody>
    </table>
-<figcaption style="margin-top: -2em; width: 100%"> 표 1. Comparison table showing the difference in AP and mAP score by the presence of MORAI and Translated MORAI dataset to the baseline, Cityscapes.</figcaption>
+<figcaption style="margin-top: -2em; width: 100%"> 표 1. Comparison table showing the difference in AP and mAP score by the presence of MORAI and Translated MORAI datasets to the baseline, Cityscapes.</figcaption>
 
 
 현실 데이터셋(Baseline)으로 학습했을 때 대비, 원본 가상 데이터셋(MORAI)을 추가하였을 경우, $person$과 $bus$ 객체에 대해서는 성능이 향상되었지만(40.7 $\rightarrow$ 41.2, 55.8 $\rightarrow$ 57.5) <br>
@@ -305,7 +306,7 @@ $car$과 $truck$의 경우에는 오히려 하락하였고(57.9 $\rightarrow$ 57
 
 동일한 실험을 변환 데이터셋(Translated MORAI)으로 재현하였을 경우, 모든 종류의 객체에 대해 유의미하게 향상되었으며, 종합 지표인 $mAP$ 역시 47.2%에서 50.5%로 <b>3.5%</b>라는 매우 유의미한 성능 향상을 보였습니다. 
 
-Object Detection 실험에서는 인지 성능 측면에서 MORAI Dataset의 가능성을 저해시키는 요소 중 하나가 Domain Gap임을 확인하였고, Sim2Real I2I로 이를 보완함으로써 object detection 모델인 Faster R-CNN의 성능 향상에 유의미하게 가상 데이터가 기여할 수 있음을 확인할 수 있었습니다.
+Object Detection 실험에서는 인지 성능 측면에서 MORAI 데이터셋의 가능성을 저해시키는 요소 중 하나가 Domain Gap임을 확인하였고, Sim2Real I2I로 이를 보완함으로써 object detection 모델인 Faster R-CNN의 성능 향상에 유의미하게 가상 데이터가 기여할 수 있음을 확인할 수 있었습니다.
 
 #### 4.1.2 Semantic Segmentation
 변환 데이터셋의 유효성을 다양한 측면에서 검증하기 위해 또다른 인지 과제인 Semantic Segmentation에 대해서도 실험을 진행하였습니다. 인지 모델로 [DeepLabV3+](https://arxiv.org/abs/1802.02611)을 사용하였으며, 상기 Object Detection 실험과 동일하게 세 가지 경우(현실 데이터셋, 현실 데이터셋 + 원본 가상 데이터셋, 현실 데이터셋 + 변환 데이터셋)로 나누어 실험을 진행하였습니다.
@@ -316,7 +317,7 @@ Object Detection 실험에서는 인지 성능 측면에서 MORAI Dataset의 가
 
 성능을 평가하기 위한 지표로 Semantic Segmentation 과제에서 대중적으로 사용하는 IoU(Intersection over Union) 및 mIoU(mean Intersection over Union)을 적용하였습니다 (100에 가까운 수치일 수록 높은 성능임을 의미함). 
 
-**표 2.** 에서는 DeepLabV3+ 모델을 위 세 가지 경우에 대해 각 학습한 후, 인지 성능을 평가한 결과를 보여줍니다.
+_**표 2.**_ 에서는 DeepLabV3+ 모델을 위 세 가지 경우에 대해 각 학습한 후, 인지 성능을 평가한 결과를 보여줍니다.
  <table style="max-width: 700px; overflow-x: auto;">
       <tr>
         <th style="border-left: none; background-color: #c9dff379; text-align: center; vertical-align: middle;">Train</th>
@@ -363,14 +364,14 @@ Object Detection 실험에서는 인지 성능 측면에서 MORAI Dataset의 가
         <td style="text-align: center; vertical-align: middle"><b>85.74</b></td>
       </tr>
   </table>
-<figcaption style="margin-top: -2em;">표 2. Comparison table showing the difference in IoU and mIoU scores by the presence of MORAI and translated MORAI dataset to the baseline, respectively.</figcaption>
+<figcaption style="margin-top: -2em;">표 2. Comparison table showing the difference in IoU and mIoU scores by the presence of MORAI and translated MORAI datasets to the baseline, respectively.</figcaption>
  
 본 Semantic Segmentation 실험에서는 앞선 Object Detection 실험에서 확인한 것과 일관된 결과를 확인할 수 있었습니다. 현실 데이터셋만을 사용하였을 때의 인지 성능은 mIoU 기준 83.62% 였습니다. 반면, Domain Gap이 크게 존재하는 원본 가상 데이터셋을 함께 사용했을 경우 mIoU 84.66%로 1.04%의 성능 향상이 있었으며, 이를 보완한 변환 데이터셋의 경우 mIoU 85.74로 약 <b>2.1%</b>의 성능 향상을 확인할 수 있었습니다. <br>
 객체의 종류 별로 평가한 IoU 역시 변환 데이터셋을 사용하였을 때 가장 높은 성능을 보였습니다.  
 
 ### 4.2 정성적 결과
-상기 Object Detection 실험에서 학습한 두 모델 (1) Cityscapes, (2) Cityscapes + Translated MORAI의 추론 결과(inference)를 시각화하여, Translated MORAI가 더해졌을 때의 효과를 확인해보았습니다. <br>
-아래 그림 8의 왼쪽 패널에서 보이는 것과 같이, Cityscapes(현실, Real)로만 학습했을 때에는 탐지하지 못했던 객체들을 Translated MORAI(변환 가상 데이터셋, Sim2Real)와 함께 학습하였을 때에는 탐지에 성공한 것을 확인할 수 있습니다. <br>
+앞의 [Object Detection 실험](#411-object-detection)에서 학습한 두 모델 (1) Cityscapes, (2) Cityscapes + Translated MORAI의 추론 결과(inference)를 시각화하여, Translated MORAI가 더해졌을 때의 효과를 확인해보았습니다. <br>
+_**그림 8.**_ 의 왼쪽과 같이, Cityscapes(현실, Real)로만 학습했을 때에는 탐지하지 못했던 객체들을 Translated MORAI(변환 가상 데이터셋, Sim2Real)와 함께 학습하였을 때에는 탐지에 성공한 것을 확인할 수 있습니다. <br>
 또한 오른쪽 패널에서 보이는 것처럼, Translated MORAI를 통해 추가적인 데이터를 학습함으로써 객체 오탐지가 줄어든 것을 확인할 수 있습니다. <br>
 특히, 오른쪽 패널의 두번째 그림과 같이 Cityscapes로만 학습하였을 때에는 벽지의 사람 그림을 사람이라 인식하였지만 Translated MORAI로 추가적인 사람 데이터를 학습한 결과, 오인지하지 않음을 확인할 수 있었습니다.
 
@@ -391,17 +392,17 @@ Object Detection 실험에서는 인지 성능 측면에서 MORAI Dataset의 가
 2. Fine detail 손실
 
 첫 번째, <b>Semantics flipping</b>은 I2I 모델을 통한 변환 과정 중 원본 이미지에 존재하는 객체의 의미론적 속성(semantic class)가 변질되는 것을 의미합니다. 그 예시로 원본 이미지에서 차량(vehicle) 속성을 가진 객체가 변환 이미지에서는 사람(pedestrian)처럼 보이게 변환되는 것을 들 수 있습니다. <br>
-**그림 9.** 에서는 Semantics flipping이 발생한 영역을 빨간색 점선 박스로 보여줍니다. 각 행 별로, **하늘 $\rightarrow$ 나무 + 건물**, **방음벽 $\rightarrow$ 건물 외벽**,** 터널 벽면 $\rightarrow$ 건물 외벽** 으로 의미론적 속성이 변화한 것을 볼 수 있습니다. <br> 
+_**그림 9.**_ 에서는 Semantics flipping이 발생한 영역을 빨간색 점선 박스로 보여줍니다. 각 행 별로, **하늘 $\rightarrow$ 나무 + 건물**, **방음벽 $\rightarrow$ 건물 외벽**,** 터널 벽면 $\rightarrow$ 건물 외벽** 으로 의미론적 속성이 변화한 것을 볼 수 있습니다. <br> 
 ![23-08-04/limit1_semantic_flipping.png](23-08-04/limit1_semantic_flipping.png){:onclick="window.open(this.src)" title="Click view screen" width="80%"}
-<figcaption><b><center> 그림 9. I2I 변환 수행시 Semantics flipping 발생 영역 시각화(빨간 점선 상자). </center></b></figcaption>
+<figcaption>그림 9. I2I 변환 수행시 Semantics flipping 발생 영역 시각화(빨간 점선 상자)</figcaption>
 해당 현상은 Source Domain $X$와 Target Domain $Y$이 가진 semantics statistics의 차이를 적절히 고려하지 않은 채 GAN과 같은 distribution-matching 방법론을 적용하였을 때 발생하게 되며, 이에 대한 정의는 [SRUNIT](https://arxiv.org/abs/2012.04932) 논문에서 자세히 설명하고 있습니다. <br>
 가상 데이터의 장점 중 하나는 픽셀단위로 정확한 정답 데이터를 생성하기 때문에 Semantics flipping에 대한 적절한 처리가 없다면 원본 데이터를 기준으로 생성한 의미론적 속성 정답과 변환 데이터의 이미지 데이터 간의 간극으로 인한 인지 모델 학습에 부정적인 영향을 줄일 수 있다는 점입니다.
 
-두 번째, **Fine detail** 손실은 자율주행의 인지 관점에서 주요한 정보들에 대한 손실을 의미합니다.</b> 즉, 원본 이미지에는 존재하는 세부 정보(high frequency) 정보들이 I2I 모델의 변환 과정 중 손실되어 변환 이미지에서 나타나지 못하는 것을 현상입니다. 세부 정보의 예시로는 차선 색, 신호등 색, 표지판에 기술된 글자 등이 있습니다. <br>
-**그림 10.** 은 원본 이미지에 대해 I2I 수행 전과 이후를 나타냅니다. 그림에서 볼 수 있듯이 원본 이미지에서는 표지판의 60km/h 속도 제한을 명확히 인지할 수 있지만, 변환 이후 디테일이 손실 및 80km/h로 보여져 속도 기준을 명확히 인지하기 어려운 결과를 가져옵니다. </ㅠ> 
+두 번째, **Fine detail 손실**은 자율주행의 인지 관점에서 주요한 정보들에 대한 손실을 의미합니다. 즉, 원본 이미지에는 존재하는 세부 정보(high frequency) 정보들이 I2I 모델의 변환 과정 중 손실되어 변환 이미지에서 나타나지 못하는 것을 현상입니다. 세부 정보의 예시로는 차선 색, 신호등 색, 표지판에 기술된 글자 등이 있습니다. <br>
+_**그림 10.**_ 은 원본 이미지에 대해 I2I 수행 전과 이후를 보여줍니다. 그림에서 볼 수 있듯이 원본 이미지에서는 표지판의 60km/h 속도 제한을 명확히 인지할 수 있지만, 변환 이후 디테일이 손실 및 80km/h로 보여져 속도 기준을 명확히 인지하기 어려운 결과를 가져옵니다.
 
 ![23-08-04/limit2_high_frequency.png](23-08-04/limit2_high_frequency.png){:onclick="window.open(this.src)" title="Click view screen" width="80%"}
-<figcaption>그림 10. I2I 변환 과정 중 세부 정보가 소실되어 <br> 표지판의 제한 속도를 인지할 수 없는 예시.</figcaption>
+<figcaption>그림 10. Fine detail 손실 예시: 표지판의 제한 속도를 인지하기 어려움</figcaption>
 
 향후 연구 방향은 인지 모델의 성능 향상에 기여할 수 있도록 Sim2Real I2I 모델의 변환 퀄리티는 유지하되, 위의 언급된 Semantics flipping과 Fine detail 손실 문제를 해결하고자 합니다. 
 
