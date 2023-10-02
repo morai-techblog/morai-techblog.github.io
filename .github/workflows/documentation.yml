@@ -12,7 +12,7 @@ jobs:
   #   steps:
   #   - name: "맞춤법 검사"
   #     uses: jckdotim/korean-grammar-action@v0.2.6
-  #     #uses: heumsi/korean-grammar-action@v0.2.8
+  #     uses: heumsi/korean-grammar-action@v0.2.8
   #     env:
   #       GITHUB_TOKEN: ${{ secrets.TOKEN2 }}
   
