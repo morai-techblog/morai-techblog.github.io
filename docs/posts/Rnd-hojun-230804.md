@@ -9,8 +9,12 @@ categories:
   - R&D Notes
 links:
 #  - posts/grammertest.md
-  - Paper, [Unpaired Image-to-Image Translation with Density Changing Regularization]: https://openreview.net/pdf?id=RNZ8JOmNaV4
-#  - Nested section:
+  - Nested section:
+    - UNIT: https://arxiv.org/pdf/1703.00848.pdf
+    - MUNIT: https://arxiv.org/abs/1804.04732
+    - DRIT: https://arxiv.org/abs/1808.00948
+    - INIT: https://arxiv.org/pdf/1905.01744.pdf 
+    - DUNIT: https://openaccess.thecvf.com/content_CVPR_2020/papers/Bhattacharjee_DUNIT_Detection-Based_Unsupervised_Image-to-Image_Translation_CVPR_2020_paper.pdf
 #    - External link: https://example.com
 #    - DataGen User Guide: https://morai-datagen-docs.scrollhelp.site/
 comments: true
@@ -79,8 +83,7 @@ I2I의 목표는 Source Image $I^{X}$가 주어졌을 때, Target Image $I^{Y}$�
 
 ### 1.2 I2I의 목적 및 연구 분야
 Source Domain $X$와 Target Domain $Y$간에 데이터 알고리즘으로 나타내는 상관 관계가 존재한다면 I2I 모델 $F$는 이를 학습하여 변환을 수행할 수 있기에 I2I의 활용 범위는 매우 무궁무진합니다. <br>
-앞서 링크한 논문 [Unpaired Image-to-Image Translation with Density
-Changing Regularization](https://arxiv.org/pdf/2101.08629.pdf)에서도 언급했듯이, I2I는 흑백 이미지에서 컬러 이미지로의 변환, 저해상도(LR, Low-Resolution) 이미지로부터 고해상도(HR, High-Resolution) 이미지 생성과 같은 다양한 애플리케이션에 적용되고 있으며, 근래에 들어서는 이러한 I2I 적용 사례가 기하급수적으로 늘어나고 있는 추세입니다.
+참고 자료로 링크한 논문들에서도 언급했듯이, I2I는 흑백 이미지에서 컬러 이미지로의 변환, 저해상도(LR, Low-Resolution) 이미지로부터 고해상도(HR, High-Resolution) 이미지 생성과 같은 다양한 애플리케이션에 적용되고 있으며, 근래에 들어서는 이러한 I2I 적용 사례가 기하급수적으로 늘어나고 있는 추세입니다.
 
 자율주행 분야에서의 I2I 기술을 활용하는 목적은 넓게는 시뮬레이터에서 생성되는 가상 이미지의 포토리얼즘 향상이며, 이를 통해 궁극적으로는 자율주행 인지 모델의 성능을 유의미하게 개선하는 가상 데이터를 생성하는 것입니다. <br>
 
@@ -158,26 +161,25 @@ Domain gap은 도메인을 구성하는 환경, 조명, 다양한 객체들의 �
 이는 가상의 그래픽 텍스처에서 주는 느낌이 현실과는 확연히 다름을 보이는 RGB domain gap에 비하여 Semantic domain gap이 보다 수월하게 해결될 수 있다는 의미를 전합니다.
 
 ### 2.3 방안: I2I 활용을 통한 Domain gap 완화
-적절한 전략이 부재한 채, 자율주행 인지 모델을 가상 도메인의 시뮬레이터에서 취득한 데이터로 학습시 성능이 오히려 감소하거나 크게 오르지 않는 현상이 종종 발생합니다. 딥러닝 분야의 [많은 연구자들](https://machinelearning.apple.com/research/bridging-the-domain-gap-for-neural-models)은 이러한 현상의 원인이 Domain gap에 있다고 얘기합니다.
+Domain gap은 이미 딥러닝 분야에서 [많은 연구자들이 해결]((https://machinelearning.apple.com/research/bridging-the-domain-gap-for-neural-models)하려고 하는 과제이기도 합니다.
+그런데 Domain gap에 대한 적절한 대응 전략 없이, 자율주행 인지 모델을 가상 도메인의 시뮬레이터에서 취득한 데이터로 학습하면 성능이 크게 오르지 않거나 오히려 감소하는 현상이 종종 발생합니다.
 
-예시로 생성한 _**그림 4**_ 와 같이 가상 도메인인 시뮬레이터에서 취득한 데이터셋($X$)과 현실 도메인에서 취득한 데이터셋($Y$)의 분포는 모양과 위치 등에서 차이(Domain gap, $Gap(X, Y)$)를 보이고 있습니다. 이는 인지 모델이 학습해야 하는 영역이 증가한다는 것을 의미하며, 모델의 수용력 (Capacity)가 충분하지 못하다면 인지 성능에 악영향을 주게 됩니다. <br>
+예시로 생성한 _**그림 4.**_ 와 같이 가상 도메인인 시뮬레이터에서 취득한 데이터셋($X$)과 현실 도메인에서 취득한 데이터셋($Y$)의 분포는 모양과 위치 등에서 차이(Domain gap, $Gap(X, Y)$)를 보이고 있습니다. 이는 인지 모델이 학습해야 하는 영역이 증가한다는 것을 의미하며, 모델의 수용력 (Capacity)가 충분하지 못하다면 인지 성능에 악영향을 주게 됩니다. <br>
 쉽게 말해, 인지 모델이 언어 영역의 문제들(현실 데이터셋)로만 학습하고 시험을 봐야 하는데 언어 영역 뿐만 아니라 수학, 과학 등 시험과는 상관없는 영역들의 문제들(가상 데이터셋)까지 학습하여 정작 언어 영역 시험 성적이 떨어지게 되는 결과로 비유할 수 있습니다.
 
 ![23-08-04/XY_scatter_plot.png](23-08-04/XY_scatter_plot.png){:onclick="window.open(this.src)" title="Click view screen" width="60%"}
 <figcaption>그림 4. 현실 데이터셋(파란색)과 가상의 MORAI 데이터셋(빨간색)간의 차이</figcaption>
 
 
-그런데 이러한 결과를 놓고 볼때, 본 연구의 목표는 _**그림 5**_ 와 같이, Sim2Real I2I 모델 $F$를 통해 현실에 근접하도록 변환된 MORAI 데이터셋(Translated MORAI, $F(X)$)을 생성하고, 궁극적으로는 인지 모델의 성능 향상에 기여하는 것입니다.
+그런데 이러한 결과를 놓고 볼때, 본 연구의 목표는 _**그림 5.**_ 와 같이, Sim2Real I2I 모델 $F$를 통해 현실에 근접하도록 변환된 MORAI 데이터셋(Translated MORAI, $F(X)$)을 생성하고, 궁극적으로는 인지 모델의 성능 향상에 기여하는 것입니다.
 따라서 I2I를 적용하여 현실 도메인에 가까운 변환 데이터셋을 구축하는 것이 'Domain gap'을 완화하기 위한 방안이 되겠습니다.
 
 ![23-08-04/XY_translated_X_scatter_plot.png](23-08-04/XY_translated_X_scatter_plot.png){:onclick="window.open(this.src)" title="Click view screen" width="60%"}
 <figcaption>그림 5. 현실 데이터셋(파란색)과 변환 데이터셋(분홍색)간의 차이</figcaption>
 
 ## 3. 연구 방법
-비지도학습 기반의 Sim2Real I2I 기술을 적용하기 위해 [UNIT](https://arxiv.org/pdf/1703.00848.pdf ), [MUNIT](https://arxiv.org/abs/1804.04732), [DRIT](https://arxiv.org/abs/1808.00948), [INIT](https://arxiv.org/pdf/1905.01744.pdf), [DUNIT]([DUNIT](https://openaccess.thecvf.com/content_CVPR_2020/papers/Bhattacharjee_DUNIT_Detection-Based_Unsupervised_Image-to-Image_Translation_CVPR_2020_paper.pdf)
-)와 같은 선구적인 논문을 조사해보았으며, 해당 논문들이 제시한 I2I 모델을 분석하고 재현해보았습니다.
+비지도학습 기반의 Sim2Real I2I 기술을 적용하기 위해 [UNIT](https://arxiv.org/pdf/1703.00848.pdf), [MUNIT](https://arxiv.org/abs/1804.04732), [DRIT](https://arxiv.org/abs/1808.00948), [INIT](https://arxiv.org/pdf/1905.01744.pdf), [DUNIT](https://openaccess.thecvf.com/content_CVPR_2020/papers/Bhattacharjee_DUNIT_Detection-Based_Unsupervised_Image-to-Image_Translation_CVPR_2020_paper.pdf)와 같이 딥러닝 분야의 선구적인 논문을 조사했으며, 해당 논문들이 제시한 I2I 모델을 분석하고 재현해보았습니다.
 
-************
 ### 3.1 Sim2Real I2I 모델 개발
 Sim2Real I2I 모델 개발에서는 다음과 같은 두 가지 가정을 사용합니다.
   
@@ -256,7 +258,7 @@ Sim2Real I2I 모델로 생성한 **Translated MORAI 데이터셋** 의 궁극적
 
 아래의 _**표 1**_ 에서는 Faster R-CNN 모델을 위 세 가지의 경우에 각 학습한 실험 결과를 4개 객체 종류(person, car, truck, bus)별 AP와 mAP로 보여줍니다. 
 
- <table style="max-width: 700px; margin-left:auto; margin-right:auto; overflow: hidden;">
+ <table style="min-width: 700px; overflow: hidden;">
       <thead>
         <tr>
           <th style="border-left: none; background-color: #c9dff379; padding: auto 5rem; text-align: center;">Train</th>
@@ -298,7 +300,7 @@ Sim2Real I2I 모델로 생성한 **Translated MORAI 데이터셋** 의 궁극적
         </tr>
       </tbody>
    </table>
-<figcaption style="margin-top: -2em; width: 100%"> 표 1. Comparison table showing the difference in AP and mAP score by the presence of MORAI and Translated MORAI datasets to the baseline, Cityscapes.</figcaption>
+<figcaption style="margin-top: -2em; width: 100%"> 표 1. Comparison table showing the difference in AP and mAP score by the presence of MORAI and Translated MORAI datasets to the baseline, Cityscapes</figcaption>
 
 
 현실 데이터셋(Baseline)으로 학습했을 때 대비, 원본 가상 데이터셋(MORAI)을 추가하였을 경우, $person$과 $bus$ 객체에 대해서는 성능이 향상되었지만(40.7 $\rightarrow$ 41.2, 55.8 $\rightarrow$ 57.5) <br>
@@ -309,16 +311,17 @@ $car$과 $truck$의 경우에는 오히려 하락하였고(57.9 $\rightarrow$ 57
 Object Detection 실험에서는 인지 성능 측면에서 MORAI 데이터셋의 가능성을 저해시키는 요소 중 하나가 Domain Gap임을 확인하였고, Sim2Real I2I로 이를 보완함으로써 object detection 모델인 Faster R-CNN의 성능 향상에 유의미하게 가상 데이터가 기여할 수 있음을 확인할 수 있었습니다.
 
 #### 4.1.2 Semantic Segmentation
-변환 데이터셋의 유효성을 다양한 측면에서 검증하기 위해 또다른 인지 과제인 Semantic Segmentation에 대해서도 실험을 진행하였습니다. 인지 모델로 [DeepLabV3+](https://arxiv.org/abs/1802.02611)을 사용하였으며, 상기 Object Detection 실험과 동일하게 세 가지 경우(현실 데이터셋, 현실 데이터셋 + 원본 가상 데이터셋, 현실 데이터셋 + 변환 데이터셋)로 나누어 실험을 진행하였습니다.
+변환 데이터셋의 유효성을 다양한 측면에서 검증하기 위해 또다른 인지 과제인 Semantic Segmentation에 대해서도 실험을 진행하였습니다. 인지 모델로 [DeepLabV3+](https://arxiv.org/abs/1802.02611)을 사용하였으며, 
+ 앞서 진행한 [Object Detection 실험](#411-object-detection)과 동일하게 다음의 세 가지 경우(현실 데이터셋, 현실 데이터셋 + 원본 가상 데이터셋, 현실 데이터셋 + 변환 데이터셋)로 나누어 실험을 진행하였습니다.
 
-1. 현실 데이터셋인 [BDO100K](https://bair.berkeley.edu/blog/2018/05/30/bdd/)로만 학습했을 떄 (<b>Baseline</b>)
-2. 현실 데이터셋인 BDD100K에 원본 가상 데이터셋(MORAI)을 추가하여 학습했을 때 (<b>Larger Domain Gap</b>)
-3. 현실 데이터셋인 BDD100K에 변환 데이터셋(Translated MORAI)을 추가하여 학습했을 때 (<b>Smaller Domain Gap</b>)
+1. **Baseline**: 현실 데이터셋인 [BDO100K](https://bair.berkeley.edu/blog/2018/05/30/bdd/)로만 학습했을 때
+2. **Larger Domain Gap**: 현실 데이터셋인 BDD100K에 원본 가상 데이터셋(MORAI)을 추가하여 학습했을 때
+3. **Smaller Domain Gap**: 현실 데이터셋인 BDD100K에 변환 데이터셋(Translated MORAI)을 추가하여 학습했을 때
 
-성능을 평가하기 위한 지표로 Semantic Segmentation 과제에서 대중적으로 사용하는 IoU(Intersection over Union) 및 mIoU(mean Intersection over Union)을 적용하였습니다 (100에 가까운 수치일 수록 높은 성능임을 의미함). 
+성능을 평가하기 위한 지표로 Semantic Segmentation 과제에서 대중적으로 사용하는 IoU(Intersection over Union) 및 mIoU(mean Intersection over Union)을 적용하였습니다. (100에 가까운 수치일 수록 높은 성능임을 의미함)
 
 _**표 2.**_ 에서는 DeepLabV3+ 모델을 위 세 가지 경우에 대해 각 학습한 후, 인지 성능을 평가한 결과를 보여줍니다.
- <table style="max-width: 700px; overflow-x: auto;">
+ <table style="max-width: 700px; margin-left: auto; margin-right: auto; overflow-x: auto;">
       <tr>
         <th style="border-left: none; background-color: #c9dff379; text-align: center; vertical-align: middle;">Train</th>
         <th style="border-left: none; background-color: #c9dff379; text-align: center; vertical-align: middle;">Val</th>
@@ -364,9 +367,9 @@ _**표 2.**_ 에서는 DeepLabV3+ 모델을 위 세 가지 경우에 대해 각 
         <td style="text-align: center; vertical-align: middle"><b>85.74</b></td>
       </tr>
   </table>
-<figcaption style="margin-top: -2em;">표 2. Comparison table showing the difference in IoU and mIoU scores by the presence of MORAI and translated MORAI datasets to the baseline, respectively.</figcaption>
+<figcaption style="margin-top: -2em; text-align: center;">표 2. Comparison table showing the difference in IoU and mIoU scores by the presence of MORAI and translated MORAI datasets to the baseline, respectively</figcaption>
  
-본 Semantic Segmentation 실험에서는 앞선 Object Detection 실험에서 확인한 것과 일관된 결과를 확인할 수 있었습니다. 현실 데이터셋만을 사용하였을 때의 인지 성능은 mIoU 기준 83.62% 였습니다. 반면, Domain Gap이 크게 존재하는 원본 가상 데이터셋을 함께 사용했을 경우 mIoU 84.66%로 1.04%의 성능 향상이 있었으며, 이를 보완한 변환 데이터셋의 경우 mIoU 85.74로 약 <b>2.1%</b>의 성능 향상을 확인할 수 있었습니다. <br>
+본 Semantic Segmentation 실험에서는 Object Detection 실험에서 확인한 것과 일관된 결과를 확인할 수 있었습니다. 현실 데이터셋만을 사용하였을 때의 인지 성능은 mIoU 기준 83.62% 였습니다. 반면, Domain Gap이 크게 존재하는 원본 가상 데이터셋을 함께 사용했을 경우 mIoU 84.66%로 1.04%의 성능 향상이 있었으며, 이를 보완한 변환 데이터셋의 경우 mIoU 85.74로 약 <b>2.1%</b>의 성능 향상을 확인할 수 있었습니다. <br>
 객체의 종류 별로 평가한 IoU 역시 변환 데이터셋을 사용하였을 때 가장 높은 성능을 보였습니다.  
 
 ### 4.2 정성적 결과
@@ -376,7 +379,7 @@ _**그림 8.**_ 의 왼쪽과 같이, Cityscapes(현실, Real)로만 학습했�
 특히, 오른쪽 패널의 두번째 그림과 같이 Cityscapes로만 학습하였을 때에는 벽지의 사람 그림을 사람이라 인식하였지만 Translated MORAI로 추가적인 사람 데이터를 학습한 결과, 오인지하지 않음을 확인할 수 있었습니다.
 
 ![23-08-04/qualitative_result.jpg](23-08-04/qualitative_result.jpg){:onclick="window.open(this.src)" title="Click view screen" width="90%"}
-<figcaption>그림 8. 변환 가상 데이터셋의 유무에 따른 인지 성능 차이: <br> 현실 데이터셋으로만 학습했을 때 대비 더 적은 미탐지 및 오인지 결과 생성.</figcaption>
+<figcaption>그림 8. 변환 가상 데이터셋의 유무에 따른 인지 성능 차이: <br> 현실 데이터셋으로만 학습했을 때 대비 더 적은 미탐지 및 오인지 결과 생성</figcaption>
 
 앞선 연구 결과를 종합해 보았을 때, Sim2Real I2I 모델를 적용한 MORAI 데이터셋을 학습한 결과와 현실 데이터셋을 학습한 결과를 비교할 수 있었고, 결과적으로 MORAI SIM을 활용한 비지도 학습 기반의 I2I가 '인지 성능 개선'에 기여하는가에 대해 본 연구의 타당성을 고찰해볼 수 있었습니다. <br> 
 
@@ -392,13 +395,13 @@ _**그림 8.**_ 의 왼쪽과 같이, Cityscapes(현실, Real)로만 학습했�
 2. Fine detail 손실
 
 첫 번째, <b>Semantics flipping</b>은 I2I 모델을 통한 변환 과정 중 원본 이미지에 존재하는 객체의 의미론적 속성(semantic class)가 변질되는 것을 의미합니다. 그 예시로 원본 이미지에서 차량(vehicle) 속성을 가진 객체가 변환 이미지에서는 사람(pedestrian)처럼 보이게 변환되는 것을 들 수 있습니다. <br>
-_**그림 9.**_ 에서는 Semantics flipping이 발생한 영역을 빨간색 점선 박스로 보여줍니다. 각 행 별로, **하늘 $\rightarrow$ 나무 + 건물**, **방음벽 $\rightarrow$ 건물 외벽**,** 터널 벽면 $\rightarrow$ 건물 외벽** 으로 의미론적 속성이 변화한 것을 볼 수 있습니다. <br> 
+_**그림 9.**_ 에서는 Semantics flipping이 발생한 영역을 빨간색 점선 박스로 보여줍니다. 각 행 별로, **하늘 $\rightarrow$ 나무 + 건물**, **방음벽 $\rightarrow$ 건물 외벽**, **터널 벽면 $\rightarrow$ 건물 외벽** 으로 의미론적 속성이 변화한 것을 볼 수 있습니다. <br> 
 ![23-08-04/limit1_semantic_flipping.png](23-08-04/limit1_semantic_flipping.png){:onclick="window.open(this.src)" title="Click view screen" width="80%"}
 <figcaption>그림 9. I2I 변환 수행시 Semantics flipping 발생 영역 시각화(빨간 점선 상자)</figcaption>
 해당 현상은 Source Domain $X$와 Target Domain $Y$이 가진 semantics statistics의 차이를 적절히 고려하지 않은 채 GAN과 같은 distribution-matching 방법론을 적용하였을 때 발생하게 되며, 이에 대한 정의는 [SRUNIT](https://arxiv.org/abs/2012.04932) 논문에서 자세히 설명하고 있습니다. <br>
 가상 데이터의 장점 중 하나는 픽셀단위로 정확한 정답 데이터를 생성하기 때문에 Semantics flipping에 대한 적절한 처리가 없다면 원본 데이터를 기준으로 생성한 의미론적 속성 정답과 변환 데이터의 이미지 데이터 간의 간극으로 인한 인지 모델 학습에 부정적인 영향을 줄일 수 있다는 점입니다.
 
-두 번째, **Fine detail 손실**은 자율주행의 인지 관점에서 주요한 정보들에 대한 손실을 의미합니다. 즉, 원본 이미지에는 존재하는 세부 정보(high frequency) 정보들이 I2I 모델의 변환 과정 중 손실되어 변환 이미지에서 나타나지 못하는 것을 현상입니다. 세부 정보의 예시로는 차선 색, 신호등 색, 표지판에 기술된 글자 등이 있습니다. <br>
+두 번째, **Fine detail 손실** 은 자율주행의 인지 관점에서 주요한 정보들에 대한 손실을 의미합니다. 즉, 원본 이미지에는 존재하는 세부 정보(high frequency) 정보들이 I2I 모델의 변환 과정 중 손실되어 변환 이미지에서 나타나지 못하는 것을 현상입니다. 세부 정보의 예시로는 차선 색, 신호등 색, 표지판에 기술된 글자 등이 있습니다. <br>
 _**그림 10.**_ 은 원본 이미지에 대해 I2I 수행 전과 이후를 보여줍니다. 그림에서 볼 수 있듯이 원본 이미지에서는 표지판의 60km/h 속도 제한을 명확히 인지할 수 있지만, 변환 이후 디테일이 손실 및 80km/h로 보여져 속도 기준을 명확히 인지하기 어려운 결과를 가져옵니다.
 
 ![23-08-04/limit2_high_frequency.png](23-08-04/limit2_high_frequency.png){:onclick="window.open(this.src)" title="Click view screen" width="80%"}
