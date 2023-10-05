@@ -4,7 +4,6 @@ on: [pull_request]
 
 jobs:
   build:
-    if: ${{ github.event.issue.pull_request && github.event.comment.body == '/맞춤법'}}
     runs-on: ubuntu-latest
     steps:
     - name: "맞춤법 검사"
