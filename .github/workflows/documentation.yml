@@ -1,10 +1,8 @@
 name: Check korean grammar on pull request comment
 
 on:
-  issue_comment:
-    types:
-      - created
-
+  pull_request:
+  
 jobs:
   grammar_check:
     if: ${{ github.event.issue.pull_request && github.event.comment.body == '/맞춤법' }}
