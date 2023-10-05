@@ -3,7 +3,8 @@ name: Check korean grammar on pull request comment
 on: [pull_request]
 
 jobs:
-  build:
+  grammar_check:
+    if: ${{ github.event.issue.pull_request }}
     runs-on: ubuntu-latest
     steps:
     - name: "맞춤법 검사"
