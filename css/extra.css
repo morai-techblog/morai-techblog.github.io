@@ -56,6 +56,12 @@
   font-size: 14px; 
 }
 
+.md-typeset table {
+  margin-left: auto;
+  margin-right: auto;
+  margin: auto;
+}
+
 .md-typeset table code,
 table pre {
   background-color: #c9dff379/* #fbe9e7 */; 
@@ -143,7 +149,8 @@ table pre {
 }
 
 
-  table thead tr th {
+
+table thead tr th {
     border-top: 2px solid #E2E2E2;
     text-align: center;
     /* min-width: 5rem;  */
