@@ -473,14 +473,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../category/rd-notes/" class="md-nav__link">
+      <a href="../../../../category/rnd-notes/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     
   
     <span class="md-typeset">
-      R&amp;D Notes
+      RnD Notes
     </span>
   
 
@@ -873,7 +873,7 @@
                     <span class="md-ellipsis">
                       in
                       
-                        <a href="../../../../category/rd-notes/">R&amp;D Notes</a></span>
+                        <a href="../../../../category/rnd-notes/">RnD Notes</a></span>
                   </div>
                 </li>
               
@@ -1168,7 +1168,7 @@
 I2I는 Source Image의 내용(Content)은 유지하되 스타일(Style)을 바꾸는 연구에 주로 활용되므로 Style-Transfer(ST)라고도 불립니다.</p>
 <p><em><strong>그림 1.</strong></em> 과 같이 Source Domain <span class="arithmatex">\(X\)</span>에 속하는 Source Image가 Target Domain <span class="arithmatex">\(Y\)</span>에 속하는 Target Image처럼 보이도록 I2I를 수행하면, 결과적으로 맨 우측의 Translated Image를 생성하게 됩니다.
 <img alt="23-08-04/I2I_overview.jpg" onclick="window.open(this.src)" src="../../../../assets/23-08-04/I2I_overview.jpg" title="Click view screen" width="100%" /></p>
-<figcaption> 그림 1. I2I 예시 </figcaption>
+<figcaption> 그림 1. I2I 예시(참고 논문:<a href="https://arxiv.org/pdf/2101.08629.pdf" target="_blank"> arxiv.org </a>) </figcaption>
 
 <p>I2I의 목표는 Source Image <span class="arithmatex">\(I^{X}\)</span>가 주어졌을 때, Target Image <span class="arithmatex">\(I^{Y}\)</span>와 유사한 Translated Image, <span class="arithmatex">\(I^{X \rightarrow Y}\)</span>를 생성하는 것입니다. 이를 수식으로 표현하면 다음과 같습니다.</p>
 <blockquote>
@@ -1183,7 +1183,7 @@ I2I는 Source Image의 내용(Content)은 유지하되 스타일(Style)을 바�
 </blockquote>
 <h3 id="12-i2i">1.2 I2I의 목적 및 연구 분야<a class="headerlink" href="#12-i2i" title="Permanent link">&para;</a></h3>
 <p>Source Domain <span class="arithmatex">\(X\)</span>와 Target Domain <span class="arithmatex">\(Y\)</span>간에 데이터 알고리즘으로 나타내는 상관 관계가 존재한다면 I2I 모델 <span class="arithmatex">\(F\)</span>는 이를 학습하여 변환을 수행할 수 있기에 I2I의 활용 범위는 매우 무궁무진합니다. <br>
-참고 자료로 링크한 논문들에서도 언급했듯이, I2I는 흑백 이미지에서 컬러 이미지로의 변환, 저해상도(LR, Low-Resolution) 이미지로부터 고해상도(HR, High-Resolution) 이미지 생성과 같은 다양한 애플리케이션에 적용되고 있으며, 근래에 들어서는 이러한 I2I 적용 사례가 기하급수적으로 늘어나고 있는 추세입니다.</p>
+참고 자료로 링크한 논문에서도 언급했듯이, I2I는 흑백 이미지에서 컬러 이미지로의 변환, 저해상도(LR, Low-Resolution) 이미지로부터 고해상도(HR, High-Resolution) 이미지 생성과 같은 다양한 애플리케이션에 적용되고 있으며, 근래에 들어서는 이러한 I2I 적용 사례가 기하급수적으로 늘어나고 있는 추세입니다.</p>
 <p>자율주행 분야에서의 I2I 기술을 활용하는 목적은 넓게는 시뮬레이터에서 생성되는 가상 이미지의 포토리얼즘 향상이며, 이를 통해 궁극적으로는 자율주행 인지 모델의 성능을 유의미하게 개선하는 가상 데이터를 생성하는 것입니다. <br></p>
 <p>초창기 I2I 연구는 지도학습(Supervised Learning)에 기초를 두고 진행하는 경우가 많았습니다.<br>
 그러나 지도학습은 딥러닝 모델 학습과정에 정답 데이터(GT, Ground truth)를 필요로하기에, 지도학습 기반의 I2I 방법론은 Source Domain <span class="arithmatex">\(X\)</span>와 Target Domain <span class="arithmatex">\(Y\)</span>간에 1:1 관계성이 정의된 'Paired 데이터셋'이 존재해야 합니다. 즉, 모델이 출력해야 하는 정답 데이터로써 Source Image <span class="arithmatex">\(I^{X}\)</span>에 대응하는 Target Image <span class="arithmatex">\(I^{Y}\)</span>가 명확하게 정의되어야 합니다. </p>
@@ -1249,7 +1249,7 @@ Domain gap은 도메인을 구성하는 환경, 조명, 다양한 객체들의 �
 <p>위 그림에서 동일한 객체에 대해 현실 데이터셋(BDD, KITTI, Cityscapes)과 가상 데이터셋(Virtual KITTI &frac12;,GTA5, SHIFT, MORAI)을 비교해보면 RGB Domain gap보다는 Semantic Domain gap의 차이가 적다는 것을 육안으로도 바로 확인할 수 있습니다.</p>
 <p>이는 가상의 그래픽 텍스처에서 주는 느낌이 현실과는 확연히 다름을 보이는 RGB domain gap에 비하여 Semantic domain gap이 보다 수월하게 해결될 수 있다는 의미를 전합니다.</p>
 <h3 id="23-i2i-domain-gap">2.3 방안: I2I 활용을 통한 Domain gap 완화<a class="headerlink" href="#23-i2i-domain-gap" title="Permanent link">&para;</a></h3>
-<p>Domain gap은 이미 딥러닝 분야에서 [많은 연구자들이 해결]((https://machinelearning.apple.com/research/bridging-the-domain-gap-for-neural-models)하려고 하는 과제이기도 합니다.
+<p>Domain gap은 이미 딥러닝 분야에서 <a href="https://machinelearning.apple.com/research/bridging-the-domain-gap-for-neural-models" target="_blank">많은 연구자들이 해결</a>하려고 하는 과제이기도 합니다.
 그런데 Domain gap에 대한 적절한 대응 전략 없이, 자율주행 인지 모델을 가상 도메인의 시뮬레이터에서 취득한 데이터로 학습하면 성능이 크게 오르지 않거나 오히려 감소하는 현상이 종종 발생합니다.</p>
 <p>예시로 생성한 <em><strong>그림 4.</strong></em> 와 같이 가상 도메인인 시뮬레이터에서 취득한 데이터셋(<span class="arithmatex">\(X\)</span>)과 현실 도메인에서 취득한 데이터셋(<span class="arithmatex">\(Y\)</span>)의 분포는 모양과 위치 등에서 차이(Domain gap, <span class="arithmatex">\(Gap(X, Y)\)</span>)를 보이고 있습니다. 이는 인지 모델이 학습해야 하는 영역이 증가한다는 것을 의미하며, 모델의 수용력 (Capacity)가 충분하지 못하다면 인지 성능에 악영향을 주게 됩니다. <br>
 쉽게 말해, 인지 모델이 언어 영역의 문제들(현실 데이터셋)로만 학습하고 시험을 봐야 하는데 언어 영역 뿐만 아니라 수학, 과학 등 시험과는 상관없는 영역들의 문제들(가상 데이터셋)까지 학습하여 정작 언어 영역 시험 성적이 떨어지게 되는 결과로 비유할 수 있습니다.</p>
@@ -1262,7 +1262,7 @@ Domain gap은 도메인을 구성하는 환경, 조명, 다양한 객체들의 �
 <figcaption>그림 5. 현실 데이터셋(파란색)과 변환 데이터셋(분홍색)간의 차이</figcaption>
 
 <h2 id="3">3. 연구 방법<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
-<p>비지도학습 기반의 Sim2Real I2I 기술을 적용하기 위해 <a href="https://arxiv.org/pdf/1703.00848.pdf">UNIT</a>, <a href="https://arxiv.org/abs/1804.04732">MUNIT</a>, <a href="https://arxiv.org/abs/1808.00948">DRIT</a>, <a href="https://arxiv.org/pdf/1905.01744.pdf">INIT</a>, <a href="https://openaccess.thecvf.com/content_CVPR_2020/papers/Bhattacharjee_DUNIT_Detection-Based_Unsupervised_Image-to-Image_Translation_CVPR_2020_paper.pdf">DUNIT</a>와 같이 딥러닝 분야의 선구적인 논문을 조사했으며, 해당 논문들이 제시한 I2I 모델을 분석하고 재현해보았습니다.</p>
+<p>비지도학습 기반의 Sim2Real I2I 기술을 적용하기 위해 <a href="https://arxiv.org/pdf/1703.00848.pdf">UNIT</a>, <a href="https://arxiv.org/abs/1804.04732">MUNIT</a>, <a href="https://arxiv.org/abs/1808.00948">DRIT</a>, <a href="https://arxiv.org/pdf/1905.01744.pdf">INIT</a>, <a href="https://openaccess.thecvf.com/content_CVPR_2020/papers/Bhattacharjee_DUNIT_Detection-Based_Unsupervised_Image-to-Image_Translation_CVPR_2020_paper.pdf">DUNIT</a>와 같이 딥러닝 분야의 선구적인 논문을 조사했으며, 해당 논문이 제시한 I2I 모델을 분석하고 재현해보았습니다.</p>
 <h3 id="31-sim2real-i2i">3.1 Sim2Real I2I 모델 개발<a class="headerlink" href="#31-sim2real-i2i" title="Permanent link">&para;</a></h3>
 <p>Sim2Real I2I 모델 개발에서는 다음과 같은 두 가지 가정을 사용합니다.</p>
 <ol>
@@ -1333,11 +1333,11 @@ Diffusion 모델들의 높은 변환 성능에도 불구하고, 저희는 다음
 <p>※ 편의 상, Sim2Real I2I 적용되지 않은 MORAI 데이터셋을 <b>원본 가상 데이터셋</b>, Sim2Real I2I가 적용된 MORAI 데이터셋을 <b>변환 데이터셋</b> 으로 지칭하겠습니다.</p>
 <h3 id="41">4.1 정량적 결과<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
 <h4 id="411-object-detection">4.1.1 Object Detection<a class="headerlink" href="#411-object-detection" title="Permanent link">&para;</a></h4>
-<p>우선 2D Object Detection 과제에 대해 <a href="https://arxiv.org/abs/1506.01497">Faster R-CNN</a>모델을 사용하였으며, Domain Gap의 영향 확인 및 변환 데이터셋(Translated MORAI)의 유용성을 검증하기 위해 다음의 같이 세 가지 경우로 나누어 학습한 뒤, 그 성능을 비교하였습니다.</p>
+<p>우선 2D Object Detection 과제에 대해 <a href="https://arxiv.org/abs/1506.01497">Faster R-CNN</a> 모델을 사용하였으며, Domain Gap의 영향 확인 및 변환 데이터셋(Translated MORAI)의 유용성을 검증하기 위해 다음의 같이 세 가지 경우로 나누어 학습한 뒤, 그 성능을 비교하였습니다.</p>
 <ol>
-<li>현실 데이터셋인 <a href="https://www.cityscapes-dataset.com/">Cityscapes</a>로만 학습했을 떄 (<b>Baseline</b>)</li>
-<li>현실 데이터셋인 Cityscapes에 원본 가상 데이터셋(MORAI)을 추가하여 학습했을 때 (<b>Larger Domain Gap</b>)</li>
-<li>현실 데이터셋인 Cityscapes에 변환 데이터셋(Translated MORAI)을 추가하여 학습했을 때 (<b>Smaller Domain Gap</b>)</li>
+<li><b>Baseline</b>: 현실 데이터셋인 <a href="https://www.cityscapes-dataset.com/">Cityscapes</a>로만 학습했을 떄 </li>
+<li><b>Larger Domain Gap</b>: 현실 데이터셋인 Cityscapes에 원본 가상 데이터셋(MORAI)을 추가하여 학습했을 때</li>
+<li><b>Smaller Domain Gap</b>: 현실 데이터셋인 Cityscapes에 변환 데이터셋(Translated MORAI)을 추가하여 학습했을 때</li>
 </ol>
 <p>성능을 확인하기 위한 지표로, Object Detection 과제에서 대중적으로 사용하는 <span class="arithmatex">\(AP\)</span>(Average Precision) 및 <span class="arithmatex">\(mAP\)</span>(mean Average Precision)를 적용하습니다 (해당 지표는 100에 가까운 수치일수록 높은 성능임을 의미함).</p>
 <p>아래의 <em><strong>표 1</strong></em> 에서는 Faster R-CNN 모델을 위 세 가지의 경우에 각 학습한 실험 결과를 4개 객체 종류(person, car, truck, bus)별 AP와 mAP로 보여줍니다. </p>
