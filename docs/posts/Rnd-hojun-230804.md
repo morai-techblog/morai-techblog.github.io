@@ -6,7 +6,7 @@ title: MORAI 데이터셋을 활용한 Image-to-Image Translation 연구
 description: >
   자율주행 인지 모델의 성능을 개선하기 위하여 MORAI SIM의 데이터셋을 활용한 Image-to-Image Translation 연구를 수행한 내용을 알아봅니다.
 categories:
-  - R&D Notes
+  - RnD Notes
 links:
 #  - posts/grammertest.md
   - Nested section:
@@ -69,7 +69,7 @@ I2I는 Source Image의 내용(Content)은 유지하되 스타일(Style)을 바�
 
 _**그림 1.**_ 과 같이 Source Domain $X$에 속하는 Source Image가 Target Domain $Y$에 속하는 Target Image처럼 보이도록 I2I를 수행하면, 결과적으로 맨 우측의 Translated Image를 생성하게 됩니다.
 ![23-08-04/I2I_overview.jpg](23-08-04/I2I_overview.jpg){:onclick="window.open(this.src)" title="Click view screen" width="100%"}
-<figcaption> 그림 1. I2I 예시 </figcaption>
+<figcaption> 그림 1. I2I 예시(참고 논문:<a href="https://arxiv.org/pdf/2101.08629.pdf" target="_blank"> arxiv.org </a>) </figcaption>
 
 I2I의 목표는 Source Image $I^{X}$가 주어졌을 때, Target Image $I^{Y}$와 유사한 Translated Image, $I^{X \rightarrow Y}$를 생성하는 것입니다. 이를 수식으로 표현하면 다음과 같습니다.
 
@@ -83,7 +83,7 @@ I2I의 목표는 Source Image $I^{X}$가 주어졌을 때, Target Image $I^{Y}$�
 
 ### 1.2 I2I의 목적 및 연구 분야
 Source Domain $X$와 Target Domain $Y$간에 데이터 알고리즘으로 나타내는 상관 관계가 존재한다면 I2I 모델 $F$는 이를 학습하여 변환을 수행할 수 있기에 I2I의 활용 범위는 매우 무궁무진합니다. <br>
-참고 자료로 링크한 논문들에서도 언급했듯이, I2I는 흑백 이미지에서 컬러 이미지로의 변환, 저해상도(LR, Low-Resolution) 이미지로부터 고해상도(HR, High-Resolution) 이미지 생성과 같은 다양한 애플리케이션에 적용되고 있으며, 근래에 들어서는 이러한 I2I 적용 사례가 기하급수적으로 늘어나고 있는 추세입니다.
+참고 자료로 링크한 논문에서도 언급했듯이, I2I는 흑백 이미지에서 컬러 이미지로의 변환, 저해상도(LR, Low-Resolution) 이미지로부터 고해상도(HR, High-Resolution) 이미지 생성과 같은 다양한 애플리케이션에 적용되고 있으며, 근래에 들어서는 이러한 I2I 적용 사례가 기하급수적으로 늘어나고 있는 추세입니다.
 
 자율주행 분야에서의 I2I 기술을 활용하는 목적은 넓게는 시뮬레이터에서 생성되는 가상 이미지의 포토리얼즘 향상이며, 이를 통해 궁극적으로는 자율주행 인지 모델의 성능을 유의미하게 개선하는 가상 데이터를 생성하는 것입니다. <br>
 
@@ -161,7 +161,7 @@ Domain gap은 도메인을 구성하는 환경, 조명, 다양한 객체들의 �
 이는 가상의 그래픽 텍스처에서 주는 느낌이 현실과는 확연히 다름을 보이는 RGB domain gap에 비하여 Semantic domain gap이 보다 수월하게 해결될 수 있다는 의미를 전합니다.
 
 ### 2.3 방안: I2I 활용을 통한 Domain gap 완화
-Domain gap은 이미 딥러닝 분야에서 [많은 연구자들이 해결]((https://machinelearning.apple.com/research/bridging-the-domain-gap-for-neural-models)하려고 하는 과제이기도 합니다.
+Domain gap은 이미 딥러닝 분야에서 [많은 연구자들이 해결](https://machinelearning.apple.com/research/bridging-the-domain-gap-for-neural-models){:target="_blank"}하려고 하는 과제이기도 합니다.
 그런데 Domain gap에 대한 적절한 대응 전략 없이, 자율주행 인지 모델을 가상 도메인의 시뮬레이터에서 취득한 데이터로 학습하면 성능이 크게 오르지 않거나 오히려 감소하는 현상이 종종 발생합니다.
 
 예시로 생성한 _**그림 4.**_ 와 같이 가상 도메인인 시뮬레이터에서 취득한 데이터셋($X$)과 현실 도메인에서 취득한 데이터셋($Y$)의 분포는 모양과 위치 등에서 차이(Domain gap, $Gap(X, Y)$)를 보이고 있습니다. 이는 인지 모델이 학습해야 하는 영역이 증가한다는 것을 의미하며, 모델의 수용력 (Capacity)가 충분하지 못하다면 인지 성능에 악영향을 주게 됩니다. <br>
@@ -178,7 +178,7 @@ Domain gap은 이미 딥러닝 분야에서 [많은 연구자들이 해결]((htt
 <figcaption>그림 5. 현실 데이터셋(파란색)과 변환 데이터셋(분홍색)간의 차이</figcaption>
 
 ## 3. 연구 방법
-비지도학습 기반의 Sim2Real I2I 기술을 적용하기 위해 [UNIT](https://arxiv.org/pdf/1703.00848.pdf), [MUNIT](https://arxiv.org/abs/1804.04732), [DRIT](https://arxiv.org/abs/1808.00948), [INIT](https://arxiv.org/pdf/1905.01744.pdf), [DUNIT](https://openaccess.thecvf.com/content_CVPR_2020/papers/Bhattacharjee_DUNIT_Detection-Based_Unsupervised_Image-to-Image_Translation_CVPR_2020_paper.pdf)와 같이 딥러닝 분야의 선구적인 논문을 조사했으며, 해당 논문들이 제시한 I2I 모델을 분석하고 재현해보았습니다.
+비지도학습 기반의 Sim2Real I2I 기술을 적용하기 위해 [UNIT](https://arxiv.org/pdf/1703.00848.pdf), [MUNIT](https://arxiv.org/abs/1804.04732), [DRIT](https://arxiv.org/abs/1808.00948), [INIT](https://arxiv.org/pdf/1905.01744.pdf), [DUNIT](https://openaccess.thecvf.com/content_CVPR_2020/papers/Bhattacharjee_DUNIT_Detection-Based_Unsupervised_Image-to-Image_Translation_CVPR_2020_paper.pdf)와 같이 딥러닝 분야의 선구적인 논문을 조사했으며, 해당 논문이 제시한 I2I 모델을 분석하고 재현해보았습니다.
 
 ### 3.1 Sim2Real I2I 모델 개발
 Sim2Real I2I 모델 개발에서는 다음과 같은 두 가지 가정을 사용합니다.
@@ -248,11 +248,11 @@ Sim2Real I2I 모델로 생성한 **Translated MORAI 데이터셋** 의 궁극적
 
 ### 4.1 정량적 결과
 #### 4.1.1 Object Detection
-우선 2D Object Detection 과제에 대해 [Faster R-CNN](https://arxiv.org/abs/1506.01497)모델을 사용하였으며, Domain Gap의 영향 확인 및 변환 데이터셋(Translated MORAI)의 유용성을 검증하기 위해 다음의 같이 세 가지 경우로 나누어 학습한 뒤, 그 성능을 비교하였습니다.
+우선 2D Object Detection 과제에 대해 [Faster R-CNN](https://arxiv.org/abs/1506.01497) 모델을 사용하였으며, Domain Gap의 영향 확인 및 변환 데이터셋(Translated MORAI)의 유용성을 검증하기 위해 다음의 같이 세 가지 경우로 나누어 학습한 뒤, 그 성능을 비교하였습니다.
 
-1. 현실 데이터셋인 [Cityscapes](https://www.cityscapes-dataset.com/)로만 학습했을 떄 (<b>Baseline</b>)
-2. 현실 데이터셋인 Cityscapes에 원본 가상 데이터셋(MORAI)을 추가하여 학습했을 때 (<b>Larger Domain Gap</b>)
-3. 현실 데이터셋인 Cityscapes에 변환 데이터셋(Translated MORAI)을 추가하여 학습했을 때 (<b>Smaller Domain Gap</b>)
+1. <b>Baseline</b>: 현실 데이터셋인 [Cityscapes](https://www.cityscapes-dataset.com/)로만 학습했을 떄 
+2. <b>Larger Domain Gap</b>: 현실 데이터셋인 Cityscapes에 원본 가상 데이터셋(MORAI)을 추가하여 학습했을 때
+3. <b>Smaller Domain Gap</b>: 현실 데이터셋인 Cityscapes에 변환 데이터셋(Translated MORAI)을 추가하여 학습했을 때
 
 성능을 확인하기 위한 지표로, Object Detection 과제에서 대중적으로 사용하는 $AP$(Average Precision) 및 $mAP$(mean Average Precision)를 적용하습니다 (해당 지표는 100에 가까운 수치일수록 높은 성능임을 의미함).
 
