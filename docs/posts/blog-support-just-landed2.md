@@ -35,6 +35,19 @@ cover_image: rgb.png
 머신러닝의 핵심은 데이터이기 때문에, 자율주행의 인지 성능 향상을 위해서는 양질의 학습 데이터셋 구축이 필수로 요구됩니다.
 
 MORAI SIM은 가상의 주행 환경에서 자율주행 테스트를 할 수 있는 시뮬레이션 플랫폼으로, 실제 자율 주행 개발에 필요한 학습 데이터셋을 자동으로 생성할 수 있습니다. 
+<table>
+  <tr>
+    <td style="border-right: 2px solid #E2E2E2;"> <img src="../../../../assets/23-07-20/cam-min.gif" alt="sensor" style="width: 90%;"  title="Click to Enlage" onclick="window.open(this.src)" />
+      <figcaption style="margin-top: 0.7em;">카메라 센서의 RGB 이미지 및 정답 데이터 (위에서부터 Semantic, Instance, Depth)</figcaption>
+    </td>
+  </tr>
+  <tr>
+    <td><img src="../../../../assets/23-07-20/pcd.gif" alt="sensor" style="width: auto; height: auto;"  title="Click to Enlage" onclick="window.open(this.src)"/>
+      <figcaption style="margin-top: 0.7em;">3D LiDAR 센서의 점군 데이터 </figcaption>
+    </td>
+  </tr>
+</table>
+<figcaption>그림 1. MORAI SIM의 센서 모델로 생성한 다양한 형식의 학습 데이터셋</figcaption>
 
 
 ## MORAI SIM의 데이터셋 생성 기술 특징
@@ -50,7 +63,7 @@ MORAI SIM에서는 센서에서 검출한 데이터에 대한 라벨링를 자�
 특히, MORAI SIM은 라이다 센서 모델에서 검출한 객체인 차량, 도로, 건물 등이 각 어떤 클래스에 속해 있는지를 점군 형태로 나타냅니다. 정답 데이터를 점군 형태로 나타내는 것은 이미지보다 어렵기 때문에, MORAI SIM의 라이다 센서를 활용한 정답 데이터 생성은 매우 큰 장점이라 할 수 있습니다.
 
 ![23-07-20/그림1.png](23-07-20/그림1.png)
-<figcaption><b><center>그림 1. MORAI SIM 라이다 센서로 검출한 점군 형태의 정답 데이터</center></b></figcaption>
+<figcaption><b><center>그림 2. MORAI SIM 라이다 센서로 검출한 점군 형태의 정답 데이터</center></b></figcaption>
 
 카메라 센서의 정답 데이터의 경우, 이미지 분할 방식인 Semantic Segmentation을 적용하여 검출 객체를 클래스 단위로 분류하고 자체 태깅 룰에 맞는 특정 색상으로 나타냅니다. 또한 객체 별 색상에 매핑된 픽셀값을 2D 및 3D Bounding Box(BBox) 데이터로 변환하여 이미지 상에 표현할 수 있습니다
 
@@ -60,10 +73,10 @@ BBOX는 정답 데이터 중의 하나로, MORAI SIM은 객체 이미지 상의 
  - 3D BBOX: 객체를 둘러싼 3차원 박스의 각 꼭지점 x, y, z 값
 
 ![23-07-20/그림2.png](23-07-20/semantic.png){:onclick="window.open(this.src)" title="Click view screen" width="80%"}
-<figcaption>그림 2. MORAI SIM 카메라 센서에서 검출한 Semantic Segmentation 이미지</figcaption>
+<figcaption>그림 3. MORAI SIM 카메라 센서에서 검출한 Semantic Segmentation 이미지</figcaption>
 
 ![23-07-20/그림3.png](23-07-20/rgb.png){:onclick="window.open(this.src)" title="Click view screen" width="80%"}
-<figcaption>그림 3. MORAI SIM 카메라 센서에서 검출한 RGB 이미지 및 3D BBox</figcaption>
+<figcaption>그림 4. MORAI SIM 카메라 센서에서 검출한 RGB 이미지 및 3D BBox</figcaption>
 
 MORAI SIM의 센서 모델에서는 개선된 이미지 분할 방식인 ‘Mesh Segmentation'과 Labeling’을 모두 지원하므로 객체의 Global 좌표 값을 활용하여 정답 데이터를 보다 정확하게 생성할 수 있습니다.
 
@@ -74,7 +87,7 @@ MORAI SIM에서 제공하는 맵과 차량 모델은 실제 존재하는 도로,
 특히 비, 안개, 악천후를 포함한 날씨, 주간 및 야간에 따른 조도 변화, 차량 종류 및 대수, 센서의 위치, 해상도까지 주행 환경을 결정하는 모든 파라미터를 가상의시뮬레이션 환경에서 설정할 수 있어 실제 날씨와 지형의 물리적 제약 없이 다양한 조건의 학습 데이터를 용이하게 수집할 수 있습니다. 
 
 ![23-07-20/그림5.png](23-07-20/그림5.png)
-<figcaption><b><center>그림 4. MORAI SIM에서 재현한 다양한 주행 환경</center></b></figcaption>
+<figcaption><b><center>그림 5. MORAI SIM에서 재현한 다양한 주행 환경</center></b></figcaption>
 
 ## MORAI SIM의 데이터셋 생성 방식
 MORAI SIM은 시뮬레이터 상의 날씨 및 시간대와 같은 환경 구성과 센서 설정을 바탕으로 데이터셋을 생성합니다.
@@ -87,7 +100,7 @@ MORAI SIM은 3D 그래픽 엔진을 활용해 시뮬레이션 환경 전반을 �
 MORAI SIM은 이러한 시나리오 환경 구성 및 센서 설정 정보를 바탕으로 시뮬레이션 Frame Rate(최소 20ms, 최대 100ms) 설정에 따라 데이터를 생성할 수 있습니다. 
 
 ![23-07-20/그림4.png](23-07-20/그림4.png)
-<figcaption><b><center>그림 5. MORAI SIM의 데이터셋 생성 방식</center></b></figcaption>
+<figcaption><b><center>그림 6. MORAI SIM의 데이터셋 생성 방식</center></b></figcaption>
 
 따라서 MORAI SIM의 데이터셋 생성 기술을 사용하면 카메라 센서의 이미지 데이터, 라이다 센서의 점군(Point Cloud) 데이터, GPS 센서의 측위 데이터와 같은 다양한 형식의 데이터셋을 TB 단위까지 구축할 수 있습니다. <br>
 특히, MORAI SIM은 3D 라이다 센서로 점군 데이터를 자동으로 생성하기 때문에, 비싸고 무거운 라이다 센서를 대신하여 주행 평가에 매우 유용하게 활용될 것입니다.
@@ -102,7 +115,7 @@ DataGen에서 데이터 생성 API를 호출하면 MORAI SIM에서는 기구성�
 DataGen에서는 프레임 간격 별로 API를 호출하며 한 프레임 당 여러 가지 환경 조합에 의한 여러 장의 이미지를 생성할 수 있습니다. 이렇게 매 주기마다 전송하는 API 요청에 의해 단시간 내 몇 만장까지의 데이터셋을 쌓을 수 있을 뿐만 아니라 특정 인지모델 학습에 필요한 데이터셋을 수백 TB까지 구축해볼 수 있습니다.
 
 ![23-07-20/그림6.png](23-07-20/그림6.png){:onclick="window.open(this.src)" title="Click view screen" width="80%"}
-<figcaption>그림 6. DataGen과 연동하여 한 프레임당 생성한 이미지 데이터</figcaption>
+<figcaption>그림 7. DataGen과 연동하여 한 프레임당 생성한 이미지 데이터</figcaption>
 
 실제로 모라이에서 수행한 프로젝트 중 이러한 DataGen과 MORAI SIM 간의 연동 기술을 활용하여 150 TB까지 구축해본 경험이 있습니다. 이는 10 TB 정도에 불과하는 기존 오픈 데이터셋과 비교하여 매우 높은 수치라고 볼 수 있습니다.
 

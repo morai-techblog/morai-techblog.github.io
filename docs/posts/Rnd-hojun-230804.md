@@ -398,8 +398,11 @@ _**그림 8.**_ 의 왼쪽과 같이, Cityscapes(현실, Real)로만 학습했�
 _**그림 9.**_ 에서는 Semantics flipping이 발생한 영역을 빨간색 점선 박스로 보여줍니다. 각 행 별로, **하늘 $\rightarrow$ 나무 + 건물**, **방음벽 $\rightarrow$ 건물 외벽**, **터널 벽면 $\rightarrow$ 건물 외벽** 으로 의미론적 속성이 변화한 것을 볼 수 있습니다. <br> 
 ![23-08-04/limit1_semantic_flipping.png](23-08-04/limit1_semantic_flipping.png){:onclick="window.open(this.src)" title="Click view screen" width="80%"}
 <figcaption>그림 9. I2I 변환 수행시 Semantics flipping 발생 영역 시각화(빨간 점선 상자)</figcaption>
-해당 현상은 Source Domain $X$와 Target Domain $Y$이 가진 semantics statistics의 차이를 적절히 고려하지 않은 채 GAN과 같은 distribution-matching 방법론을 적용하였을 때 발생하게 되며, 이에 대한 정의는 [SRUNIT](https://arxiv.org/abs/2012.04932) 논문에서 자세히 설명하고 있습니다. <br>
+
+Semantics flipping은 Source Domain $X$와 Target Domain $Y$ 간의 의미론적 통계(semantics statistics) 차이를 고려하지 않은 채 GAN과 같은 distribution-matching 방법론을 적용하였을 때 발생하게 되며, 관련하여 [SRUNIT](https://arxiv.org/abs/2012.04932) 논문에서 자세히 설명하고 있습니다. <br>
 가상 데이터의 장점 중 하나는 픽셀단위로 정확한 정답 데이터를 생성하기 때문에 Semantics flipping에 대한 적절한 처리가 없다면 원본 데이터를 기준으로 생성한 의미론적 속성 정답과 변환 데이터의 이미지 데이터 간의 간극으로 인한 인지 모델 학습에 부정적인 영향을 줄일 수 있다는 점입니다.
+
+Sim2Real I2I 기술은 이미지 변환 과정 중에도 원본 이미지 내 객체들의 의미론적 속성(semantic class)을 유지해야 합니다. 그런데 semantics flipping이 발생한다면 원본 이미지 대비 변환 이미지의 의미론적 속성이 변질되어, 인지 모델의 지도학습(Supervised learning) 시, 원본 이미지의 의미론적 정답 데이터와 대응하지 않아 인지 성능에 부정적인 영향을 줄 수 있습니다.
 
 두 번째, **Fine detail 손실** 은 자율주행의 인지 관점에서 주요한 정보들에 대한 손실을 의미합니다. 즉, 원본 이미지에는 존재하는 세부 정보(high frequency) 정보들이 I2I 모델의 변환 과정 중 손실되어 변환 이미지에서 나타나지 못하는 것을 현상입니다. 세부 정보의 예시로는 차선 색, 신호등 색, 표지판에 기술된 글자 등이 있습니다. <br>
 _**그림 10.**_ 은 원본 이미지에 대해 I2I 수행 전과 이후를 보여줍니다. 그림에서 볼 수 있듯이 원본 이미지에서는 표지판의 60km/h 속도 제한을 명확히 인지할 수 있지만, 변환 이후 디테일이 손실 및 80km/h로 보여져 속도 기준을 명확히 인지하기 어려운 결과를 가져옵니다.
