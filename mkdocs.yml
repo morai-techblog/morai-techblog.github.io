@@ -74,6 +74,7 @@ plugins:
       blog_dir: .
       archive: false
       authors_file: .authors.yml
+      title_file: .title.yml
       post_slugify_separator: "-"
   - search
   - tags:
