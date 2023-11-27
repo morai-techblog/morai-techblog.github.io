@@ -1,0 +1,1222 @@
+<!--
+  Copyright (c) 2016-2023 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="SIM Drive 신규 버전, 23.R1.0의 새로운 기능과 주요 개선 사항을 살펴봅니다.
+">
+      
+      
+        <meta name="author" content="Eunjung Kim">
+      
+      
+        <link rel="canonical" href="https://morai-techblog.github.io/2023/11/27/sim-drive/">
+      
+      
+        <link rel="prev" href="../../../09/22/morai-image-to-image-translation/">
+      
+      
+      
+        
+      
+      
+        <link rel="alternate" type="application/rss+xml" title="RSS feed" href="../../../../feed_rss_created.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="../../../../feed_rss_updated.xml">
+      
+      <link rel="icon" href="../../../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.1.21+insiders-4.39.0">
+    
+    
+      
+        <title>SIM Drive 신규 버전 출시 - MORAI Tech Blog</title>
+      
+    
+    
+  
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.3a36e643.min.css">
+      
+      
+
+    
+  <link rel="stylesheet" href="../../../../assets/stylesheets/custom.78a0de75.min.css">
+
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../css/extra.css">
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+
+  <script id="__analytics">function __md_analytics(){function n(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],n("js",new Date),n("config","G-ED54ZHH9RT"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&n("event","search",{search_term:this.value})}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");n("event","feedback",{page:t,data:e}),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){n("config","G-ED54ZHH9RT",{page_path:e.pathname})})});var e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-ED54ZHH9RT",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
+
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+  <link rel="stylesheet" href="../../../../assets/stylesheets/custom.css">
+    <!-- RSS Feed -->
+    <link rel="alternate" type="application/rss+xml" title="RSS feed of created content" href="https://morai-techblog.github.io/feed_rss_created.xml">
+    <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="https://morai-techblog.github.io/feed_rss_updated.xml"
+
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#-sim-drive" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+              <button class="md-banner__button md-icon" aria-label="Don't show this again">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+              </button>
+            
+            
+  
+  <script src="../../../../assets/javascripts/custom.js"></script>
+  모라이의 테크 여정에 합류하세요!
+  <a rel="me" href="https://www.morai.ai/career" target="_blank">
+    Come fly with MORAI👍
+  </a>
+
+          </div>
+          
+            <script>var content,el=document.querySelector("[data-md-component=announce]");el&&(content=el.querySelector(".md-typeset"),__md_hash(content.innerHTML)===__md_get("__announce")&&(el.hidden=!0))</script>
+          
+        </aside>
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="MORAI Tech Blog" class="md-header__button md-logo" aria-label="MORAI Tech Blog" data-md-component="logo">
+      
+  <img src="../../../../assets/logo22.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            MORAI Tech Blog
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              SIM Drive 신규 버전 출시
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+          
+  
+  
+    
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../.." class="md-tabs__link md-tabs__link--active">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+        
+      
+        
+      
+        
+          
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../category/products/" class="md-tabs__link">
+          
+  
+    
+  
+  Categories
+
+        </a>
+      </li>
+    
+    
+
+        
+      
+      
+        
+      
+        
+          
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../about/" class="md-tabs__link">
+        
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+        
+      
+        
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="MORAI Tech Blog" class="md-nav__button md-logo" aria-label="MORAI Tech Blog" data-md-component="logo">
+      
+  <img src="../../../../assets/logo22.png" alt="logo">
+
+    </a>
+    MORAI Tech Blog
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../about/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    
+  
+    Categories
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Categories
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/products/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    <span class="md-typeset">
+      Products
+    </span>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/rnd-notes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    <span class="md-typeset">
+      RnD Notes
+    </span>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <span class="md-typeset">
+          주요 하이라이트
+        </span>
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <span class="md-typeset">
+          새로운 기능 요약
+        </span>
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="새로운 기능 요약">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <span class="md-typeset">
+          “맵과 오브젝트의 다양성 확대”
+        </span>
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3d-bbox" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <span class="md-typeset">
+          “카메라 센서의 3D BBOX 정답 데이터, 최신 센서 모델 지원”
+        </span>
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <span class="md-typeset">
+          “정밀 센서의 최신 사양을 지원하는 신규 모델 추가”
+        </span>
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <span class="md-typeset">
+          “보행자 시나리오 개선을 위한 웨이포인트 생성 기능”
+        </span>
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <span class="md-typeset">
+          “시뮬레이션 환경에 대한 날씨 효과 및 마찰력 옵션 추가”
+        </span>
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <span class="md-typeset">
+          주요 개선 사항 요약
+        </span>
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="주요 개선 사항 요약">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <span class="md-typeset">
+          “에이전트 차량 모델의 채터링(떨림) 현상 해결 및 종방향 주행 성능 개선”
+        </span>
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="“에이전트 차량 모델의 채터링(떨림) 현상 해결 및 종방향 주행 성능 개선”">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kinematics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <span class="md-typeset">
+          🍀 Kinematics 모델이란
+        </span>
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+  <div class="md-content md-content--post" data-md-component="content">
+
+    <!-- Sidebar -->
+    <div
+      class="md-sidebar md-sidebar--post"
+      data-md-component="sidebar"
+      data-md-type="navigation"
+    >
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner md-post">
+          <nav class="md-nav">
+
+            <!-- Back to overview link -->
+            <div class="md-post__back">
+              <div class="md-nav__title md-nav__container">
+                <a href="../../../.." class=" md-nav__link">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+                  <span class="md-ellipsis">
+                    Back to index
+                  </span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Page authors -->
+            
+              <div class="md-post__authors md-typeset">
+                
+                  <div class="md-profile md-post__profile">
+                    <span class="md-author md-author--long">
+                      <a href="https://ca.slack-edge.com/T01APHTC397-U04CMQ44CRG-4c8894d7da3c-512" target="_blank">
+                      <img src="https://ca.slack-edge.com/T01APHTC397-U04CMQ44CRG-4c8894d7da3c-512" alt="Eunjung Kim" />
+                      </a>
+                    </span>
+                    <span class="md-profile__description">
+                      <a href="/about/2" class="md-meta__link"><strong>Eunjung Kim</strong>
+                      </a><br />
+                      Technical Writer | <br> 모라이의 언어와 글을 담당합니다.
+                    </span>
+                  </div>
+                
+              </div>
+            
+
+            <!-- Page metadata -->
+            <ul class="md-post__meta md-nav__list">
+              <li class="md-nav__item md-nav__title">
+                <div class="md-nav__link">
+                  <span class="md-ellipsis">
+                    Metadata
+                  </span>
+                </div>
+              </li>
+
+              <!-- Page date -->
+              <li class="md-nav__item">
+                <div class="md-nav__link">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5v-5Z"/></svg>
+                  <time datetime="2023-11-27 00:00:00" class="md-ellipsis">November 27, 2023</time>
+                </div>
+              </li>
+
+              <!-- Page categories -->
+              
+                <li class="md-nav__item">
+                  <div class="md-nav__link">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 3v15h3V3H9m3 2 4 13 3-1-4-13-3 1M5 5v13h3V5H5M3 19v2h18v-2H3Z"/></svg>
+                    <span class="md-ellipsis">
+                      in
+                      
+                        <a href="../../../../category/products/">Products</a></span>
+                  </div>
+                </li>
+              
+
+              <!-- Page readtime -->
+              
+                
+                <li class="md-nav__item">
+                  <div class="md-nav__link">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7h1.5Z"/></svg>
+                    <span class="md-ellipsis">
+                      
+                        12 min read
+                      
+                    </span>
+                  </div>
+                </li>
+              
+            </ul>
+
+            <!-- Page links -->
+            
+              <ul class="md-nav__list">
+                <li class="md-nav__item md-nav__title">
+                  <div class="md-nav__link">
+                    <span class="md-ellipsis">
+                      Related links
+                    </span>
+                  </div>
+                </li>
+
+                <!-- Render page links -->
+                
+                  
+                  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://help-morai-sim.scrollhelp.site/morai-sim-standard-kr/23-r1-0" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    SIM Dirve User Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              </ul>
+            
+          </nav>
+
+          <!-- Table of contents, if integrated -->
+          
+        </div>
+      </div>
+    </div>
+
+    <!-- Page content -->
+    <article class="md-content__inner md-typeset">
+      
+        
+  
+  
+
+
+  <nav class="md-tags" >
+    
+      
+      
+        <a href="../../../../tags/#sim-drive" class="md-tag">SIM Drive</a>
+      
+    
+      
+      
+        <a href="../../../../tags/#23r10" class="md-tag">23.R1.0</a>
+      
+    
+      
+      
+        <a href="../../../../tags/#" class="md-tag">최신 릴리스</a>
+      
+    
+      
+      
+        <a href="../../../../tags/#" class="md-tag">신규 버전</a>
+      
+    
+  </nav>
+
+
+
+
+<h1 id="-sim-drive">업데이트 소식 - SIM Drive 신규 버전 출시<a class="headerlink" href="#-sim-drive" title="Permanent link">&para;</a></h1>
+<p>2023년 SIM Drive 신규 버전(버전명: 23.R1.0)이 출시되었습니다.</p>
+<p>이번 릴리스 버전, 23.R1.0에는 지난 베타 버전으로 제공한 다양한 기능을 병합하였으며, 기존 정규 버전의 주요 기능을 일부 개선하였습니다.</p>
+<p>특히, 교육 및 범용으로 제공하는 기본 프리셋 버전인 SIM Drive ST의 활용성을 강화하기 위해 센서, 환경, 시나리오와 같은 시뮬레이터 주요 기능에 대한 신규 옵션이 추가되었습니다.</p>
+<h2 id="_1">주요 하이라이트<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>SIM Drive 23.R1.0에 새롭게 추가된 기능 및 개선 사항에 대한 주요 하이라이트는 아래와 같습니다.</p>
+<ul>
+<li><a href="#_3"><strong>맵과 오브젝트 모델 확대</strong></a>: 일본 도로 교통법에 맞는 맵과 신호등 처리 로직을 포함하여 국방 분야 시뮬레이션 평가에 활용할 수 있는 오브젝트 모델이 추가되었습니다.
+<br />
+<table>
+  <tr>
+    <th style="border-right: 2px solid #E2E2E2; padding: 1px;"> <a href="#_3"><img src="../../../../assets/23-11-23/newfeature1.png" alt="sensor" style="width: 600px; height: auto;"  title="Click to Enlage"/></a>
+    </th>
+    <th style="padding: 1px;"><a href="#_3"><img src="../../../../assets/23-11-23/newfeature3.png" alt="sensor" style="width: 600px; height: auto;"  title="Click to Enlage"/></a>
+    </th>
+  </tr>
+  </table></li>
+</ul>
+<div style="clear: both;"></div>
+
+<ul>
+<li>
+<p><a href="#_3d-bbox"><strong>카메라 센서의 3D BBox 정답 데이터 제공</strong></a>
+  <a href="#3d-bbox"><img src="../../../../assets/23-11-23/newfeature4.png" style="width: 60%; height: auto; float: left; margin-bottom: 10px;"></a>
+<br />
+<div style="clear: both;"></div>
+</p>
+</li>
+<li>
+<p><a href="#_4"><strong>최신 센서 사양을 지원하는 신규 모델 추가</strong></a>
+  <a href="#_4"><img src="../../../../assets/23-11-23/newfeature4.png" style="width: 60%; height: auto; float: left; margin-bottom: 10px;"></a>
+<br />
+<div style="clear: both;"></div>
+</p>
+</li>
+<li>
+<p><a href="#_5"><strong>보행자 시나리오 개선을 위한 웨이포인트 생성 기능</strong></a>
+  <a href="#_5"><img src="../../../../assets/23-11-23/newfeature5.png" style="width: 60%; height: auto; float: left; margin-bottom: 10px;"></a>
+<br />
+<div style="clear: both;"></div>
+</p>
+</li>
+<li>
+<p><a href="#_6"><strong>시뮬레이션 환경에 대한 날씨 효과 및 마찰력 옵션 추가</strong></a>
+  <a href="#_6"><img src="../../../../assets/23-11-23/main12-2.png" style="width: 70%; height: auto; float: left; margin-bottom: 10px;"></a>
+<br />
+<div style="clear: both;"></div>
+</p>
+</li>
+<li>
+<p><a href="_#_8"><strong>에이전트 차량 모델의 채터링(떨림) 현상 해결 및 종방향 주행 성능 개선</strong></a>
+  <a href="#_8"><img src="../../../../assets/23-11-23/improve1.jpg" style="width: 70%; height: auto; float: left; margin-bottom: 10px;"></a>
+<br />
+<div style="clear: both;"></div>
+</p>
+</li>
+</ul>
+<h2 id="_2">새로운 기능 요약<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>이번 릴리스에 새롭게 추가된 기능은 아래와 같습니다.</p>
+<h3 id="_3">“맵과 오브젝트의 다양성 확대”<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>모라이 SIM Drive에서는 디지털트윈 자동화 구축 기술을 적용한 정밀지도(HD Map) 데이터 기반의 3D 맵과 다양한 오브젝트 모델을 제공합니다.</p>
+<p>이번 23.R1.0 릴리스에서는 글로벌 표준의 주행 환경과 교통 법규에 맞는 보다 현실감 있는 시뮬레이션을 위한 맵과 오브젝트 모델을 추가했습니다.</p>
+<p>첫 번째로, 일본 주행 환경과 교통법에 따른 좌측 운전자(LHT) 맵과 MGeo 데이터를 추가했습니다. 
+<img alt="main1" onclick="window.open(this.src)" src="../../../../assets/23-11-23/main1.png" title="Click view screen" width="70%" /></p>
+<figcaption>그림 1. SIM Drive에서 제공하는 일본향 맵 및 주행 경로</figcaption>
+
+<p>기존 MGeo 데이터의 LHT(운전자 좌측)/RHT(운전자 우측) 맵을 구분하고 LHT 맵에 대한 정지선 주행 로직을 추가했습니다. 또한 향후 릴리스 버전에는 ‘비보호 우회전’ 도로 교통법을 지원하기 위한 신호등 처리 로직을 포함할 계획입니다.</p>
+<p><img alt="main2" onclick="window.open(this.src)" src="../../../../assets/23-11-23/main2.png" title="Click view screen" width="70%" /></p>
+<figcaption>그림 2. '비보호 우회전' 교통법이 시행되고 있는 일본 교통 환경</figcaption>
+
+<p>두 번째로, 국방 분야의 자율주행 무기체계 시뮬레이션을 위해 실제 훈련장을 연상케하는 야지맵과 군수용 차량과 더불어 군인, 웅덩이, 철조망과 같은 장애물 오브젝트를 추가하였습니다.
+ 
+<table>
+  <tr>
+    <th style="border-right: 2px solid #E2E2E2; padding: 1px;"> <a href="#_5"><img src="../../../../assets/23-11-23/main4.png" alt="sensor" style="width: 600px; height: auto;"  title="Click to Enlage"/></a>
+    </th>
+    <th style="padding: 1px;"><a href="#_5"><img src="../../../../assets/23-11-23/main5.png" alt="sensor" style="width: 600px; height: auto;" title="Click to Enlage"/></a>
+    </th>
+  </tr>
+</table></p>
+<figcaption style="margin-top: -2em;">그림 3. 국방용 시뮬레이션을 위한 무기체계 차량 및 오브젝트 모델</figcaption>
+
+<h3 id="3d-bbox">“카메라 센서의 3D BBOX 정답 데이터, 최신 센서 모델 지원”<a class="headerlink" href="#3d-bbox" title="Permanent link">&para;</a></h3>
+<p>23.R1.0의 카메라 센서에서는 검출 오브젝트에 대한 3D Bounding Box(3D BBox) 데이터를 제공합니다. </p>
+<p>3D BBox 데이터는 4개의 평면 좌표값을 가지는 2D BBox 데이터에 비해 8쌍의 3축 Global 좌표(x, y, z)로 구성되어, 장애물의 위치 정보를 보다 정확하게 파악하기 위한 학습 데이터로 활용할수 있습니다.
+<img alt="main6" onclick="window.open(this.src)" src="../../../../assets/23-11-23/main6.png" title="Click view screen" width="80%" /></p>
+<figcaption>그림 4. 카메라 센서에서 검출한 3D BBOX 데이터의 좌표 구성</figcaption>
+
+<p>SIM에서 저장한 2D/3D BBox 데이터는 기본적으로 텍스트 형태로 추출지만, 센서 편집 모드에 추가된 <strong>Viz Bounding Box 2D/3D</strong> 을 이용하면 특정 오브젝트에 대한 2D/3D BBox를 시뮬레이터 상에서 바로 확인할 수 있습니다.
+<img alt="main7" onclick="window.open(this.src)" src="../../../../assets/23-11-23/main7.png" title="Click view screen" width="70%" /></p>
+<figcaption>그림 5. SIM Drive의 Viz Bounding Box 2D/3D로 시각화한 2D/3D BBox 데이터</figcaption>
+
+<h3 id="_4">“정밀 센서의 최신 사양을 지원하는 신규 모델 추가”<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>자율주행 기술에서는 인지 성능을 높이기 위한 정밀 센서의 역할이 매우 중요합니다.
+SIM Dirve는 카메라, 2D/3D 라이다, 레이더, IMU, GNSS에 이르기까지 실제 센서와 동일한 검출 데이터 형식과 통신 방식을 지원하는 다양한 센서 모델을 제공합니다.
+<img alt="main1" onclick="window.open(this.src)" src="../../../../assets/23-11-23/main13.png" title="Click view screen" width="70%" /></p>
+<figcaption>그림 6. SIM Drive에서 제공하느 가상 센서 모델</figcaption>
+
+<p>이번 릴리스에서는 자율주행 인지 모델에서 요구하는 각 센서 사양에 맞추어 카메라, 라이다, 레이더에 대한 최신 센서 모델이 새롭게 추가되었습니다.</p>
+<p>우선 카메라와 2D 라이다의 경우, 검출 로직은 기존과 동일하나 시뮬레이터 내부적으로 검출 데이터를 가시화하는 그래픽 모델이 추가되었습니다. </p>
+<p>특히, 레이더 센서의 경우, 포인트 단위가 아닌 오브젝트 단위의 검출 방식으로 변경되어, 기존 레이터 모델에 비해 오브젝트에 대한 트래킹 정보를 검출합니다. 따라서 현재 단일 프레임 상의 검출 데이터와 이전에 전송된 여러 개의 프레임 데이터를 비교하여 해당 오브젝트의 속도, 위치 값을 계산할 수 있습니다.</p>
+<h3 id="_5">“보행자 시나리오 개선을 위한 웨이포인트 생성 기능”<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>SIM Drive에서는 직접 시나리오를 생성하고 수행할 수 있는 빌트인 시나리오 에디터를 제공합니다. </p>
+<p>이번 릴리스의 시나리오 에디터에서는 보행자 이동에 따른 웨이포인트(Waypoint) 생성 기능을 추가하여 보다 구체적으로 보행자 시나리오를 설계하고 수행할 수 있습니다.
+<img alt="main6" onclick="window.open(this.src)" src="../../../../assets/23-11-23/main8.png" title="Click view screen" width="70%" /></p>
+<figcaption>그림 7. 빌트인 시나리오 에디터의 웨이포인트 생성 기능</figcaption>
+
+<p>지난 버전의 보행자 시나리오와 비교하여, Waypoint 기능이 추가된 보행자 시나리오 로직은 아래와 같습니다.</p>
+<table>
+<thead>
+<tr>
+<th align="left">기존 보행자 시나리오</th>
+<th align="left">Waypoint 기반 보행자 시나리오</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><ol><li style="text-align: left;">Ego 차량이 Activation Distance(m) 내 존재</li><li  style="text-align: left;">Object Setting에서 정의한 보행자 Heading 방향과 Walk Speed(kh/m) 속도로 Moving Distance 만큼 이동</li></ol></td>
+<td align="left"><p style="text-align: left;"> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 7 9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59 21 7Z"/></svg></span> 보행자는 Moving Distance 대신 사용자가 설정한 Waypoint를 따라 이동</p> <ol><li style="text-align: left;"> Waypoint에 도달하기까지 기존에 정의된 Walk Speed(km/h)로 이동하고 도달하면 각 Waypoint에 정의된 Speed(km/h)로 이동</li> <li style="text-align: left;">Waypoint 도달 후 Pause Time(s) 만큼 대기 가능</li></ol></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_6">“시뮬레이션 환경에 대한 날씨 효과 및 마찰력 옵션 추가”<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>SIM Drive의 시뮬레이션 환경에서는 비, 안개, 악천후의 날씨를 비롯하여 주/야간 시간대에 따른 조도 변화를 설정할 수 있습니다. <Br>
+현실에서는 다양한 환경 데이터를 취득하기 어려운 제약 사항이 존재하지만, SIM에서는 현실과 동일한 다양한 환경 조건의 학습 데이터를 매우 간편하게 취득할 수 있습니다.</p>
+<p>23.R1.0에서는 보다 현실감 있는 시뮬레이션을 위해 날씨 별 효과 강도 및 도로 마찰력을 제어하는 사용자 옵션을 추가하였습니다.</p>
+<p>악천후 날씨의 경우 <strong>Storm, Rainy, Snowy</strong> 효과 강도를 보다 세밀하게 제어하도록 <strong>Effect Strength</strong> 옵션을 추가하였으며 안개 낀 날씨의 경우, <strong>Density</strong> (밀도) 및 <strong>Distance</strong>(간격) 옵션을 추가하였습니다.</p>
+<table>
+  <tr>
+    <th style="border-right: 2px solid #E2E2E2;" > <img src="../../../../assets/23-11-23/main10-1.png" alt="sensor" style="width: 500px; height: auto;"  title="Click to Enlage" onclick="window.open(this.src)" />
+    </th>
+    <th><img src="../../../../assets/23-11-23/main10-2.png" alt="sensor" style="width: 500px; height: auto;"  title="Click to Enlage" onclick="window.open(this.src)"/>
+    </th>
+  </tr>
+</table>
+<figcaption>그림 8. SIM Drive 시뮬레이션 환경 구성에 추가된 Effect Strength 및 Foggy Density, Distance</figcaption>
+
+<p>또한 도로에 대한 Multiplier(마찰 계수) 옵션을 추가하여, 눈이나 비와 같은 날씨에 영향을 받을 수 있는 도로면 마찰 강도를 0 ~ 1 사이로 제어할 수 있습니다.</p>
+<p><img src="../../../../assets/23-11-23/main11.png" style="width: 50%; height: auto; float: left; margin-bottom: 10px;"></p>
+<div style="clear: both;"></div>
+
+<h2 id="_7">주요 개선 사항 요약<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<p>이전에 배포된 릴리스(22.R4.0)에서 개선된 사항을 알아봅니다.</p>
+<h3 id="_8">“에이전트 차량 모델의 채터링(떨림) 현상 해결 및 종방향 주행 성능 개선”<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>Kinematics(운동학)을 포함한 SIM Drive 에이전트 차량 모델에 대해 가속도 제어시 발생하는 채터링(떨림 현상)을 제거함으로써 종방향 주행 성능을 개선하였습니다. </p>
+<p><img alt="main6" onclick="window.open(this.src)" src="../../../../assets/23-11-23/main9.png" title="Click view screen" width="60%" /></p>
+<figcaption>그림 9. SIM Dirve Kinematics 차량 모델의 기존 종방향 제어 대비 개선된 주행 결과 </figcaption>
+
+<h4 id="kinematics">🍀 Kinematics 모델이란<a class="headerlink" href="#kinematics" title="Permanent link">&para;</a></h4>
+<pre>
+  Kinematics(운동학) 모델은 물리적인 힘의 영향으로 가속하여 동작하는 <br>기존의 Dynamics(동역학)과 달리, 힘(질량)을 고려하지 않는 시스템 모델입니다. 
+
+  자율주행 시뮬레이션에서 Kinematics 모델은 일반적인 Dynamics(동역학) 모델에 비하여 아래와 같은 장점을 갖습니다.
+
+  ◾상대적으로 가벼운 연산을 하므로 시뮬레이션에 최적화
+
+  ◾페달 및 브레이크가 없어 가속/감속 제어가 용이, 시나리오 수행 성능이 향상됨
+
+  ◾Low pass filter 적용, 최대 가속/감속도의 제한을 두어 설계했기 때문에 급가속/감속과 같은 불연속 입력에 대한 안정적인 제어 가능
+</pre>
+
+  
+  
+
+
+  <aside class="md-source-file">
+    
+    
+    
+      
+      <span class="md-source-file__fact">
+        <span class="md-icon" title="Contributors">
+          
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 4a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4Z"/></svg>
+          
+        </span>
+        <nav>
+          
+            <a href="mailto:ejkim@morai.ai">ejkim</a>
+        </nav>
+      </span>
+    
+    
+  </aside>
+
+
+  
+
+
+  
+
+
+
+<!-- Post content -->
+<hr>
+
+
+<!-- Comment system -->
+
+
+  <h2 id="__comments">Comments</h2>
+  <!-- Insert generated snippet here -->
+  <script src="https://giscus.app/client.js"
+        data-repo="morai-techblog/morai-techblog.github.io"
+        data-repo-id="R_kgDOJ7Fs-w"
+        data-category-id="DIC_kwDOJ7Fs-84CYARI"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="1"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+  </script>
+
+  <!-- Synchronize Giscus theme with palette -->
+  <script>
+    var giscus = document.querySelector("script[src*=giscus]")
+
+    /* Set palette on initial load */
+    var palette = __md_get("__palette")
+    if (palette && typeof palette.color === "object") {
+      var theme = palette.color.scheme === "slate" ? "dark" : "light"
+      giscus.setAttribute("data-theme", theme) 
+    }
+
+    /* Register event handlers after documented loaded */
+    document.addEventListener("DOMContentLoaded", function() {
+      var ref = document.querySelector("[data-md-component=palette]")
+      ref.addEventListener("change", function() {
+        var palette = __md_get("__palette")
+        if (palette && typeof palette.color === "object") {
+          var theme = palette.color.scheme === "slate" ? "dark" : "light"
+
+          /* Instruct Giscus to change theme */
+          var frame = document.querySelector(".giscus-frame")
+          frame.contentWindow.postMessage(
+            { giscus: { setConfig: { theme } } },
+            "https://giscus.app"
+          )
+        }
+      })
+    })
+  </script>
+
+      
+    </article>
+  </div>
+
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2023 <a href="https://www.morai.ai">MORAI Inc.</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs Insiders
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.youtube.com/moraisim" target="_blank" rel="noopener" title="www.youtube.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.linkedin.com/company/morai/" target="_blank" rel="noopener" title="www.linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://morai-techblog.github.io/feed_rss_updated.xml" target="_blank" rel="noopener" title="morai-techblog.github.io" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M0 64c0-17.7 14.3-32 32-32 229.8 0 416 186.2 416 416 0 17.7-14.3 32-32 32s-32-14.3-32-32C384 253.6 226.4 96 32 96 14.3 96 0 81.7 0 64zm0 352a64 64 0 1 1 128 0 64 64 0 1 1-128 0zm32-256c159.1 0 288 128.9 288 288 0 17.7-14.3 32-32 32s-32-14.3-32-32c0-123.7-100.3-224-224-224-17.7 0-32-14.3-32-32s14.3-32 32-32z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"annotate": {"json": [".s2"]}, "base": "../../../..", "features": ["announce.dismiss", "content.action.edit", "content.action.view", "content.code.annotate", "content.code.copy", "content.code.select", "content.tooltips", "navigation.indexes", "navigation.sections", "navigation.tabs", "navigation.top", "search.highlight", "search.share", "search.suggest", "toc.follow"], "search": "../../../../assets/javascripts/workers/search.6c7302c4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+  
+      <script src="../../../../assets/javascripts/bundle.7c5c0157.min.js"></script>
+      
+        
+          <script src="../../../../javascripts/mathjax.js"></script>
+        
+      
+        
+          <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        
+      
+        
+          <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        
+      
+        
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
+        
+      
+        
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        
+      
+    
+  <script src="../../../../assets/javascripts/custom.js"></script>
+  <!-- <script src="../../../../assets/javascripts/custom.bf178a28.min.js"></script> -->
+  <!-- <script type="application/ld+json"> -->
+
+  </body>
+</html>
