@@ -1,9 +1,9 @@
 ---
-date: 2023-10-31
+date: 2023-11-27
 authors: [EJ]
 title: SIM Drive 신규 버전 출시
 description: >
-  SIM Drive 신규 버전, 23.R1.0에 반영된 새로운 기능과 주요 개선 사항을 살펴봅니다.
+  SIM Drive 신규 버전, 23.R1.0의 새로운 기능과 주요 개선 사항을 살펴봅니다.
 categories:
   - Products
 links:
@@ -19,7 +19,7 @@ tags:
   - 최신 릴리스
   - 신규 버전
 cover_image: drive-main.png
-draft: true
+draft: false
 ---
 
 # 업데이트 소식 - SIM Drive 신규 버전 출시
@@ -31,129 +31,144 @@ draft: true
 
 
 ## 주요 하이라이트 
-SIM Drive 23.R1.0의 주요 하이라이트는 다음과 같습니다.
+SIM Drive 23.R1.0에 새롭게 추가된 기능 및 개선 사항에 대한 주요 하이라이트는 아래와 같습니다.
 
-### 새로운 기능
-
-  - **맵과 오브젝트 모델 확대**: 일본 도로 교통법에 맞는 맵과 신호등 처리 로직을 포함하여 국방 분야 시뮬레이션 평가에 활용할 수 있는 오브젝트 모델이 추가되었습니다.
+  - [**맵과 오브젝트 모델 확대**](#_3): 일본 도로 교통법에 맞는 맵과 신호등 처리 로직을 포함하여 국방 분야 시뮬레이션 평가에 활용할 수 있는 오브젝트 모델이 추가되었습니다.
   <table>
   <tr>
-    <th style="border-right: 2px solid #E2E2E2;" > <img src="../../../../assets/23-11-23/newfeature1.png" alt="sensor" style="width: 500px; height: auto;"  title="Click to Enlage" onclick="window.open(this.src)" />
+    <th style="border-right: 2px solid #E2E2E2; padding: 1px;"> <a href="#_3"><img src="../../../../assets/23-11-23/newfeature1.png" alt="sensor" style="width: 600px; height: auto;"  title="Click to Enlage"/></a>
     </th>
-    <th><img src="../../../../assets/23-11-23/newfeature3.png" alt="sensor" style="width: 500px; height: auto;"  title="Click to Enlage" onclick="window.open(this.src)"/>
+    <th style="padding: 1px;"><a href="#_3"><img src="../../../../assets/23-11-23/newfeature3.png" alt="sensor" style="width: 600px; height: auto;"  title="Click to Enlage"/></a>
+    </th>
+  </tr>
+  </table>
+  <div style="clear: both;"></div>
+
+- [**카메라 센서의 3D BBox 정답 데이터 제공**](#_3d-bbox)
+  <a href="#3d-bbox"><img src="../../../../assets/23-11-23/newfeature4.png" style="width: 60%; height: auto; float: left; margin-bottom: 10px;"></a>
+  <div style="clear: both;"></div>
+
+- [**최신 센서 사양을 지원하는 신규 모델 추가**](#_4)
+  <a href="#_4"><img src="../../../../assets/23-11-23/newfeature4.png" style="width: 60%; height: auto; float: left; margin-bottom: 10px;"></a>
+  <div style="clear: both;"></div>
+
+- [**보행자 시나리오 개선을 위한 웨이포인트 생성 기능**](#_5)
+  <a href="#_5"><img src="../../../../assets/23-11-23/newfeature5.png" style="width: 60%; height: auto; float: left; margin-bottom: 10px;"></a>
+  <div style="clear: both;"></div>
+
+- [**시뮬레이션 환경에 대한 날씨 효과 및 마찰력 옵션 추가**](#_6)
+  <a href="#_6"><img src="../../../../assets/23-11-23/main12-2.png" style="width: 70%; height: auto; float: left; margin-bottom: 10px;"></a>
+  <div style="clear: both;"></div>
+
+- [**에이전트 차량 모델의 채터링(떨림) 현상 해결 및 종방향 주행 성능 개선**](_#_8)
+  <a href="#_8"><img src="../../../../assets/23-11-23/improve1.jpg" style="width: 70%; height: auto; float: left; margin-bottom: 10px;"></a>
+  <div style="clear: both;"></div>
+
+
+## 새로운 기능 요약
+이번 릴리스에 새롭게 추가된 기능은 아래와 같습니다.
+
+### “맵과 오브젝트의 다양성 확대”
+모라이 SIM Drive에서는 디지털트윈 자동화 구축 기술을 적용한 정밀지도(HD Map) 데이터 기반의 3D 맵과 다양한 오브젝트 모델을 제공합니다.
+
+이번 23.R1.0 릴리스에서는 글로벌 표준의 주행 환경과 교통 법규에 맞는 보다 현실감 있는 시뮬레이션을 위한 맵과 오브젝트 모델을 추가했습니다.
+
+첫 번째로, 일본 주행 환경과 교통법에 따른 좌측 운전자(LHT) 맵과 MGeo 데이터를 추가했습니다. 
+![main1](23-11-23/main1.png){:onclick="window.open(this.src)" title="Click view screen" width="70%"}
+<figcaption>그림 1. SIM Drive에서 제공하는 일본향 맵 및 주행 경로</figcaption>
+
+기존 MGeo 데이터의 LHT(운전자 좌측)/RHT(운전자 우측) 맵을 구분하고 LHT 맵에 대한 정지선 주행 로직을 추가했습니다. 또한 향후 릴리스 버전에는 ‘비보호 우회전’ 도로 교통법을 지원하기 위한 신호등 처리 로직을 포함할 계획입니다.
+
+![main2](23-11-23/main2.png){:onclick="window.open(this.src)" title="Click view screen" width="70%"}
+<figcaption>그림 2. '비보호 우회전' 교통법이 시행되고 있는 일본 교통 환경</figcaption>
+
+두 번째로, 국방 분야의 자율주행 무기체계 시뮬레이션을 위해 실제 훈련장을 연상케하는 야지맵과 군수용 차량과 더불어 군인, 웅덩이, 철조망과 같은 장애물 오브젝트를 추가하였습니다.
+ <table>
+  <tr>
+    <th style="border-right: 2px solid #E2E2E2; padding: 1px;"> <a href="#_5"><img src="../../../../assets/23-11-23/main4.png" alt="sensor" style="width: 600px; height: auto;"  title="Click to Enlage"/></a>
+    </th>
+    <th style="padding: 1px;"><a href="#_5"><img src="../../../../assets/23-11-23/main5.png" alt="sensor" style="width: 600px; height: auto;" title="Click to Enlage"/></a>
     </th>
   </tr>
 </table>
+<figcaption style="margin-top: -2em;">그림 3. 국방용 시뮬레이션을 위한 무기체계 차량 및 오브젝트 모델</figcaption>
 
-- **카메라 센서의 3D BBox 정답 데이터, 2D LiDAR, Radar 센서 최신 모델 지원**
-  <img src="../../../../assets/23-11-23/newfeature4.png" style="width: 70%; height: auto; float: left; margin-bottom: 20px;">
-  <div style="clear: both;"></div>
+### “카메라 센서의 3D BBOX 정답 데이터, 최신 센서 모델 지원”
+23.R1.0의 카메라 센서에서는 검출 오브젝트에 대한 3D Bounding Box(3D BBox) 데이터를 제공합니다. 
 
-- **정밀한 시나리오 수행을 위한 Waypoint 기반 보행자 시스템 설계**
-  <img src="../../../../assets/23-11-23/newfeature5.png" style="width: 70%; height: auto; float: left; margin-bottom: 10px;">
-  <div style="clear: both;"></div>
+3D BBox 데이터는 4개의 평면 좌표값을 가지는 2D BBox 데이터에 비해 8쌍의 3축 Global 좌표(x, y, z)로 구성되어, 장애물의 위치 정보를 보다 정확하게 파악하기 위한 학습 데이터로 활용할수 있습니다.
+![main6](23-11-23/main6.png){:onclick="window.open(this.src)" title="Click view screen" width="80%"}
+<figcaption>그림 4. 카메라 센서에서 검출한 3D BBOX 데이터의 좌표 구성</figcaption>
 
+SIM에서 저장한 2D/3D BBox 데이터는 기본적으로 텍스트 형태로 추출지만, 센서 편집 모드에 추가된 **Viz Bounding Box 2D/3D** 을 이용하면 특정 오브젝트에 대한 2D/3D BBox를 시뮬레이터 상에서 바로 확인할 수 있습니다.
+![main7](23-11-23/main7.png){:onclick="window.open(this.src)" title="Click view screen" width="70%"}
+<figcaption>그림 5. SIM Drive의 Viz Bounding Box 2D/3D로 시각화한 2D/3D BBox 데이터</figcaption>
 
-## 들어가며
-자율주행 분야에서 당면하고 있는 과제는 보다 정확하게 객체를 인식하기 위한 ‘인지 성능 향상’입니다. 자율주행에 머신러닝 기술을 적용한다면 자율주행 차량의 센서로 주변 환경 및 특정 사물을 파악하는 원리를 스스로 학습할 수 있습니다.
+### “정밀 센서의 최신 사양을 지원하는 신규 모델 추가”
+자율주행 기술에서는 인지 성능을 높이기 위한 정밀 센서의 역할이 매우 중요합니다.
+SIM Dirve는 카메라, 2D/3D 라이다, 레이더, IMU, GNSS에 이르기까지 실제 센서와 동일한 검출 데이터 형식과 통신 방식을 지원하는 다양한 센서 모델을 제공합니다.
+![main1](23-11-23/main13.png){:onclick="window.open(this.src)" title="Click view screen" width="70%"}
+<figcaption>그림 6. SIM Drive에서 제공하느 가상 센서 모델</figcaption>
 
-최근 머신러닝 기술 발전으로 자율주행의 인지 크게 향상되었지만, 인지율 향상은 머신러닝 또는 딥러닝 알고리즘의 적용만으로 이뤄낼 수 없습니다. 
-머신러닝의 핵심은 데이터이기 때문에, 자율주행의 인지 성능 향상을 위해서는 양질의 학습 데이터셋 구축이 필수로 요구됩니다.
+이번 릴리스에서는 자율주행 인지 모델에서 요구하는 각 센서 사양에 맞추어 카메라, 라이다, 레이더에 대한 최신 센서 모델이 새롭게 추가되었습니다.
 
-MORAI SIM은 가상의 주행 환경에서 자율주행 테스트를 할 수 있는 시뮬레이션 플랫폼으로, 실제 자율 주행 개발에 필요한 학습 데이터셋을 자동으로 생성할 수 있습니다. 
+우선 카메라와 2D 라이다의 경우, 검출 로직은 기존과 동일하나 시뮬레이터 내부적으로 검출 데이터를 가시화하는 그래픽 모델이 추가되었습니다. 
+
+특히, 레이더 센서의 경우, 포인트 단위가 아닌 오브젝트 단위의 검출 방식으로 변경되어, 기존 레이터 모델에 비해 오브젝트에 대한 트래킹 정보를 검출합니다. 따라서 현재 단일 프레임 상의 검출 데이터와 이전에 전송된 여러 개의 프레임 데이터를 비교하여 해당 오브젝트의 속도, 위치 값을 계산할 수 있습니다.
+
+### “보행자 시나리오 개선을 위한 웨이포인트 생성 기능”
+SIM Drive에서는 직접 시나리오를 생성하고 수행할 수 있는 빌트인 시나리오 에디터를 제공합니다. 
+
+이번 릴리스의 시나리오 에디터에서는 보행자 이동에 따른 웨이포인트(Waypoint) 생성 기능을 추가하여 보다 구체적으로 보행자 시나리오를 설계하고 수행할 수 있습니다.
+![main6](23-11-23/main8.png){:onclick="window.open(this.src)" title="Click view screen" width="70%"}
+<figcaption>그림 7. 빌트인 시나리오 에디터의 웨이포인트 생성 기능</figcaption>
+
+지난 버전의 보행자 시나리오와 비교하여, Waypoint 기능이 추가된 보행자 시나리오 로직은 아래와 같습니다.
+
+| 기존 보행자 시나리오 | Waypoint 기반 보행자 시나리오 |
+| :---------- | :----------------------------------- |
+| <ol><li style="text-align: left;">Ego 차량이 Activation Distance(m) 내 존재</li><li  style="text-align: left;">Object Setting에서 정의한 보행자 Heading 방향과 Walk Speed(kh/m) 속도로 Moving Distance 만큼 이동</li></ol> | <p style="text-align: left;"> :material-check: 보행자는 Moving Distance 대신 사용자가 설정한 Waypoint를 따라 이동</p> <ol><li style="text-align: left;"> Waypoint에 도달하기까지 기존에 정의된 Walk Speed(km/h)로 이동하고 도달하면 각 Waypoint에 정의된 Speed(km/h)로 이동</li> <li style="text-align: left;">Waypoint 도달 후 Pause Time(s) 만큼 대기 가능</li></ol> |
+
+### “시뮬레이션 환경에 대한 날씨 효과 및 마찰력 옵션 추가”
+SIM Drive의 시뮬레이션 환경에서는 비, 안개, 악천후의 날씨를 비롯하여 주/야간 시간대에 따른 조도 변화를 설정할 수 있습니다. <Br>
+현실에서는 다양한 환경 데이터를 취득하기 어려운 제약 사항이 존재하지만, SIM에서는 현실과 동일한 다양한 환경 조건의 학습 데이터를 매우 간편하게 취득할 수 있습니다.
+
+23.R1.0에서는 보다 현실감 있는 시뮬레이션을 위해 날씨 별 효과 강도 및 도로 마찰력을 제어하는 사용자 옵션을 추가하였습니다.
+
+악천후 날씨의 경우 **Storm, Rainy, Snowy** 효과 강도를 보다 세밀하게 제어하도록 **Effect Strength** 옵션을 추가하였으며 안개 낀 날씨의 경우, **Density** (밀도) 및 **Distance**(간격) 옵션을 추가하였습니다.
 <table>
   <tr>
-    <td style="border-right: 2px solid #E2E2E2;"> <img src="../../../../assets/23-07-20/cam-min.gif" alt="sensor" style="width: 90%;"  title="Click to Enlage" onclick="window.open(this.src)" />
-      <figcaption style="margin-top: 0.7em;">카메라 센서의 RGB 이미지 및 정답 데이터 (위에서부터 Semantic, Instance, Depth)</figcaption>
-    </td>
-  </tr>
-  <tr>
-    <td><img src="../../../../assets/23-07-20/pcd.gif" alt="sensor" style="width: auto; height: auto;"  title="Click to Enlage" onclick="window.open(this.src)"/>
-      <figcaption style="margin-top: 0.7em;">3D LiDAR 센서의 점군 데이터 </figcaption>
-    </td>
+    <th style="border-right: 2px solid #E2E2E2;" > <img src="../../../../assets/23-11-23/main10-1.png" alt="sensor" style="width: 500px; height: auto;"  title="Click to Enlage" onclick="window.open(this.src)" />
+    </th>
+    <th><img src="../../../../assets/23-11-23/main10-2.png" alt="sensor" style="width: 500px; height: auto;"  title="Click to Enlage" onclick="window.open(this.src)"/>
+    </th>
   </tr>
 </table>
-<figcaption>그림 1. MORAI SIM의 센서 모델로 생성한 다양한 형식의 학습 데이터셋</figcaption>
+<figcaption>그림 8. SIM Drive 시뮬레이션 환경 구성에 추가된 Effect Strength 및 Foggy Density, Distance</figcaption>
 
+또한 도로에 대한 Multiplier(마찰 계수) 옵션을 추가하여, 눈이나 비와 같은 날씨에 영향을 받을 수 있는 도로면 마찰 강도를 0 ~ 1 사이로 제어할 수 있습니다.
 
-## MORAI SIM의 데이터셋 생성 기술 특징
-MORAI SIM의 학습 데이터셋 생성 기술은 자율주행 인지 모델에 적용할 수 있는 데이터셋의 일반성, 실사성, 정확성의 조건을 모두 만족한다고 볼 수 있습니다.
+<img src="../../../../assets/23-11-23/main11.png" style="width: 50%; height: auto; float: left; margin-bottom: 10px;">
+<div style="clear: both;"></div>
 
-### 정답 데이터 자동 생성
-MORAI SIM은 가상의 센서 모델를 활용하여 실제 주행 환경과 정답 데이터를 자동으로 생성합니다. 즉, 센서에서 검출한 객체는 무엇이고 어디에 위치하는지 라벨 정보를 달아준다고 생각하면 쉽습니다.
+## 주요 개선 사항 요약
+이전에 배포된 릴리스(22.R4.0)에서 개선된 사항을 알아봅니다.
 
-정답 데이터는 말 그대로 답이 있는 데이터로, 머신러닝의 지도 학습에 사용됩니다. 따라서 정답 데이터는 학습 데이터에 포함하며, 자율주행 인지 모델이 학습하는데 있어 중요한 부분을 차지합니다. <br>
-아직까지는 머신러닝을 위한 데이터셋 구축 기술이 많이 보급화되지 않았기 때문에 이러한 정답 데이터를 모으기 위해 사람이 Raw 데이터를 관측하여 직접 라벨링을 하는 경우가 많습니다. 
+### “에이전트 차량 모델의 채터링(떨림) 현상 해결 및 종방향 주행 성능 개선”
+Kinematics(운동학)을 포함한 SIM Drive 에이전트 차량 모델에 대해 가속도 제어시 발생하는 채터링(떨림 현상)을 제거함으로써 종방향 주행 성능을 개선하였습니다. 
 
-MORAI SIM에서는 센서에서 검출한 데이터에 대한 라벨링를 자동화할 수 있어 정답 데이터로 가공하는 데에 드는 비용과 시간을 대폭 줄일 수 있습니다.
-특히, MORAI SIM은 라이다 센서 모델에서 검출한 객체인 차량, 도로, 건물 등이 각 어떤 클래스에 속해 있는지를 점군 형태로 나타냅니다. 정답 데이터를 점군 형태로 나타내는 것은 이미지보다 어렵기 때문에, MORAI SIM의 라이다 센서를 활용한 정답 데이터 생성은 매우 큰 장점이라 할 수 있습니다.
+![main6](23-11-23/main9.png){:onclick="window.open(this.src)" title="Click view screen" width="60%"}
+<figcaption>그림 9. SIM Dirve Kinematics 차량 모델의 기존 종방향 제어 대비 개선된 주행 결과 </figcaption>
 
-![23-07-20/그림1.png](23-07-20/그림1.png)
-<figcaption><b><center>그림 2. MORAI SIM 라이다 센서로 검출한 점군 형태의 정답 데이터</center></b></figcaption>
+#### 🍀 Kinematics 모델이란 
+<pre>
+  Kinematics(운동학) 모델은 물리적인 힘의 영향으로 가속하여 동작하는 <br>기존의 Dynamics(동역학)과 달리, 힘(질량)을 고려하지 않는 시스템 모델입니다. 
 
-카메라 센서의 정답 데이터의 경우, 이미지 분할 방식인 Semantic Segmentation을 적용하여 검출 객체를 클래스 단위로 분류하고 자체 태깅 룰에 맞는 특정 색상으로 나타냅니다. 또한 객체 별 색상에 매핑된 픽셀값을 2D 및 3D Bounding Box(BBox) 데이터로 변환하여 이미지 상에 표현할 수 있습니다
+  자율주행 시뮬레이션에서 Kinematics 모델은 일반적인 Dynamics(동역학) 모델에 비하여 아래와 같은 장점을 갖습니다.
+  
+  ◾상대적으로 가벼운 연산을 하므로 시뮬레이션에 최적화
 
-BBOX는 정답 데이터 중의 하나로, MORAI SIM은 객체 이미지 상의 2D 및 3D BBOX 표시와 함께 아래와 같은 텍스트 형태의 좌표 정보를 생성합니다.
+  ◾페달 및 브레이크가 없어 가속/감속 제어가 용이, 시나리오 수행 성능이 향상됨
 
- - 2D BBOX: 객체를 둘러싼 좌상단, 우하단에 대한 x, y 값
- - 3D BBOX: 객체를 둘러싼 3차원 박스의 각 꼭지점 x, y, z 값
-
-![23-07-20/그림2.png](23-07-20/semantic.png){:onclick="window.open(this.src)" title="Click view screen" width="80%"}
-<figcaption>그림 3. MORAI SIM 카메라 센서에서 검출한 Semantic Segmentation 이미지</figcaption>
-
-![23-07-20/그림3.png](23-07-20/rgb.png){:onclick="window.open(this.src)" title="Click view screen" width="80%"}
-<figcaption>그림 4. MORAI SIM 카메라 센서에서 검출한 RGB 이미지 및 3D BBox</figcaption>
-
-MORAI SIM의 센서 모델에서는 개선된 이미지 분할 방식인 ‘Mesh Segmentation'과 Labeling’을 모두 지원하므로 객체의 Global 좌표 값을 활용하여 정답 데이터를 보다 정확하게 생성할 수 있습니다.
-
-### 다양한 주행 환경을 반영한 학습 데이터셋 생성 
-MORAI SIM은 실제의 다양한 주행 환경을 재현하여 인지 모델의 일반성과 신뢰성을 보장하는 학습 데이터셋을 생성합니다.
-
-MORAI SIM에서 제공하는 맵과 차량 모델은 실제 존재하는 도로, 교통 표지판, 특수 차량 등을 그대로 모사했기 때문에, 이를 바탕으로 국내 교통 환경에 최적화된 데이터를 생성할 수 있습니다. 
-특히 비, 안개, 악천후를 포함한 날씨, 주간 및 야간에 따른 조도 변화, 차량 종류 및 대수, 센서의 위치, 해상도까지 주행 환경을 결정하는 모든 파라미터를 가상의시뮬레이션 환경에서 설정할 수 있어 실제 날씨와 지형의 물리적 제약 없이 다양한 조건의 학습 데이터를 용이하게 수집할 수 있습니다. 
-
-![23-07-20/그림5.png](23-07-20/그림5.png)
-<figcaption><b><center>그림 5. MORAI SIM에서 재현한 다양한 주행 환경</center></b></figcaption>
-
-## MORAI SIM의 데이터셋 생성 방식
-MORAI SIM은 시뮬레이터 상의 날씨 및 시간대와 같은 환경 구성과 센서 설정을 바탕으로 데이터셋을 생성합니다.
-
-환경 구성에는 눈, 비, 안개와 같은 날씨와 조도를 결정하는 시간대, 주변 차량 및 보행자, 장애물과 같은 정적/동적 객체 정보가 있습니다. <Br>
-MORAI SIM은 3D 그래픽 엔진을 활용해 시뮬레이션 환경 전반을 현실감 있게 재현하며, ASAM 오픈 시나리오 기반의 MORAI Scenario Runner와 연동하여 주행 시뮬레이션을 보다 체계적으로 수행할 수 있습니다.
-
-센서 설정에서는 차량에 장착하는 센서의 종류와 개수, 장착 위치 및 자세 정보를 입력하고, 검출할 이미지를 **Preview** 기능으로 확인할 수 있습니다.
-
-MORAI SIM은 이러한 시나리오 환경 구성 및 센서 설정 정보를 바탕으로 시뮬레이션 Frame Rate(최소 20ms, 최대 100ms) 설정에 따라 데이터를 생성할 수 있습니다. 
-
-![23-07-20/그림4.png](23-07-20/그림4.png)
-<figcaption><b><center>그림 6. MORAI SIM의 데이터셋 생성 방식</center></b></figcaption>
-
-따라서 MORAI SIM의 데이터셋 생성 기술을 사용하면 카메라 센서의 이미지 데이터, 라이다 센서의 점군(Point Cloud) 데이터, GPS 센서의 측위 데이터와 같은 다양한 형식의 데이터셋을 TB 단위까지 구축할 수 있습니다. <br>
-특히, MORAI SIM은 3D 라이다 센서로 점군 데이터를 자동으로 생성하기 때문에, 비싸고 무거운 라이다 센서를 대신하여 주행 평가에 매우 유용하게 활용될 것입니다.
-
-## MORAI DataGen과 연동한 대규모 데이터셋 구축 
-자율주행 인지 모델은 머신러닝처럼 많은 양의 데이터로 학습할수록 인지 성능이 향상됩니다. <Br>
-MORAI SIM은 MORAI DataGen과 연동하여 사용자 환경 정보에 맞는 대량의 데이터를 자동으로 생성할수 있습니다. 
-
-MORAI DataGen은 MORAI SIM의 데이터셋 생성 기능을 특화하여 별도로 개발된 자동화 도구입니다.
-DataGen에서 데이터 생성 API를 호출하면 MORAI SIM에서는 기구성한 시나리오 환경 및 센서 정보에 따른 대규모 데이터셋을 자동으로 구축할 수 있습니다.
-
-DataGen에서는 프레임 간격 별로 API를 호출하며 한 프레임 당 여러 가지 환경 조합에 의한 여러 장의 이미지를 생성할 수 있습니다. 이렇게 매 주기마다 전송하는 API 요청에 의해 단시간 내 몇 만장까지의 데이터셋을 쌓을 수 있을 뿐만 아니라 특정 인지모델 학습에 필요한 데이터셋을 수백 TB까지 구축해볼 수 있습니다.
-
-![23-07-20/그림6.png](23-07-20/그림6.png){:onclick="window.open(this.src)" title="Click view screen" width="80%"}
-<figcaption>그림 7. DataGen과 연동하여 한 프레임당 생성한 이미지 데이터</figcaption>
-
-실제로 모라이에서 수행한 프로젝트 중 이러한 DataGen과 MORAI SIM 간의 연동 기술을 활용하여 150 TB까지 구축해본 경험이 있습니다. 이는 10 TB 정도에 불과하는 기존 오픈 데이터셋과 비교하여 매우 높은 수치라고 볼 수 있습니다.
-
-## 마치며
-이상으로 자율 주행의 인지 성능을 높이기 위한 양질의 학습 데이터셋 필요성과 더불어, MORAI SIM 의 데이터셋 생성 기술의 특징을 살펴보았습니다.
-
-MORAI SIM에서 생성한 학습 데이터셋이 인지 모델의 일반성, 정확성 성능을 보장한다는 사실은 이미 여러 논문에서 오픈 데이터셋(KITTI, Berkeley Deep Drive 100K; BDD100K)을 학습한 인지 모델의 성능과 비교하여 입증한 바 있습니다.
-
-자율주행 자동차의 안전성을 높이고 상용화를 앞당기기 위해서는 자율주행의 인지 성능을 높이는 양질의 데이터셋 구축이 선행되어야 하는 것은 자명합니다.
-또한 인지 성능의 향상은 데이터셋 구축에서 그치는 것이 아니라, 양질의 데이터를 활용한 인지 모델의 학습과 검증, 피드백까지의 과정을 지속적으로 반복해야만 이루어질 수 있습니다.
-
-이러한 측면에서 MORAI SIM은 국내 교통 인프라를 포함, 다양한 환경에 대한 데이터 수집의 용이성, 정답 데이터 생성의 품질과 효율성을 수반할 뿐만 아니라,
-데이터 생성 과정을 재현, 변형, 반복할 수 있는 가상의 시스템 환경을 제공합니다.
-
-
+  ◾Low pass filter 적용, 최대 가속/감속도의 제한을 두어 설계했기 때문에 급가속/감속과 같은 불연속 입력에 대한 안정적인 제어 가능
+</pre>
