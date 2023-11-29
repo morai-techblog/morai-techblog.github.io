@@ -45,19 +45,23 @@ SIM Drive 23.R1.0에 새롭게 추가된 기능 및 개선 사항에 대한 주�
   <div style="clear: both;"></div>
 
 - [**카메라 센서의 3D BBox 정답 데이터 제공**](#_3d-bbox)
-  <a href="#3d-bbox"><img src="../../../../assets/23-11-23/newfeature4.png" style="width: 60%; height: auto; float: left; margin-bottom: 10px;"></a>
-  <div style="clear: both;"></div>
+  <a href="#3d-bbox"><img src="../../../../assets/23-11-23/newfeature4.png" style="width: 500px; height: auto; float: left; margin-bottom: 10px;"></a>
+
+<div style="clear: both;"></div>
 
 - [**최신 센서 사양을 지원하는 신규 모델 추가**](#_4)
-  <a href="#_4"><img src="../../../../assets/23-11-23/newfeature4.png" style="width: 60%; height: auto; float: left; margin-bottom: 10px;"></a>
+  <a href="#_4"><img src="../../../../assets/23-11-23/newfeature4.png" style="width: 500px; height: auto; float: left; margin-bottom: 10px;"></a>
+
   <div style="clear: both;"></div>
 
 - [**보행자 시나리오 개선을 위한 웨이포인트 생성 기능**](#_5)
-  <a href="#_5"><img src="../../../../assets/23-11-23/newfeature5.png" style="width: 60%; height: auto; float: left; margin-bottom: 10px;"></a>
+  <a href="#_5"><img src="../../../../assets/23-11-23/newfeature5.png" style="width: 60%; height: auto; float: left; margin-bottom: 16px;"></a>
+
   <div style="clear: both;"></div>
 
 - [**시뮬레이션 환경에 대한 날씨 효과 및 마찰력 옵션 추가**](#_6)
   <a href="#_6"><img src="../../../../assets/23-11-23/main12-2.png" style="width: 70%; height: auto; float: left; margin-bottom: 10px;"></a>
+  
   <div style="clear: both;"></div>
 
 - [**에이전트 차량 모델의 채터링(떨림) 현상 해결 및 종방향 주행 성능 개선**](_#_8)
@@ -108,7 +112,7 @@ SIM에서 저장한 2D/3D BBox 데이터는 기본적으로 텍스트 형태로 
 자율주행 기술에서는 인지 성능을 높이기 위한 정밀 센서의 역할이 매우 중요합니다.
 SIM Dirve는 카메라, 2D/3D 라이다, 레이더, IMU, GNSS에 이르기까지 실제 센서와 동일한 검출 데이터 형식과 통신 방식을 지원하는 다양한 센서 모델을 제공합니다.
 ![main1](23-11-23/main13.png){:onclick="window.open(this.src)" title="Click view screen" width="70%"}
-<figcaption>그림 6. SIM Drive에서 제공하느 가상 센서 모델</figcaption>
+<figcaption>그림 6. SIM Drive에서 제공하는 가상 센서 모델</figcaption>
 
 이번 릴리스에서는 자율주행 인지 모델에서 요구하는 각 센서 사양에 맞추어 카메라, 라이다, 레이더에 대한 최신 센서 모델이 새롭게 추가되었습니다.
 
@@ -162,7 +166,7 @@ Kinematics(운동학)을 포함한 SIM Drive 에이전트 차량 모델에 대�
 
 #### 🍀 Kinematics 모델이란 
 <pre>
-  Kinematics(운동학) 모델은 물리적인 힘의 영향으로 가속하여 동작하는 <br>기존의 Dynamics(동역학)과 달리, 힘(질량)을 고려하지 않는 시스템 모델입니다. 
+  Kinematics(운동학) 모델은 물리적인 힘의 영향으로 가속하여 동작하는 Dynamics(동역학)과 달리, 힘(질량)을 고려하지 않는 차량 모델입니다. 
 
   자율주행 시뮬레이션에서 Kinematics 모델은 일반적인 Dynamics(동역학) 모델에 비하여 아래와 같은 장점을 갖습니다.
   
