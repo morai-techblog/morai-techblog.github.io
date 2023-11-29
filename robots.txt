@@ -1,6 +1,0 @@
-User-agent: Googlebot
-Disallow:
-
-Allow: /
-
-Sitemap: https://morai-techblog.github.io/sitemap.xml
