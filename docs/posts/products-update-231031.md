@@ -27,45 +27,46 @@ draft: false
 
 이번 릴리스 버전, 23.R1.0에는 지난 베타 버전으로 제공한 다양한 기능을 병합하였으며, 기존 정규 버전의 주요 기능을 일부 개선하였습니다.
 
-특히, 교육 및 범용으로 제공하는 기본 프리셋 버전인 SIM Drive ST의 활용성을 강화하기 위해 센서, 환경, 시나리오와 같은 시뮬레이터 주요 기능에 대한 신규 옵션이 추가되었습니다.
+특히, 교육 및 범용으로 제공하는 기본 프리셋 버전인 SIM Drive ST의 활용성을 높이기 위해 센서, 환경, 시나리오와 같은 시뮬레이터 주요 기능 옵션을 대거 확장하였습니다.
 
 
 ## 주요 하이라이트 
 SIM Drive 23.R1.0에 새롭게 추가된 기능 및 개선 사항에 대한 주요 하이라이트는 아래와 같습니다.
 
-  - [**맵과 오브젝트 모델 확대**](#_3): 일본 도로 교통법에 맞는 맵과 신호등 처리 로직을 포함하여 국방 분야 시뮬레이션 평가에 활용할 수 있는 오브젝트 모델이 추가되었습니다.
+  - [맵과 오브젝트 모델 확대](#_3): 일본 도로 교통법에 맞는 맵과 신호등 처리 로직을 포함하여 국방 분야 시뮬레이션 평가에 활용할 수 있는 오브젝트 모델이 추가되었습니다.
   <table>
   <tr>
-    <th style="border-right: 2px solid #E2E2E2; padding: 1px;"> <a href="#_3"><img src="../../../../assets/23-11-23/newfeature1.png" alt="sensor" style="width: 600px; height: auto;"  title="Click to Enlage"/></a>
+    <th style="border-right: 2px solid #E2E2E2; padding: 0.5px;"> <a href="#_3"><img src="../../../../assets/23-11-23/newfeature1.png" alt="sensor" style="width: 600px; height: auto;"  title="Click to Enlage"/></a>
     </th>
-    <th style="padding: 1px;"><a href="#_3"><img src="../../../../assets/23-11-23/newfeature3.png" alt="sensor" style="width: 600px; height: auto;"  title="Click to Enlage"/></a>
+    <th style="padding: 0.5px;"><a href="#_3"><img src="../../../../assets/23-11-23/newfeature3.png" alt="sensor" style="width: 600px; height: auto;"  title="Click to Enlage"/></a>
     </th>
   </tr>
   </table>
-  <div style="clear: both;"></div>
-
-- [**카메라 센서의 3D BBox 정답 데이터 제공**](#_3d-bbox)
-  <a href="#3d-bbox"><img src="../../../../assets/23-11-23/newfeature4.png" style="width: 500px; height: auto; float: left; margin-bottom: 10px;"></a>
-
-<div style="clear: both;"></div>
-
-- [**최신 센서 사양을 지원하는 신규 모델 추가**](#_4)
-  <a href="#_4"><img src="../../../../assets/23-11-23/newfeature4.png" style="width: 500px; height: auto; float: left; margin-bottom: 10px;"></a>
 
   <div style="clear: both;"></div>
 
-- [**보행자 시나리오 개선을 위한 웨이포인트 생성 기능**](#_5)
-  <a href="#_5"><img src="../../../../assets/23-11-23/newfeature5.png" style="width: 60%; height: auto; float: left; margin-bottom: 16px;"></a>
+- [카메라 센서의 3D BBox 정답 데이터 제공](#_3d-bbox)
+  <a href="#3d-bbox"><img src="../../../../assets/23-11-23/newfeature4.png" style="width: 70%; height: auto; float: left; margin-bottom: 12px;"></a>
 
   <div style="clear: both;"></div>
 
-- [**시뮬레이션 환경에 대한 날씨 효과 및 마찰력 옵션 추가**](#_6)
+- [최신 센서 사양을 지원하는 신규 모델 추가](#_4)
+  <a href="#_4"><img src="../../../../assets/23-11-23/main-senspr.png" style="width: 70%; height: auto; float: left; margin-bottom: 10px;"></a>
+
+  <div style="clear: both;"></div>
+
+- [보행자 시나리오 개선을 위한 웨이포인트 생성 기능](#_5)
+  <a href="#_5"><img src="../../../../assets/23-11-23/newfeature5.png" style="width: 70%; height: auto; float: left; margin-bottom: 16px;"></a>
+
+  <div style="clear: both;"></div>
+
+- [시뮬레이션 환경에 대한 날씨 효과 및 마찰력 옵션 추가](#_6)
   <a href="#_6"><img src="../../../../assets/23-11-23/main12-2.png" style="width: 70%; height: auto; float: left; margin-bottom: 10px;"></a>
   
   <div style="clear: both;"></div>
 
-- [**에이전트 차량 모델의 채터링(떨림) 현상 해결 및 종방향 주행 성능 개선**](_#_8)
-  <a href="#_8"><img src="../../../../assets/23-11-23/improve1.jpg" style="width: 70%; height: auto; float: left; margin-bottom: 10px;"></a>
+- [에이전트 차량 모델의 채터링(떨림) 현상 해결 및 종방향 주행 성능 개선](#_8)
+  <a href="#_8"><img src="../../../../assets/23-11-23/improve1.jpg" style="width: 80%; height: auto; float: left; margin-bottom: 10px;"></a>
   <div style="clear: both;"></div>
 
 
@@ -87,15 +88,8 @@ SIM Drive 23.R1.0에 새롭게 추가된 기능 및 개선 사항에 대한 주�
 <figcaption>그림 2. '비보호 우회전' 교통법이 시행되고 있는 일본 교통 환경</figcaption>
 
 두 번째로, 국방 분야의 자율주행 무기체계 시뮬레이션을 위해 실제 훈련장을 연상케하는 야지맵과 군수용 차량과 더불어 군인, 웅덩이, 철조망과 같은 장애물 오브젝트를 추가하였습니다.
- <table>
-  <tr>
-    <th style="border-right: 2px solid #E2E2E2; padding: 1px;"> <a href="#_5"><img src="../../../../assets/23-11-23/main4.png" alt="sensor" style="width: 600px; height: auto;"  title="Click to Enlage"/></a>
-    </th>
-    <th style="padding: 1px;"><a href="#_5"><img src="../../../../assets/23-11-23/main5.png" alt="sensor" style="width: 600px; height: auto;" title="Click to Enlage"/></a>
-    </th>
-  </tr>
-</table>
-<figcaption style="margin-top: -2em;">그림 3. 국방용 시뮬레이션을 위한 무기체계 차량 및 오브젝트 모델</figcaption>
+![main5](23-11-23/main5.png){:onclick="window.open(this.src)" title="Click view screen" width="70%"}
+<figcaption>그림 3. 국방용 시뮬레이션을 위한 오브젝트 모델</figcaption>
 
 ### “카메라 센서의 3D BBOX 정답 데이터, 최신 센서 모델 지원”
 23.R1.0의 카메라 센서에서는 검출 오브젝트에 대한 3D Bounding Box(3D BBox) 데이터를 제공합니다. 
