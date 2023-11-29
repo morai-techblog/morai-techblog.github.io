@@ -882,40 +882,34 @@
 <div style="clear: both;"></div>
 
 <ul>
-<li>
-<p><a href="#_3d-bbox"><strong>카메라 센서의 3D BBox 정답 데이터 제공</strong></a>
-  <a href="#3d-bbox"><img src="../../../../assets/23-11-23/newfeature4.png" style="width: 60%; height: auto; float: left; margin-bottom: 10px;"></a>
-<br />
+<li><a href="#_3d-bbox"><strong>카메라 센서의 3D BBox 정답 데이터 제공</strong></a>
+  <a href="#3d-bbox"><img src="../../../../assets/23-11-23/newfeature4.png" style="width: 500px; height: auto; float: left; margin-bottom: 10px;"></a></li>
+</ul>
 <div style="clear: both;"></div>
-</p>
-</li>
-<li>
-<p><a href="#_4"><strong>최신 센서 사양을 지원하는 신규 모델 추가</strong></a>
-  <a href="#_4"><img src="../../../../assets/23-11-23/newfeature4.png" style="width: 60%; height: auto; float: left; margin-bottom: 10px;"></a>
-<br />
+
+<ul>
+<li><a href="#_4"><strong>최신 센서 사양을 지원하는 신규 모델 추가</strong></a>
+  <a href="#_4"><img src="../../../../assets/23-11-23/newfeature4.png" style="width: 500px; height: auto; float: left; margin-bottom: 10px;"></a></li>
+</ul>
 <div style="clear: both;"></div>
-</p>
-</li>
-<li>
-<p><a href="#_5"><strong>보행자 시나리오 개선을 위한 웨이포인트 생성 기능</strong></a>
-  <a href="#_5"><img src="../../../../assets/23-11-23/newfeature5.png" style="width: 60%; height: auto; float: left; margin-bottom: 10px;"></a>
-<br />
+
+<ul>
+<li><a href="#_5"><strong>보행자 시나리오 개선을 위한 웨이포인트 생성 기능</strong></a>
+  <a href="#_5"><img src="../../../../assets/23-11-23/newfeature5.png" style="width: 60%; height: auto; float: left; margin-bottom: 16px;"></a></li>
+</ul>
 <div style="clear: both;"></div>
-</p>
-</li>
-<li>
-<p><a href="#_6"><strong>시뮬레이션 환경에 대한 날씨 효과 및 마찰력 옵션 추가</strong></a>
-  <a href="#_6"><img src="../../../../assets/23-11-23/main12-2.png" style="width: 70%; height: auto; float: left; margin-bottom: 10px;"></a>
-<br />
+
+<ul>
+<li><a href="#_6"><strong>시뮬레이션 환경에 대한 날씨 효과 및 마찰력 옵션 추가</strong></a>
+  <a href="#_6"><img src="../../../../assets/23-11-23/main12-2.png" style="width: 70%; height: auto; float: left; margin-bottom: 10px;"></a></li>
+</ul>
 <div style="clear: both;"></div>
-</p>
-</li>
-<li>
-<p><a href="_#_8"><strong>에이전트 차량 모델의 채터링(떨림) 현상 해결 및 종방향 주행 성능 개선</strong></a>
+
+<ul>
+<li><a href="_#_8"><strong>에이전트 차량 모델의 채터링(떨림) 현상 해결 및 종방향 주행 성능 개선</strong></a>
   <a href="#_8"><img src="../../../../assets/23-11-23/improve1.jpg" style="width: 70%; height: auto; float: left; margin-bottom: 10px;"></a>
 <br />
 <div style="clear: both;"></div>
-</p>
 </li>
 </ul>
 <h2 id="_2">새로운 기능 요약<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
@@ -957,7 +951,7 @@
 <p>자율주행 기술에서는 인지 성능을 높이기 위한 정밀 센서의 역할이 매우 중요합니다.
 SIM Dirve는 카메라, 2D/3D 라이다, 레이더, IMU, GNSS에 이르기까지 실제 센서와 동일한 검출 데이터 형식과 통신 방식을 지원하는 다양한 센서 모델을 제공합니다.
 <img alt="main1" onclick="window.open(this.src)" src="../../../../assets/23-11-23/main13.png" title="Click view screen" width="70%" /></p>
-<figcaption>그림 6. SIM Drive에서 제공하느 가상 센서 모델</figcaption>
+<figcaption>그림 6. SIM Drive에서 제공하는 가상 센서 모델</figcaption>
 
 <p>이번 릴리스에서는 자율주행 인지 모델에서 요구하는 각 센서 사양에 맞추어 카메라, 라이다, 레이더에 대한 최신 센서 모델이 새롭게 추가되었습니다.</p>
 <p>우선 카메라와 2D 라이다의 경우, 검출 로직은 기존과 동일하나 시뮬레이터 내부적으로 검출 데이터를 가시화하는 그래픽 모델이 추가되었습니다. </p>
@@ -972,14 +966,14 @@ SIM Dirve는 카메라, 2D/3D 라이다, 레이더, IMU, GNSS에 이르기까지
 <table>
 <thead>
 <tr>
-<th align="left">기존 보행자 시나리오</th>
-<th align="left">Waypoint 기반 보행자 시나리오</th>
+<th style="text-align: left;">기존 보행자 시나리오</th>
+<th style="text-align: left;">Waypoint 기반 보행자 시나리오</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left"><ol><li style="text-align: left;">Ego 차량이 Activation Distance(m) 내 존재</li><li  style="text-align: left;">Object Setting에서 정의한 보행자 Heading 방향과 Walk Speed(kh/m) 속도로 Moving Distance 만큼 이동</li></ol></td>
-<td align="left"><p style="text-align: left;"> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 7 9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59 21 7Z"/></svg></span> 보행자는 Moving Distance 대신 사용자가 설정한 Waypoint를 따라 이동</p> <ol><li style="text-align: left;"> Waypoint에 도달하기까지 기존에 정의된 Walk Speed(km/h)로 이동하고 도달하면 각 Waypoint에 정의된 Speed(km/h)로 이동</li> <li style="text-align: left;">Waypoint 도달 후 Pause Time(s) 만큼 대기 가능</li></ol></td>
+<td style="text-align: left;"><ol><li style="text-align: left;">Ego 차량이 Activation Distance(m) 내 존재</li><li  style="text-align: left;">Object Setting에서 정의한 보행자 Heading 방향과 Walk Speed(kh/m) 속도로 Moving Distance 만큼 이동</li></ol></td>
+<td style="text-align: left;"><p style="text-align: left;"> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 7 9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59 21 7Z"/></svg></span> 보행자는 Moving Distance 대신 사용자가 설정한 Waypoint를 따라 이동</p> <ol><li style="text-align: left;"> Waypoint에 도달하기까지 기존에 정의된 Walk Speed(km/h)로 이동하고 도달하면 각 Waypoint에 정의된 Speed(km/h)로 이동</li> <li style="text-align: left;">Waypoint 도달 후 Pause Time(s) 만큼 대기 가능</li></ol></td>
 </tr>
 </tbody>
 </table>
@@ -1011,7 +1005,7 @@ SIM Dirve는 카메라, 2D/3D 라이다, 레이더, IMU, GNSS에 이르기까지
 
 <h4 id="kinematics">🍀 Kinematics 모델이란<a class="headerlink" href="#kinematics" title="Permanent link">&para;</a></h4>
 <pre>
-  Kinematics(운동학) 모델은 물리적인 힘의 영향으로 가속하여 동작하는 <br>기존의 Dynamics(동역학)과 달리, 힘(질량)을 고려하지 않는 시스템 모델입니다. 
+  Kinematics(운동학) 모델은 물리적인 힘의 영향으로 가속하여 동작하는 Dynamics(동역학)과 달리, 힘(질량)을 고려하지 않는 차량 모델입니다. 
 
   자율주행 시뮬레이션에서 Kinematics 모델은 일반적인 Dynamics(동역학) 모델에 비하여 아래와 같은 장점을 갖습니다.
 
