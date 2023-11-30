@@ -18,7 +18,7 @@ tags:
   - 23.R1.0
   - 최신 릴리스
   - 신규 버전
-cover_image: drive-main.png
+cover_image: Drive.jpg
 draft: false
 ---
 
