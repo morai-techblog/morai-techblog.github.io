@@ -8,7 +8,7 @@ categories:
   - Products
 links:
 #  - posts/grammertest.md
-  - SIM Dirve User Guide: https://help-morai-sim.scrollhelp.site/morai-sim-standard-kr/23-r1-0
+  - SIM Dirve User Guide: https://help-morai-sim.scrollhelp.site/sim-drive/Working-version/23-r1-0
 #  - Nested section:
 #    - External link: https://example.com
 #    - DataGen User Guide: https://morai-datagen-docs.scrollhelp.site/
@@ -27,7 +27,7 @@ draft: false
 
 이번 릴리스 버전, 23.R1.0에는 지난 베타 버전으로 제공한 다양한 기능을 병합하였으며, 기존 정규 버전의 주요 기능을 일부 개선하였습니다.
 
-특히, 교육 및 범용으로 제공하는 기본 프리셋 버전인 SIM Drive ST의 활용성을 높이기 위해 센서, 환경, 시나리오와 같은 시뮬레이터 주요 기능 옵션을 대거 확장하였습니다.
+특히, 교육 및 범용으로 제공하는 기본 프리셋 버전인 SIM Drive ST의 활용성을 높이기 위해 센서, 환경, 시나리오와 같은 시뮬레이터 주요 기능의 사용성을 강화했습니다.
 
 
 ## 주요 하이라이트 
