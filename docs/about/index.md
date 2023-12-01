@@ -1,6 +1,6 @@
 ---
 #layout: blog-authors.html
-title: 🥇 모라이 기술 블로그에 관하여
+title: 모라이 기술 블로그에 관하여
 comments: false
 hide:
   - toc
