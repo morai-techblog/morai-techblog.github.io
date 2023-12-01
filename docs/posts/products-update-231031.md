@@ -73,7 +73,7 @@ SIM Drive 23.R1.0에 새롭게 추가된 기능 및 개선 사항에 대한 주�
 ## 새로운 기능 요약
 이번 릴리스에 새롭게 추가된 기능은 아래와 같습니다.
 
-### “맵과 오브젝트의 다양성 확대”
+### 맵과 오브젝트의 다양성 확대
 모라이 SIM Drive에서는 디지털트윈 자동화 구축 기술을 적용한 정밀지도(HD Map) 데이터 기반의 3D 맵과 다양한 오브젝트 모델을 제공합니다.
 
 이번 23.R1.0 릴리스에서는 글로벌 표준의 주행 환경과 교통 법규에 맞는 보다 현실감 있는 시뮬레이션을 위한 맵과 오브젝트 모델을 추가했습니다.
@@ -91,7 +91,7 @@ SIM Drive 23.R1.0에 새롭게 추가된 기능 및 개선 사항에 대한 주�
 ![main5](23-11-23/main5.png){:onclick="window.open(this.src)" title="Click view screen" width="70%"}
 <figcaption>그림 3. 국방용 시뮬레이션을 위한 오브젝트 모델</figcaption>
 
-### “카메라 센서의 3D BBOX 정답 데이터, 최신 센서 모델 지원”
+### 카메라 센서의 3D BBOX 정답 데이터, 최신 센서 모델 지원
 23.R1.0의 카메라 센서에서는 검출 오브젝트에 대한 3D Bounding Box(3D BBox) 데이터를 제공합니다. 
 
 3D BBox 데이터는 4개의 평면 좌표값을 가지는 2D BBox 데이터에 비해 8쌍의 3축 Global 좌표(x, y, z)로 구성되어, 장애물의 위치 정보를 보다 정확하게 파악하기 위한 학습 데이터로 활용할수 있습니다.
@@ -102,7 +102,7 @@ SIM에서 저장한 2D/3D BBox 데이터는 기본적으로 텍스트 형태로 
 ![main7](23-11-23/main7.png){:onclick="window.open(this.src)" title="Click view screen" width="70%"}
 <figcaption>그림 5. SIM Drive의 Viz Bounding Box 2D/3D로 시각화한 2D/3D BBox 데이터</figcaption>
 
-### “정밀 센서의 최신 사양을 지원하는 신규 모델 추가”
+### 정밀 센서의 최신 사양을 지원하는 신규 모델 추가
 자율주행 기술에서는 인지 성능을 높이기 위한 정밀 센서의 역할이 매우 중요합니다.
 SIM Dirve는 카메라, 2D/3D 라이다, 레이더, IMU, GNSS에 이르기까지 실제 센서와 동일한 검출 데이터 형식과 통신 방식을 지원하는 다양한 센서 모델을 제공합니다.
 ![main1](23-11-23/main13.png){:onclick="window.open(this.src)" title="Click view screen" width="70%"}
@@ -114,7 +114,7 @@ SIM Dirve는 카메라, 2D/3D 라이다, 레이더, IMU, GNSS에 이르기까지
 
 특히, 레이더 센서의 경우, 포인트 단위가 아닌 오브젝트 단위의 검출 방식으로 변경되어, 기존 레이터 모델에 비해 오브젝트에 대한 트래킹 정보를 검출합니다. 따라서 현재 단일 프레임 상의 검출 데이터와 이전에 전송된 여러 개의 프레임 데이터를 비교하여 해당 오브젝트의 속도, 위치 값을 계산할 수 있습니다.
 
-### “보행자 시나리오 개선을 위한 웨이포인트 생성 기능”
+### 보행자 시나리오 개선을 위한 웨이포인트 생성 기능
 SIM Drive에서는 직접 시나리오를 생성하고 수행할 수 있는 빌트인 시나리오 에디터를 제공합니다. 
 
 이번 릴리스의 시나리오 에디터에서는 보행자 이동에 따른 웨이포인트(Waypoint) 생성 기능을 추가하여 보다 구체적으로 보행자 시나리오를 설계하고 수행할 수 있습니다.
@@ -127,7 +127,7 @@ SIM Drive에서는 직접 시나리오를 생성하고 수행할 수 있는 빌�
 | :---------- | :----------------------------------- |
 | <ol><li style="text-align: left;">Ego 차량이 Activation Distance(m) 내 존재</li><li  style="text-align: left;">Object Setting에서 정의한 보행자 Heading 방향과 Walk Speed(kh/m) 속도로 Moving Distance 만큼 이동</li></ol> | <p style="text-align: left;"> :material-check: 보행자는 Moving Distance 대신 사용자가 설정한 Waypoint를 따라 이동</p> <ol><li style="text-align: left;"> Waypoint에 도달하기까지 기존에 정의된 Walk Speed(km/h)로 이동하고 도달하면 각 Waypoint에 정의된 Speed(km/h)로 이동</li> <li style="text-align: left;">Waypoint 도달 후 Pause Time(s) 만큼 대기 가능</li></ol> |
 
-### “시뮬레이션 환경에 대한 날씨 효과 및 마찰력 옵션 추가”
+### 시뮬레이션 환경에 대한 날씨 효과 및 마찰력 옵션 추가
 SIM Drive의 시뮬레이션 환경에서는 비, 안개, 악천후의 날씨를 비롯하여 주/야간 시간대에 따른 조도 변화를 설정할 수 있습니다. <Br>
 현실에서는 다양한 환경 데이터를 취득하기 어려운 제약 사항이 존재하지만, SIM에서는 현실과 동일한 다양한 환경 조건의 학습 데이터를 매우 간편하게 취득할 수 있습니다.
 
@@ -142,31 +142,49 @@ SIM Drive의 시뮬레이션 환경에서는 비, 안개, 악천후의 날씨를
     </th>
   </tr>
 </table>
-<figcaption>그림 8. SIM Drive 시뮬레이션 환경 구성에 추가된 Effect Strength 및 Foggy Density, Distance</figcaption>
+<figcaption>그림 8. SIM Drive 시뮬레이션 날씨 구성의 Effect Strength, Foggy Density 및 Distance 옵션</figcaption>
 
 또한 도로에 대한 Multiplier(마찰 계수) 옵션을 추가하여, 눈이나 비와 같은 날씨에 영향을 받을 수 있는 도로면 마찰 강도를 0 ~ 1 사이로 제어할 수 있습니다.
 
-<img src="../../../../assets/23-11-23/main11.png" style="width: 50%; height: auto; float: left; margin-bottom: 10px;">
-<div style="clear: both;"></div>
+![main6](23-11-23/main11.png){:onclick="window.open(this.src)" title="Click view screen" width="50%"}
+<figcaption>그림 9. SIM Drive 시뮬레이션 날씨 구성의 Multiplier 옵션</figcaption>
+
 
 ## 주요 개선 사항 요약
-이전에 배포된 릴리스(22.R4.0)에서 개선된 사항을 알아봅니다.
+이전에 배포된 버전(22.R4.0) 대비, 이번 릴리스에 반영된 주요 개선 사항을 알아봅니다.
 
-### “에이전트 차량 모델의 채터링(떨림) 현상 해결 및 종방향 주행 성능 개선”
-Kinematics(운동학)을 포함한 SIM Drive 에이전트 차량 모델에 대해 가속도 제어시 발생하는 채터링(떨림 현상)을 제거함으로써 종방향 주행 성능을 개선하였습니다. 
+### 차량 모델의 종방향 주행 성능 및 가속도 제어 개선”
+SIM Drive에서는 차량 제어를 위해 크게 Kinematics(운동학)와 Dynamics(동역학) 모델을 제공합니다.
 
-![main6](23-11-23/main9.png){:onclick="window.open(this.src)" title="Click view screen" width="60%"}
-<figcaption>그림 9. SIM Dirve Kinematics 차량 모델의 기존 종방향 제어 대비 개선된 주행 결과 </figcaption>
+#### 🍀 Kinematics와 Dynamics 모델의 차이 
+<div style="width: 700px;">
+<pre style="padding: 2em; line-height: 1.5em;">
+  Kinematics(운동학) 모델은 물리적인 힘의 영향으로 가속하여 동작하는 Dynamics(동역학)과 달리, 
+  힘(질량)을 고려하지 않는 차량 모델입니다. 
 
-#### 🍀 Kinematics 모델이란 
-<pre>
-  Kinematics(운동학) 모델은 물리적인 힘의 영향으로 가속하여 동작하는 Dynamics(동역학)과 달리, 힘(질량)을 고려하지 않는 차량 모델입니다. 
+  Kinematics 모델은 거동 제어가 복잡하고 어려운 Dynamics(동역학) 모델에 비해, 아래와 같은 특징
+  을 갖습니다.
 
-  자율주행 시뮬레이션에서 Kinematics 모델은 일반적인 Dynamics(동역학) 모델에 비하여 아래와 같은 장점을 갖습니다.
+  ◾ 판단 및 제어에서 결정된 속도 프로파일과 조향 입력을 받아 차량 자세 및 위치 결정
+    <img src="../../../../assets/23-11-23/kinema.png" style="width: 80%; height: auto; margin: -1em 2em -1em 2em;" onclick="window.open(this.src)"></img>
+
+  ◾ 상대적으로 가벼운 연산을 하므로 시뮬레이션에 최적화
+
+  ◾ 페달 브레이크 제어를 생략하여 가속/감속 제어가 용이함. 결과적으로 시나리오 수행 성능을 
+    향상할 수 있음
+
+</pre></div>
+<Br>
+
+23.R1.0 에서는 위의 차량 모델의 주행 성능을 아래와 같이 개선하였습니다.
+
+- Kinematics 및 다이나믹스 모델의 종방향 제어 시 발생하는 채터링(떨림 현상)을 해결하여 주행 성능을 개선
   
-  ◾상대적으로 가벼운 연산을 하므로 시뮬레이션에 최적화
+![main6](23-11-23/dynamics.png){:onclick="window.open(this.src)" title="Click view screen" width="70%"}
+<figcaption style="margin-top: -3em;">그림 10. 다이나믹스 모델의 종방향 제어 개선 결과 <br> (빨간색 목표 가속도 대비 파란색 출력 가속도) </figcaption>
 
-  ◾페달 및 브레이크가 없어 가속/감속 제어가 용이, 시나리오 수행 성능이 향상됨
+- 다이나믹스 모델의 가속도 제어 성능을 향상
 
-  ◾Low pass filter 적용, 최대 가속/감속도의 제한을 두어 설계했기 때문에 급가속/감속과 같은 불연속 입력에 대한 안정적인 제어 가능
-</pre>
+    - 차량의 판단 및 거동 계획 로직을 개선하고 목표한 가속도에 따른 페달 및 브레이크 제어를 개선하여 차량 모델의 거동(움직임) 향상
+
+
