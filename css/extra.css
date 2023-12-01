@@ -126,9 +126,10 @@ table pre {
 }
 
 
+.md-post__authors
 .md-typeset .md-author img {
-  max-width: auto;
-  height: 100%;
+  width: 375px;
+  height: auto ;
   margin-bottom: 0em;
   padding-bottom: 0em;
 }
