@@ -157,13 +157,11 @@ SIM Drive의 시뮬레이션 환경에서는 비, 안개, 악천후의 날씨를
 SIM Drive에서는 차량 제어를 위해 크게 Kinematics(운동학)와 Dynamics(동역학) 모델을 제공합니다.
 
 #### 🍀 Kinematics와 Dynamics 모델의 차이 
-<div style="width: 700px;">
-<pre style="padding: 2em; line-height: 1.5em;">
-  Kinematics(운동학) 모델은 물리적인 힘의 영향으로 가속하여 동작하는 Dynamics(동역학)과 달리, 
-  힘(질량)을 고려하지 않는 차량 모델입니다. 
+<pre style="padding: 2em 2em 2em 2em; line-height: 1.5em;">
+  Kinematics(운동학) 모델은 물리적인 힘의 영향으로 가속하여 동작하는 Dynamics(동역학)과 달리, 힘(질량)을 
+  고려하지 않는 차량 모델입니다. 
 
-  Kinematics 모델은 거동 제어가 복잡하고 어려운 Dynamics(동역학) 모델에 비해, 아래와 같은 특징
-  을 갖습니다.
+  Kinematics 모델은 거동 제어가 복잡하고 어려운 Dynamics(동역학) 모델에 비해, 아래와 같은 특징을 갖습니다.
 
   ◾ 판단 및 제어에서 결정된 속도 프로파일과 조향 입력을 받아 차량 자세 및 위치 결정
     <img src="../../../../assets/23-11-23/kinema.png" style="width: 80%; height: auto; margin: -1em 2em -1em 2em;" onclick="window.open(this.src)"></img>
@@ -172,8 +170,7 @@ SIM Drive에서는 차량 제어를 위해 크게 Kinematics(운동학)와 Dynam
 
   ◾ 페달 브레이크 제어를 생략하여 가속/감속 제어가 용이함. 결과적으로 시나리오 수행 성능을 
     향상할 수 있음
-
-</pre></div>
+</pre>
 <Br>
 
 23.R1.0 에서는 전체 차량 모델의 주행 성능이 아래와 같이 개선되었습니다.
@@ -181,7 +178,7 @@ SIM Drive에서는 차량 제어를 위해 크게 Kinematics(운동학)와 Dynam
 - Kinematics 및 다이나믹스 모델의 종방향 제어 시 발생하는 채터링(떨림 현상)을 해결하여 주행 성능을 개선
   
 ![main6](23-11-23/dynamics.png){:onclick="window.open(this.src)" title="Click view screen" width="70%"}
-<figcaption style="margin-top: -3em;">그림 10. 다이나믹스 모델의 종방향 제어 개선 결과 <br> (빨간색 목표 가속도 대비 파란색 출력 가속도) </figcaption>
+<figcaption style="margin-top: -1em;">그림 10. 다이나믹스 모델의 종방향 제어 개선 결과 <br> (빨간색 목표 가속도 대비 파란색 출력 가속도) </figcaption>
 
 - 다이나믹스 모델의 가속도 제어 성능을 향상
 
