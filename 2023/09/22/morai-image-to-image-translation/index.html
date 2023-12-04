@@ -1143,22 +1143,20 @@
 <h3 id="_1">🍀 용어 설명<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <p>본문에서 언급되는 주요 기술 용어는 아래와 같습니다.</p>
 <pre>
-  ◾ <b>Image-to-Image Translation(I2I)</b>: 가상 이미지를 현실 이미지로 변환하는 기술로 ‘Simulation to Real World(Sim2Real)’ 또는’Synthetic-RGB to Real-RGB’ Translation 라고도 부름
+  ◾<b> Image-to-Image Translation(I2I)</b>: 가상 이미지를 현실 이미지로 변환하는 기술로 
+  ‘Simulation to Real World(Sim2Real)’ 또는’Synthetic-RGB to Real-RGB’ Translation 라고도 부름
 
-  ◾ <b>Source Domain</b>: I2I 연구에 사용한 원본 데이터만 존재하는 집합. 본 포스팅에 한해 Source Domain을 Synthetic 데이터가 존재하는 집합(데이터셋)으로 정의함. 
-        예:  GTA5, SHIFT, Virtual KITTI 데이터섯
+  ◾<b>Source Domain</b>: I2I 연구에 사용한 원본 데이터만 존재하는 집합. 본 포스팅에 한해 Source Domain을 Synthetic 데이터가 존재하는 집합(데이터셋)으로 정의함. 예:  GTA5, SHIFT, Virtual KITTI 데이터셋
 
   ◾ <b>Source Image</b>: Source Domain에서 추출한 임의의 원본 이미지
 
-  ◾ <b>Target Domain</b>:  I2I 연구에서 목표로 하는 타겟 데이터만 존재하는 집합. 본 포스팅에 한해 Target Domain을 현실의 Real 데이터가 존재하는 집합(데이터셋)으로 정의함.
-        예: Cityscapes, nuScenes, BDD100K 데이터셋
+  ◾ <b>Target Domain</b>:  I2I 연구에서 목표로 하는 타겟 데이터만 존재하는 집합. 본 포스팅에 한해 Target Domain을 현실의 Real 데이터가 존재하는 집합(데이터셋)으로 정의함. 예: Cityscapes, nuScenes, BDD100K 데이터셋
 
   ◾ <b>Target Image</b>: Target Domain에서 추출한 임의의 타겟 이미지
 
   ◾ <b>Translated Image</b>: Source Image를 Target Image Style로 변환하는 I2I 모델 <i>F</i>가 있다고 간주할 때, <i>F</i>에 의해 변환된 출력 이미지
 
-  ◾<b>Domain</b>: 동일한 수준별로 분류한 특정 집합. 본 포스팅에서는 크게 가상(Synthetic) 도메인과 현실(Real) 도메인이 있고, 각 도메인 내 해당 데이터가 속한 환경 요인에 따라 하위 도메인으로 분류할 수 있음.
-        예: 시간대에 따른 밤 도메인과 낮 도메인, 지리에 따른 도심 도메인, 시골 도메인
+  ◾<b>Domain</b>: 동일한 수준별로 분류한 특정 집합. 본 포스팅에서는 크게 가상(Synthetic) 도메인과 현실(Real) 도메인이 있고, 각 도메인 내 해당 데이터가 속한 환경 요인에 따라 하위 도메인으로 분류할 수 있음. 예: 시간대에 따른 밤 도메인과 낮 도메인, 지리에 따른 도심 도메인, 시골 도메인
 
   ◾ <b>Domain Gap</b>: 두개 혹은 그 이상의 서로 다른 Domain에 속한 데이터 간의 차이
 </pre>

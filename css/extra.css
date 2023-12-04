@@ -61,11 +61,16 @@ p {
   background-color: #c9dff379/*  *//* #ededed */;
   border-radius: 10px;
   font-family: Roboto;
-  line-height: 1rem;
+  line-height: 1.2rem;
   font-size: 15px; /*230316*/
   font-weight: 400; 
-  padding: 30px 10px;
-  overflow-x: auto;
+  /* width: 100%; */
+  /* margin: 1em;
+  padding: 2em; */
+  margin: 0 0 24px;
+  padding: 24px;
+  /* overflow-x: auto; */
+  white-space: pre-wrap;
   border: 0;
   /* color: #025e9b; */
 }
@@ -73,8 +78,16 @@ p {
 
 .md-typeset pre code {
   background-color: #f5f5f5;
-  margin: -30px -10px;
+  margin: -30px -25px; 
+  /* margin: 0 0 24px;
+  padding: 24px; */
   /* padding-left: 20px; */
+  border-radius: 10px;
+  /* margin: 0 0 24px; */
+  padding: 24px;
+  overflow: none;
+  white-space: pre-wrap;
+  border: 0;
 }
 
 
