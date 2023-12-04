@@ -31,7 +31,7 @@ draft: false
 
 
 ## 주요 하이라이트 
-SIM Drive 23.R1.0에 새롭게 추가된 기능 및 개선 사항에 대한 주요 하이라이트는 아래와 같습니다.
+SIM Drive 23.R1.0에 새롭게 추가된 기능 및 개선 사항에 대한 주요 하이라이트는 다음과 같습니다.
 
   - [맵과 오브젝트 모델 확대](#_3): 일본 도로 교통법에 맞는 맵과 신호등 처리 로직을 포함하여 국방 분야 시뮬레이션 평가에 활용할 수 있는 오브젝트 모델이 추가되었습니다.
   <table>
@@ -45,7 +45,7 @@ SIM Drive 23.R1.0에 새롭게 추가된 기능 및 개선 사항에 대한 주�
 
   <div style="clear: both;"></div>
 
-- [카메라 센서의 3D BBox 정답 데이터 제공](#_3d-bbox)
+- [카메라 센서의 3D BBox 정답 데이터 제공](#_3d-bbox): 카메라 센서 모듈에서 검출 오브젝트에 대해 3D Bounding Box(3D BBox) 데이터를 확인하고 추출할 수 있습니다.
   <a href="#3d-bbox"><img src="../../../../assets/23-11-23/newfeature4.png" style="width: 70%; height: auto; float: left; margin-bottom: 12px;"></a>
 
   <div style="clear: both;"></div>
@@ -55,23 +55,27 @@ SIM Drive 23.R1.0에 새롭게 추가된 기능 및 개선 사항에 대한 주�
 
   <div style="clear: both;"></div>
 
-- [보행자 시나리오 개선을 위한 웨이포인트 생성 기능](#_5)
+- [보행자 시나리오 개선을 위한 웨이포인트 생성 기능](#_5): 
+  
+    빌트인 시나리오 에디터의 웨이포인트(Waypoint)를 생성 기능을 통해 보행자 이동에 따른 보다 구체적인 시나리오를 설계하고 수행할 수 있습니다.
   <a href="#_5"><img src="../../../../assets/23-11-23/newfeature5.png" style="width: 70%; height: auto; float: left; margin-bottom: 16px;"></a>
 
   <div style="clear: both;"></div>
 
-- [시뮬레이션 환경에 대한 날씨 효과 및 마찰력 옵션 추가](#_6)
+- [시뮬레이션 환경에 대한 날씨 효과 및 마찰력 옵션 추가](#_6): 
+  
+    보다 현실감 있는 시뮬레이션을 위해 날씨의 효과 강도(Effect Strength)와 안개 밀도 및 간격, 그리고 도로 마찰력을 조절할 수 있는 사용자 옵션을 추가하였습니다.
   <a href="#_6"><img src="../../../../assets/23-11-23/main12-2.png" style="width: 70%; height: auto; float: left; margin-bottom: 10px;"></a>
   
   <div style="clear: both;"></div>
 
-- [에이전트 차량 모델의 채터링(떨림) 현상 해결 및 종방향 주행 성능 개선](#_8)
-  <a href="#_8"><img src="../../../../assets/23-11-23/improve1.jpg" style="width: 80%; height: auto; float: left; margin-bottom: 10px;"></a>
-  <div style="clear: both;"></div>
+- [차량 모델의 주행 및 가속도 제어 성능 향상](#_8):
+  
+    차량 모델의 주행 시 발생하는 채터링 이슈를 해결하여 Kinematics와 Dynamics 종방향 제어에 대한 주행 성능을 개선하였으며, Dynamics 모델의 가속도 제어 성능을 향상하였습니다.
 
 
 ## 새로운 기능 요약
-이번 릴리스에 새롭게 추가된 기능은 아래와 같습니다.
+이번 릴리스에 새롭게 추가된 기능은 다음과 같습니다.
 
 ### 맵과 오브젝트의 다양성 확대
 모라이 SIM Drive에서는 디지털트윈 자동화 구축 기술을 적용한 정밀지도(HD Map) 데이터 기반의 3D 맵과 다양한 오브젝트 모델을 제공합니다.
@@ -91,7 +95,7 @@ SIM Drive 23.R1.0에 새롭게 추가된 기능 및 개선 사항에 대한 주�
 ![main5](23-11-23/main5.png){:onclick="window.open(this.src)" title="Click view screen" width="70%"}
 <figcaption>그림 3. 국방용 시뮬레이션을 위한 오브젝트 모델</figcaption>
 
-### 카메라 센서의 3D BBOX 정답 데이터, 최신 센서 모델 지원
+### 카메라 센서의 3D BBOX 정답 데이터
 23.R1.0의 카메라 센서에서는 검출 오브젝트에 대한 3D Bounding Box(3D BBox) 데이터를 제공합니다. 
 
 3D BBox 데이터는 4개의 평면 좌표값을 가지는 2D BBox 데이터에 비해 8쌍의 3축 Global 좌표(x, y, z)로 구성되어, 장애물의 위치 정보를 보다 정확하게 파악하기 위한 학습 데이터로 활용할수 있습니다.
@@ -129,11 +133,11 @@ SIM Drive에서는 직접 시나리오를 생성하고 수행할 수 있는 빌�
 
 ### 시뮬레이션 환경에 대한 날씨 효과 및 마찰력 옵션 추가
 SIM Drive의 시뮬레이션 환경에서는 비, 안개, 악천후의 날씨를 비롯하여 주/야간 시간대에 따른 조도 변화를 설정할 수 있습니다. <Br>
-현실에서는 다양한 환경 데이터를 취득하기 어려운 제약 사항이 존재하지만, SIM에서는 현실과 동일한 다양한 환경 조건의 학습 데이터를 매우 간편하게 취득할 수 있습니다.
+현실 도메인에는 다양한 환경 데이터를 취득하기 어려운 제약 사항이 존재하지만, 가상 도메인의 SIMDrive를 사용하면 현실과 동일한 다양한 환경 조건의 학습 데이터를 매우 간편하게 취득할 수 있습니다.
 
 23.R1.0에서는 보다 현실감 있는 시뮬레이션을 위해 날씨 별 효과 강도 및 도로 마찰력을 제어하는 사용자 옵션을 추가하였습니다.
 
-악천후 날씨의 경우 **Storm, Rainy, Snowy** 효과 강도를 보다 세밀하게 제어하도록 **Effect Strength** 옵션을 추가하였으며 안개 낀 날씨의 경우, **Density** (밀도) 및 **Distance**(간격) 옵션을 추가하였습니다.
+악천후 날씨의 경우 **Storm, Rainy, Snowy** 효과 강도를 보다 세밀하게 제어하도록 **Effect Strength** 옵션을 추가하였으며 안개 낀 날씨의 경우, **Foggy Density** / **Distance**(안개 밀도 및 간격) 옵션을 추가하였습니다.
 <table>
   <tr>
     <th style="border-right: 2px solid #E2E2E2;" > <img src="../../../../assets/23-11-23/main10-1.png" alt="sensor" style="width: 500px; height: auto;"  title="Click to Enlage" onclick="window.open(this.src)" />
@@ -153,33 +157,32 @@ SIM Drive의 시뮬레이션 환경에서는 비, 안개, 악천후의 날씨를
 ## 주요 개선 사항 요약
 이전에 배포된 버전(22.R4.0) 대비, 이번 릴리스에 반영된 주요 개선 사항을 알아봅니다.
 
-### 차량 모델의 종방향 주행 성능 및 가속도 제어 개선”
+### 차량 모델의 종방향 주행 성능 및 가속도 제어 개선
 SIM Drive에서는 차량 제어를 위해 크게 Kinematics(운동학)와 Dynamics(동역학) 모델을 제공합니다.
 
 #### 🍀 Kinematics와 Dynamics 모델의 차이 
-<pre style="padding: 2em 2em 2em 2em; line-height: 1.5em;">
-  Kinematics(운동학) 모델은 물리적인 힘의 영향으로 가속하여 동작하는 Dynamics(동역학)과 달리, 힘(질량)을 
-  고려하지 않는 차량 모델입니다. 
 
-  Kinematics 모델은 거동 제어가 복잡하고 어려운 Dynamics(동역학) 모델에 비해, 아래와 같은 특징을 갖습니다.
+<pre>
+Kinematics(운동학) 모델은 물리적인 힘의 영향으로 가속하여 동작하는 Dynamics(동역학)과 달리, 힘(질량)을 고려하지 않는 차량 모델입니다. 
+Kinematics 모델은 거동 제어가 복잡하고 어려운 Dynamics(동역학) 모델에 비해, 아래와 같은 특징을 갖습니다.
 
   ◾ 판단 및 제어에서 결정된 속도 프로파일과 조향 입력을 받아 차량 자세 및 위치 결정
     <img src="../../../../assets/23-11-23/kinema.png" style="width: 80%; height: auto; margin: -1em 2em -1em 2em;" onclick="window.open(this.src)"></img>
 
   ◾ 상대적으로 가벼운 연산을 하므로 시뮬레이션에 최적화
 
-  ◾ 페달 브레이크 제어를 생략하여 가속/감속 제어가 용이함. 결과적으로 시나리오 수행 성능을 
-    향상할 수 있음
+  ◾ 페달 브레이크 제어를 생략하여 가속/감속 제어가 용이함. 결과적으로 시나리오 수행 성능을 향상할 수 있음
 </pre>
+
 <Br>
 
 23.R1.0 에서는 전체 차량 모델의 주행 성능이 아래와 같이 개선되었습니다.
 
-- Kinematics 및 다이나믹스 모델의 종방향 제어 시 발생하는 채터링(떨림 현상)을 해결하여 주행 성능을 개선
+- Kinematics 및 Dynamics 모델의 종방향 제어 시 발생하는 채터링(떨림 현상)을 해결하여 주행 성능을 개선
   
 ![main6](23-11-23/dynamics.png){:onclick="window.open(this.src)" title="Click view screen" width="70%"}
-<figcaption style="margin-top: -1em;">그림 10. 다이나믹스 모델의 종방향 제어 개선 결과 <br> (빨간색 목표 가속도 대비 파란색 출력 가속도) </figcaption>
+<figcaption style="margin-top: -1em;">그림 10. Dynamics 모델의 종방향 제어 개선 결과 <br> (빨간색 목표 가속도 대비 파란색 출력 가속도) </figcaption>
 
-- 다이나믹스 모델의 가속도 제어 성능을 향상
+- Dynamics 모델의 가속도 제어 성능을 향상
 
     - 차량의 판단 및 거동 계획 로직을 개선하고 목표한 가속도에 따른 페달 및 브레이크 제어를 개선하여 차량 모델의 거동(움직임) 향상

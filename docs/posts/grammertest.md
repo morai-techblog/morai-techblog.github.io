@@ -184,12 +184,25 @@ already included with Material for MkDocs. First, create a folder called `posts`
 with a file called `hello-world.md`:
 
 ``` { .sh .no-copy }
+---
 .
 ├─ docs/
 │  ├─ posts/
 │  │  └─ hello-world.md # (1)!
 │  └─ index.md
 └─ mkdocs.yml
+---
+```
+
+``` { .sh}
+---
+.
+├─ docs/
+│  ├─ posts/
+│  │  └─ hello-world.md # (1)!
+│  └─ index.md
+└─ mkdocs.yml
+---
 ```
 
 1.  If you'd like to arrange posts differently, you're free to do so. The URLs
