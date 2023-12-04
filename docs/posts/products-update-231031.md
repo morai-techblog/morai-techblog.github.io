@@ -33,19 +33,23 @@ draft: false
 ## 주요 하이라이트 
 SIM Drive 23.R1.0에 새롭게 추가된 기능 및 개선 사항에 대한 주요 하이라이트는 다음과 같습니다.
 
-  - [맵과 오브젝트 모델 확대](#_3): 일본 도로 교통법에 맞는 맵과 신호등 처리 로직을 포함하여 국방 분야 시뮬레이션 평가에 활용할 수 있는 오브젝트 모델이 추가되었습니다.
-  <table>
-  <tr>
-    <th style="border-right: 2px solid #E2E2E2; padding: 0.5px;"> <a href="#_3"><img src="../../../../assets/23-11-23/newfeature1.png" alt="sensor" style="width: 600px; height: auto;"  title="Click to Enlage"/></a>
-    </th>
-    <th style="padding: 0.5px;"><a href="#_3"><img src="../../../../assets/23-11-23/newfeature3.png" alt="sensor" style="width: 600px; height: auto;"  title="Click to Enlage"/></a>
-    </th>
-  </tr>
-  </table>
+  - [맵과 오브젝트 모델 확대](#_3): 
+    
+    일본 도로 교통법에 맞는 맵과 신호등 처리 로직을 포함하여 국방 분야 시뮬레이션 평가에 활용할 수 있는 오브젝트 모델이 추가되었습니다.
+    <table>
+    <tr>
+      <th style="border-right: 2px solid #E2E2E2; padding: 0.5px;"> <a href="#_3"><img src="../../../../assets/23-11-23/newfeature1.png" alt="sensor" style="width: 600px; height: auto;"  title="Click to Enlage"/></a>
+      </th>
+      <th style="padding: 0.5px;"><a href="#_3"><img src="../../../../assets/23-11-23/newfeature3.png" alt="sensor" style="width: 600px; height: auto;"  title="Click to Enlage"/></a>
+      </th>
+    </tr>
+    </table>
 
   <div style="clear: both;"></div>
 
-- [카메라 센서의 3D BBox 정답 데이터 제공](#_3d-bbox): 카메라 센서 모듈에서 검출 오브젝트에 대해 3D Bounding Box(3D BBox) 데이터를 확인하고 추출할 수 있습니다.
+- [카메라 센서의 3D BBox 정답 데이터 제공](#_3d-bbox):
+  
+     카메라 센서 모듈에서 검출 오브젝트에 대해 3D Bounding Box(3D BBox) 데이터를 확인하고 추출할 수 있습니다.
   <a href="#3d-bbox"><img src="../../../../assets/23-11-23/newfeature4.png" style="width: 70%; height: auto; float: left; margin-bottom: 12px;"></a>
 
   <div style="clear: both;"></div>
@@ -58,14 +62,16 @@ SIM Drive 23.R1.0에 새롭게 추가된 기능 및 개선 사항에 대한 주�
 - [보행자 시나리오 개선을 위한 웨이포인트 생성 기능](#_5): 
   
     빌트인 시나리오 에디터의 웨이포인트(Waypoint)를 생성 기능을 통해 보행자 이동에 따른 보다 구체적인 시나리오를 설계하고 수행할 수 있습니다.
-  <a href="#_5"><img src="../../../../assets/23-11-23/newfeature5.png" style="width: 70%; height: auto; float: left; margin-bottom: 16px;"></a>
+
+    <a href="#_5"><img src="../../../../assets/23-11-23/newfeature5.png" style="width: 70%; height: auto; float: left; margin-bottom: 16px;"></a>
 
   <div style="clear: both;"></div>
 
 - [시뮬레이션 환경에 대한 날씨 효과 및 마찰력 옵션 추가](#_6): 
   
     보다 현실감 있는 시뮬레이션을 위해 날씨의 효과 강도(Effect Strength)와 안개 밀도 및 간격, 그리고 도로 마찰력을 조절할 수 있는 사용자 옵션을 추가하였습니다.
-  <a href="#_6"><img src="../../../../assets/23-11-23/main12-2.png" style="width: 70%; height: auto; float: left; margin-bottom: 10px;"></a>
+
+    <a href="#_6"><img src="../../../../assets/23-11-23/main12-2.png" style="width: 70%; height: auto; float: left; margin-bottom: 10px;"></a>
   
   <div style="clear: both;"></div>
 
