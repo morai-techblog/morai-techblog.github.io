@@ -171,9 +171,9 @@ SIM Drive의 시뮬레이션 환경에서는 비, 안개, 악천후의 날씨를
   1. 차량의 목표 가속도를 생성하는 [Intelligent Driver Model(IDM)](https://en.wikipedia.org/wiki/Intelligent_driver_model)을 적용하여 종방향 판단 및 거동 계획 로직를 개선
   2. 차량의 종방향 상태에 따른 Transition Model을 적용하여 목표 속도를 추종하는 Cruise Control 성능 개선
   3. 차량의 목표 가속도 출력을 위한 페달 및 브레이크 입력 시 떨림 해결, 종방향 거동 제어 개선
-
-> <p style= "font-size: 14px;">※ SUT: System Under Test, 평가 대상 하드웨어 및/또는 소프트웨어.</p>
-> <p style= "font-size: 14px;">※ IDM: Intelligent Driver Model, 차량의 주행 모델링에 사용되는 제어 알고리즘으로, 실제 교통 시뮬레이션에 많이 활용됨.</p>
+>
+<p style= "font-size: 14px; line-height: 1rem;">※ SUT: System Under Test, 평가 대상 하드웨어 및/또는 소프트웨어</p>
+<p style= "font-size: 14px; line-height: 1rem;">※ IDM: Intelligent Driver Model, 차량의 주행 모델링에 사용되는 제어 알고리즘으로, 실제 교통 시뮬레이션에 많이 활용됨</p>
 
 
 <br>
