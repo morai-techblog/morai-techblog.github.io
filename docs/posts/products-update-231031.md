@@ -166,12 +166,31 @@ SIM Drive의 시뮬레이션 환경에서는 비, 안개, 악천후의 날씨를
 ### 차량 모델의 종방향 거동 성능 개선
 차량의 종방향 주행 시 발생하던 채터링(떨림 현상) 문제를 해결하여 차량의 '종방향 거동 성능'을 향상하였습니다.
 
-이에 대한 해결 과정은 아래와 같습니다.
+이에 대한 해결 과정은 아래와 같으며, 결과적으로 SIM Drive의 시뮬레이션을 활용하면 보다 정확하게 SUT를 검증할 수 있습니다.
+
+※ SUT: System Under Test, 평가 대상 하드웨어 및/또는 소프트웨어.
 >
   1. 차량의 목표 가속도를 생성하는 Intelligent Driver Model(IDM) 적용하여 종방향 판단 및 거동 계획 로직를 개선
-  2. 차량의 목표 속도를 추종하는 제어기 성능 개선
-  3. SIM Drive의 Ego 및 Surrounding 차량이 목표 속도에 따라 적절히 주행할 수 있어, 결과적으로 시뮬레이션을 활용하면 보다 정확하게 SUT를 검증할 수 있음
->
+  2. 차량의 종방향 상태에 따른 Transition Model을 적용하여 목표 속도를 추종하는 Cruise Control 성능 개선
+  3. 차량의 목표 가속도 출력을 위한 페달 및 브레이크 입력 시 떨림 해결, 종방향 거동 제어 개선
+
+ 
 
   ![main6](23-11-23/improve.png){:onclick="window.open(this.src)" title="Click view screen" width="70%"}
   <figcaption style="margin-top: -1em;">그림 10. 차량 모델의 종방향 제어 개선 결과 <br> (검정색 목표 속도 대비 파란색 출력 속도) </figcaption>
+
+#### 🍀 Intelligent Driver Model(IDM)이란
+<pre>
+Intelligent Driver Model(IDM)은 차량의 주행 모델링에 사용되는 제어 알고리즘으로, 실제 교통 시뮬레이션에 많이 활용됩니다.
+
+IDM 알고리즘 및 구성 파라미터는 아래와 같습니다.
+  <img src="../../../../assets/23-11-23/idm1.png" style="width: 60%; height: auto; margin: -1em 2em -1em 1em;" onclick="window.open(this.src)"></img>
+  <img src="../../../../assets/23-11-23/idm2.png" style="width: 60%; height: auto; margin: -1em 2em -1em 1em;" onclick="window.open(this.src)"></img>
+    a: Max Acceleration  
+    δ: Acceleration Exponent
+    v_target: Target Speed
+    b: Comfort Deceleration
+    s_min: Min Distance
+    T: HeadwayTime
+</pre>
+<br>
