@@ -166,14 +166,15 @@ SIM Drive의 시뮬레이션 환경에서는 비, 안개, 악천후의 날씨를
 ### 차량 모델의 종방향 거동 성능 개선
 차량의 종방향 주행 시 발생하던 채터링(떨림 현상) 문제를 포함하여 차량의 전반적인 '종방향 거동 성능'을 향상하였습니다.
 
-이에 대한 해결 방법은 아래와 같으며, 결과적으로 SIM Drive의 시뮬레이션을 활용하면 보다 정확하게 SUT를 검증할 수 있게 되었습니다.
+이에 대한 해결 방법은 아래와 같습니다.
 >
-  1. 차량의 목표 가속도를 생성하는 [Intelligent Driver Model(IDM)](https://en.wikipedia.org/wiki/Intelligent_driver_model)을 적용하여 종방향 판단 및 거동 계획 로직를 개선
-  2. 차량의 종방향 상태에 따른 Transition Model을 적용하여 목표 속도를 추종하는 Cruise Control 성능 개선
-  3. 차량의 목표 가속도 출력을 위한 페달 및 브레이크 입력 시 떨림 해결, 종방향 거동 제어 개선
->
-<p style= "font-size: 14px; line-height: 1rem;">※ SUT: System Under Test, 평가 대상 하드웨어 및/또는 소프트웨어</p>
-<p style= "font-size: 14px; line-height: 1rem;">※ IDM: Intelligent Driver Model, 차량의 주행 모델링에 사용되는 제어 알고리즘으로, 실제 교통 시뮬레이션에 많이 활용됨</p>
+  1. 차량의 종방향 목표를 수행하기 위한 판단 및 거동 계획 로직 개선
+> 2. 차량의 종방향 거동 제어 개선을 통한 추종 성능 향상 및 페달/브레이크 입력 떨림 해결
+  
+![main6](23-11-23/improve.png){:onclick="window.open(this.src)" title="Click view screen" width="70%"}
+<figcaption>그림 10. 차량 모델의 종방향 거동 제어 개선 결과(검정색 목표 속도 대비 파란색 출력 속도)</figcaption>
 
+결과적으로, SIM Drive 시뮬레이션을 활용하면 보다 정확하게 SUT를 검증할 수 있습니다.
+<p style= "font-size: 14px; line-height: 1rem;">※ SUT: System Under Test, 평가 대상 하드웨어 및/또는 소프트웨어</p>
 
 <br>
