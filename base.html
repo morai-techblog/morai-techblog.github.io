@@ -1,27 +1,37 @@
  {#-
   This file was automatically generated - do not edit
--#}
+-#}content="width=device-width,initial-scale=1"
 {% import "partials/language.html" as lang with context %}
 <!doctype html>
 <html lang="{{ lang.t('language') }}" class="no-js">
   <head>
+    <meta
+      http-equiv="refresh"
+      content="0; url=https://morai-tech.gitlab.io/blog/"
+    />
+    <link rel="canonical" href="https://morai-tech.gitlab.io/blog/" />
     <meta name="google-site-verification" content="Y69YPDneoHJWvIezkzG37fMO9S2qMzdsgnD9HH7FD_8" />
+    <meta name="keywords" content="기술 블로그,테크 블로그" />
     {% block site_meta %}
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
+      <!-- <meta http-equiv="refresh" content="0; url=https://morai-tech.gitlab.io/blog/" />
+      <link rel="canonical" href="https://morai-tech.gitlab.io/blog/"/> -->
       {% if page.meta and page.meta.description %}
         <meta name="description" content="{{ page.meta.description }}">
       {% elif config.site_description %}
         <meta name="description" content="{{ config.site_description }}">
-      {% endif %}
+      {% endif %}  
       {% if page.meta and page.meta.author %}
         <meta name="author" content="{{ page.meta.author }}">
       {% elif config.site_author %}
         <meta name="author" content="{{ config.site_author }}">
       {% endif %}
       {% if page.canonical_url %}
+        <meta http-equiv="refresh" content="0; url=https://morai-tech.gitlab.io/blog/" />
         <link rel="canonical" href="{{ page.canonical_url }}">
-      {% endif %}
+        <!-- <link rel="canonical" href="https://morai-tech.gitlab.io/blog/" /> -->
+      {% endif %} 
       {% if page.previous_page %}
         <link rel="prev" href="{{ page.previous_page.url | url }}">
       {% endif %}

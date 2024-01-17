@@ -5,9 +5,6 @@ authors:
 description: Github Action의 자동 맞춤범 검사기를 도입하여 개발자가 초안을 빠르게 수정하기
 categories:
   - Cases Study
-tags:
-  - Foo
-  - Bar
 cover_image: post_230714.png
 title: 맞춤법 자동검사 도입기 feat. 마크다운 사용법
 draft: true
@@ -187,12 +184,25 @@ already included with Material for MkDocs. First, create a folder called `posts`
 with a file called `hello-world.md`:
 
 ``` { .sh .no-copy }
+---
 .
 ├─ docs/
 │  ├─ posts/
 │  │  └─ hello-world.md # (1)!
 │  └─ index.md
 └─ mkdocs.yml
+---
+```
+
+``` { .sh}
+---
+.
+├─ docs/
+│  ├─ posts/
+│  │  └─ hello-world.md # (1)!
+│  └─ index.md
+└─ mkdocs.yml
+---
 ```
 
 1.  If you'd like to arrange posts differently, you're free to do so. The URLs

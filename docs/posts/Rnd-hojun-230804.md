@@ -39,22 +39,20 @@ draft: false
 본문에서 언급되는 주요 기술 용어는 아래와 같습니다.
 
 <pre>
-  ◾ <b>Image-to-Image Translation(I2I)</b>: 가상 이미지를 현실 이미지로 변환하는 기술로 ‘Simulation to Real World(Sim2Real)’ 또는’Synthetic-RGB to Real-RGB’ Translation 라고도 부름
+  ◾<b> Image-to-Image Translation(I2I)</b>: 가상 이미지를 현실 이미지로 변환하는 기술로 
+  ‘Simulation to Real World(Sim2Real)’ 또는’Synthetic-RGB to Real-RGB’ Translation 라고도 부름
 
-  ◾ <b>Source Domain</b>: I2I 연구에 사용한 원본 데이터만 존재하는 집합. 본 포스팅에 한해 Source Domain을 Synthetic 데이터가 존재하는 집합(데이터셋)으로 정의함. 
-        예:  GTA5, SHIFT, Virtual KITTI 데이터섯
+  ◾<b>Source Domain</b>: I2I 연구에 사용한 원본 데이터만 존재하는 집합. 본 포스팅에 한해 Source Domain을 Synthetic 데이터가 존재하는 집합(데이터셋)으로 정의함. 예:  GTA5, SHIFT, Virtual KITTI 데이터셋
 
   ◾ <b>Source Image</b>: Source Domain에서 추출한 임의의 원본 이미지
 
-  ◾ <b>Target Domain</b>:  I2I 연구에서 목표로 하는 타겟 데이터만 존재하는 집합. 본 포스팅에 한해 Target Domain을 현실의 Real 데이터가 존재하는 집합(데이터셋)으로 정의함.
-        예: Cityscapes, nuScenes, BDD100K 데이터셋
+  ◾ <b>Target Domain</b>:  I2I 연구에서 목표로 하는 타겟 데이터만 존재하는 집합. 본 포스팅에 한해 Target Domain을 현실의 Real 데이터가 존재하는 집합(데이터셋)으로 정의함. 예: Cityscapes, nuScenes, BDD100K 데이터셋
 
   ◾ <b>Target Image</b>: Target Domain에서 추출한 임의의 타겟 이미지
 
   ◾ <b>Translated Image</b>: Source Image를 Target Image Style로 변환하는 I2I 모델 <i>F</i>가 있다고 간주할 때, <i>F</i>에 의해 변환된 출력 이미지
   
-  ◾<b>Domain</b>: 동일한 수준별로 분류한 특정 집합. 본 포스팅에서는 크게 가상(Synthetic) 도메인과 현실(Real) 도메인이 있고, 각 도메인 내 해당 데이터가 속한 환경 요인에 따라 하위 도메인으로 분류할 수 있음.
-        예: 시간대에 따른 밤 도메인과 낮 도메인, 지리에 따른 도심 도메인, 시골 도메인
+  ◾<b>Domain</b>: 동일한 수준별로 분류한 특정 집합. 본 포스팅에서는 크게 가상(Synthetic) 도메인과 현실(Real) 도메인이 있고, 각 도메인 내 해당 데이터가 속한 환경 요인에 따라 하위 도메인으로 분류할 수 있음. 예: 시간대에 따른 밤 도메인과 낮 도메인, 지리에 따른 도심 도메인, 시골 도메인
 
   ◾ <b>Domain Gap</b>: 두개 혹은 그 이상의 서로 다른 Domain에 속한 데이터 간의 차이
 </pre>
@@ -242,7 +240,7 @@ Diffusion 모델들의 높은 변환 성능에도 불구하고, 저희는 다음
 <figcaption>그림 7. Sim2Real I2I 모델을 적용한 Translated MORAI 데이터셋 예시</figcaption>
 
 ## 4. 연구 결과
-Sim2Real I2I 모델로 생성한 **Translated MORAI 데이터셋** 의 궁극적인 목표는 인지 모델의 성능 개선에 기여하는 것 입니다. 이를 검증하기 위해 대중적인 인지 과제인 2D Object Detection(객체 탐지)와 Semantic Segmentation(의미적 분할)에서 각 Translated MORAI 데이터셋으로 학습한 인지 모델의 성능을 실험해보았습니다. 
+Sim2Real I2I 모델로 생성한 **Translated MORAI 데이터셋** 의 궁극적인 목표는 인지 모델의 성능 개선에 기여하는 것 입니다. 이를 검증하기 위해 대중적인 인지 과제인 2D Object Detection(객체 탐지)에서 Translated MORAI 데이터셋으로 학습한 인지 모델의 성능을 실험해보았습니다.
 
   ※ 편의 상, Sim2Real I2I 적용되지 않은 MORAI 데이터셋을 <b>원본 가상 데이터셋</b>, Sim2Real I2I가 적용된 MORAI 데이터셋을 <b>변환 데이터셋</b> 으로 지칭하겠습니다.
 
@@ -308,69 +306,7 @@ $car$과 $truck$의 경우에는 오히려 하락하였고(57.9 $\rightarrow$ 57
 
 동일한 실험을 변환 데이터셋(Translated MORAI)으로 재현하였을 경우, 모든 종류의 객체에 대해 유의미하게 향상되었으며, 종합 지표인 $mAP$ 역시 47.2%에서 50.5%로 <b>3.5%</b>라는 매우 유의미한 성능 향상을 보였습니다. 
 
-Object Detection 실험에서는 인지 성능 측면에서 MORAI 데이터셋의 가능성을 저해시키는 요소 중 하나가 Domain Gap임을 확인하였고, Sim2Real I2I로 이를 보완함으로써 object detection 모델인 Faster R-CNN의 성능 향상에 유의미하게 가상 데이터가 기여할 수 있음을 확인할 수 있었습니다.
-
-#### 4.1.2 Semantic Segmentation
-변환 데이터셋의 유효성을 다양한 측면에서 검증하기 위해 또다른 인지 과제인 Semantic Segmentation에 대해서도 실험을 진행하였습니다. 인지 모델로 [DeepLabV3+](https://arxiv.org/abs/1802.02611)을 사용하였으며, 
- 앞서 진행한 [Object Detection 실험](#411-object-detection)과 동일하게 다음의 세 가지 경우(현실 데이터셋, 현실 데이터셋 + 원본 가상 데이터셋, 현실 데이터셋 + 변환 데이터셋)로 나누어 실험을 진행하였습니다.
-
-1. **Baseline**: 현실 데이터셋인 [BDO100K](https://bair.berkeley.edu/blog/2018/05/30/bdd/)로만 학습했을 때
-2. **Larger Domain Gap**: 현실 데이터셋인 BDD100K에 원본 가상 데이터셋(MORAI)을 추가하여 학습했을 때
-3. **Smaller Domain Gap**: 현실 데이터셋인 BDD100K에 변환 데이터셋(Translated MORAI)을 추가하여 학습했을 때
-
-성능을 평가하기 위한 지표로 Semantic Segmentation 과제에서 대중적으로 사용하는 IoU(Intersection over Union) 및 mIoU(mean Intersection over Union)을 적용하였습니다. (100에 가까운 수치일 수록 높은 성능임을 의미함)
-
-_**표 2.**_ 에서는 DeepLabV3+ 모델을 위 세 가지 경우에 대해 각 학습한 후, 인지 성능을 평가한 결과를 보여줍니다.
- <table style="max-width: 700px; margin-left: auto; margin-right: auto; overflow-x: auto;">
-      <tr>
-        <th style="border-left: none; background-color: #c9dff379; text-align: center; vertical-align: middle;">Train</th>
-        <th style="border-left: none; background-color: #c9dff379; text-align: center; vertical-align: middle;">Val</th>
-        <th style="text-align: center; background-color: #f7f5f5; vertical-align: middle;">road</th>
-        <th style="text-align: center; background-color: #f7f5f5; vertical-align: middle;">sidewalk</th>
-        <th style="text-align: center; background-color: #f7f5f5;">traffic signal</th>
-        <th style="text-align: center; background-color: #f7f5f5; vertical-align: middle;">sky</th>
-        <th style="text-align: center; background-color: #f7f5f5; vertical-align: middle;">person</th>
-        <th style="text-align: center; background-color: #f7f5f5; vertical-align: middle;">car</th>
-        <th style="text-align: center; background-color: #fbe9e7; vertical-align: middle;">mIoU* (%)</th>
-      </tr>
-      <tr>
-        <td style="text-align: center;">BDD100K</td>
-        <td style="text-align: center; vertical-align: middle; border-right: 2px solid #E2E2E2;">BDD100K</td>
-        <td style="text-align: center;">95.06</td>
-        <td style="text-align: center;">71.11</td>
-        <td style="text-align: center;">77.11</td>
-        <td style="text-align: center;">98.55</td>
-        <td style="text-align: center;">65.17</td>
-        <td style="text-align: center; border-right: 2px solid #E2E2E2;">94.75</td>
-        <td style="text-align: center;">83.62</td>
-      </tr>
-      <tr>
-        <td style="text-align: center;">BDD100K + MORAI</td>
-        <td style="text-align: center; vertical-align: middle; border-right: 2px solid #E2E2E2;">BDD100K</td>
-        <td style="text-align: center; vertical-align: middle;">95.33</td>
-        <td style="text-align: center; vertical-align: middle;">73.39</td>
-        <td style="text-align: center; vertical-align: middle;">78.8</td>
-        <td style="text-align: center; vertical-align: middle;">98.49</td>
-        <td style="text-align: center; vertical-align: middle;">66.84</td>
-        <td style="text-align: center; vertical-align: middle; border-right: 2px solid #E2E2E2;">95.08</td>
-        <td style="text-align: center; vertical-align: middle;">84.66</td>
-      </tr>
-      <tr>
-        <td style="text-align: center;">BDD100K + Translated MORAI</td>
-        <td style="text-align: center; vertical-align: middle; border-right: 2px solid #E2E2E2;">BDD100K</td>
-        <td style="text-align: center; vertical-align: middle"><b>95.68</b></td>
-        <td style="text-align: center; vertical-align: middle"><b>74.24</b></td>
-        <td style="text-align: center; vertical-align: middle"><b>79.28</b></td>
-        <td style="text-align: center; vertical-align: middle"><b>98.79</b></td>
-        <td style="text-align: center; vertical-align: middle"><b>70.81</b></td>
-        <td style="text-align: center; vertical-align: middle; border-right: 2px solid #E2E2E2;"><b>95.63</b></td>
-        <td style="text-align: center; vertical-align: middle"><b>85.74</b></td>
-      </tr>
-  </table>
-<figcaption style="margin-top: -2em; text-align: center;">표 2. Comparison table showing the difference in IoU and mIoU scores by the presence of MORAI and translated MORAI datasets to the baseline, respectively</figcaption>
- 
-본 Semantic Segmentation 실험에서는 Object Detection 실험에서 확인한 것과 일관된 결과를 확인할 수 있었습니다. 현실 데이터셋만을 사용하였을 때의 인지 성능은 mIoU 기준 83.62% 였습니다. 반면, Domain Gap이 크게 존재하는 원본 가상 데이터셋을 함께 사용했을 경우 mIoU 84.66%로 1.04%의 성능 향상이 있었으며, 이를 보완한 변환 데이터셋의 경우 mIoU 85.74로 약 <b>2.1%</b>의 성능 향상을 확인할 수 있었습니다. <br>
-객체의 종류 별로 평가한 IoU 역시 변환 데이터셋을 사용하였을 때 가장 높은 성능을 보였습니다.  
+Object Detection 실험에서는 인지 성능 측면에서 MORAI 데이터셋의 가능성을 저해시키는 요소 중 하나가 Domain Gap임을 확인하였고, Sim2Real I2I로 이를 보완함으로써 object detection 모델인 Faster R-CNN의 성능 향상에 유의미하게 가상 데이터가 기여할 수 있음을 확인할 수 있었습니다.  
 
 ### 4.2 정성적 결과
 앞의 [Object Detection 실험](#411-object-detection)에서 학습한 두 모델 (1) Cityscapes, (2) Cityscapes + Translated MORAI의 추론 결과(inference)를 시각화하여, Translated MORAI가 더해졌을 때의 효과를 확인해보았습니다. <br>
@@ -386,7 +322,7 @@ _**그림 8.**_ 의 왼쪽과 같이, Cityscapes(현실, Real)로만 학습했�
 ### 4.3 향후 계획
 본 연구에서는 Sim2Real I2I 모델을 기반으로 Domain Gap이 줄어든 변환 데이터셋을 구축한 결과, 다음의 측면에서 인지 모델의 고도화에 기여할 수 있음을 확인하였습니다.
 
-- 객체탐지(mAP), 의미적 분할(mIoU) 측면에서 인지 모델의 성능 향상
+- 객체탐지(mAP) 측면에서 인지 모델의 성능 향상
 - 자율주행에 있어 치명적인 오인지(false positive) 감소
 
 다만 연구를 진행하면서 다음의 기술적 한계도 경험하였습니다.

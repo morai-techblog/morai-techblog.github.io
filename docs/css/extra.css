@@ -1,8 +1,47 @@
+/* Import Noto Sans Web Fonts */
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 100; src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.otf) format('opentype');}
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 300;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.otf) format('opentype');}
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 400;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.otf) format('opentype');}
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 500;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.otf) format('opentype');}
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 700;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.otf) format('opentype');}
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 900;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.otf) format('opentype');}
 
-.md-typeset p {
-  font-size: 15px; /*230316*/
-  line-height: 1.2rem; /*230316*/
+/* Apply your blog tags.. */
+/* body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+input,
+textarea,
+select,
+p { 
+  font-family: 'Noto Sans KR', sans-serif;
+} */
+
+ul,
+li,
+p { 
+  font-family: 'Noto Sans KR';
+  font-size: 16px; /*230316*/
+  line-height: 1.4rem; /*230316*/
+} 
+
+.md-typeset p, li {
+  font-size: 16px; /*230316*/
+  line-height: 1.3rem; /*230316*/
+  font-family: 'Noto Sans KR', sans-serif;
 }
+
+
+.md-profile__description {
+  font-size: 14px;  /*230316*/
+  line-height: 1rem; /*230316*/
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
 
 .test p {
  font-size: 12px;
@@ -12,7 +51,7 @@
 
 .md-typeset .admonition p,
 .md-typeset details {
-  font-family: Roboto;
+  font-family: 'Noto Sans KR', Roboto;
   font-size: 14px; /*230316*/
   border-width: 0px;
   border-left-width: 0px; 
@@ -22,11 +61,16 @@
   background-color: #c9dff379/*  *//* #ededed */;
   border-radius: 10px;
   font-family: Roboto;
-  line-height: 1rem;
+  line-height: 1.2rem;
   font-size: 15px; /*230316*/
   font-weight: 400; 
-  padding: 30px 10px;
-  overflow-x: auto;
+  /* width: 100%; */
+  /* margin: 1em;
+  padding: 2em; */
+  margin: 0 0 24px;
+  padding: 24px;
+  /* overflow-x: auto; */
+  white-space: pre-wrap;
   border: 0;
   /* color: #025e9b; */
 }
@@ -34,8 +78,16 @@
 
 .md-typeset pre code {
   background-color: #f5f5f5;
-  margin: -30px -10px;
+  margin: -30px -25px; 
+  /* margin: 0 0 24px;
+  padding: 24px; */
   /* padding-left: 20px; */
+  border-radius: 10px;
+  /* margin: 0 0 24px; */
+  padding: 24px;
+  overflow: none;
+  white-space: pre-wrap;
+  border: 0;
 }
 
 
@@ -84,12 +136,13 @@ table pre {
   border: 0;
   -ms-interpolation-mode: bicubic;
   image-rendering: optimizeQuality;
-
 }
 
+
+.md-post__authors
 .md-typeset .md-author img {
-  max-width: auto;
-  height: 100%;
+  width: 375px;
+  height: auto ;
   margin-bottom: 0em;
   padding-bottom: 0em;
 }
@@ -188,11 +241,6 @@ table tbody tr:last-child > td {
 }
 
 
-.md-typeset li {
-  line-height: 1.5rem; /*230316*/
-  font-size: 14px; /*230316*/
-}
-
 #__nav_3_label {
   font-size: 20px;
   color: #4051b5;
@@ -213,13 +261,22 @@ table tbody tr:last-child > td {
 } */
 
 .md-header__button.md-logo img:first-child {
-  width: 45x;
-  height: 45px;
+  width: 30x;
+  height: 30px;
 }
 
-/* .md-nav__link.md-nav__link--active .md-ellipsis {
+.md-header__inner.md-grid {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.md-header__title .md-header__ellipsis .md-header__topic .md-ellipsis {
+  font-size: 24px;
+}
+
+.md-nav__link.md-nav__link--active .md-ellipsis {
   font-size: 28x;
-} */
+}
 
 .md-nav__link.md-nav__link--active span:first-child {
   font-size: 28x;
@@ -239,9 +296,15 @@ table tbody tr:last-child > td {
   font-size: 20px;
 }
 
-.md-nav__list > li .md-nav__link.md-nav__link--passed.md-nav__link--active .md-ellipsis {
+.md-nav__list > li .md-nav__link.md-nav__link--active .md-ellipsis {
   font-size: 20px;
   color: #4051b5;
+}
+
+.md-nav__list > li .md-nav__item .md-ellipsis .md-typeset {
+  font-size: 16px;
+  line-height: 1rem;
+  /* color: #060b117a; */
 }
 
 /*ref*/
