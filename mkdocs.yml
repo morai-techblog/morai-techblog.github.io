@@ -1,9 +1,11 @@
 site_name: Tech Blog
 docs_dir: docs/
-site_url: https://morai-techblog.github.io/
+site_url: https://morai-techblog.github.io
+# canonical_url: https://morai-tech.gitlab.io/blog/
+# redirect_to: https://morai-tech.gitlab.io/blog
 site_author: Eunjung Kim
 site_description: >-
-  모라이 기술 블로그에서는 미래 모빌리티를 위한 모라이 제품과 기술의 개발 여정을 전달합니다.
+  모라이 기술블로그에서는 미래 모빌리티를 위한 모라이 제품과 기술의 개발 여정을 전달합니다.
 # The MORAI tech blog conveys the journey of developing a simulation platform for the future of mobility.
 # repo_url: https://github.com/morai-techblog/morai-techblog.github.io
 # edit_uri: blob/main/docs/
@@ -95,6 +97,8 @@ plugins:
 #  - info:
 #      archive_stop_on_violation: false
   - git-authors
+  - redirects:
+      . : https://morai-tech.gitlab.io/blog/
 
 # Hooks
 # hooks:

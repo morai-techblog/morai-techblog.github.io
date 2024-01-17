@@ -4,6 +4,10 @@ title: 모라이 기술 블로그에 관하여
 comments: false
 hide:
   - toc
+
+# canonical_url: "https://morai-tech.gitlab.io/blog/about"
+redirect_to: https://morai-tech.gitlab.io/blog/about
+
 ---
 
 # 🥇 모라이 기술 블로그에 관하여
